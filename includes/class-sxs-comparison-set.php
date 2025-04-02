@@ -82,6 +82,16 @@ class SXS_Comparison_Set {
             'high'
         );
         
+        // Position Brief and Scorecard metabox
+        add_meta_box(
+            'sxs_position_brief_scorecard',
+            __('Position Brief & Scorecard', 'sxs-candidate-comparison'),
+            array($this, 'render_position_brief_scorecard_meta_box'),
+            'sxs_comparison',
+            'normal',
+            'high'
+        );
+        
         // Recruiters metabox
         add_meta_box(
             'sxs_recruiters_selection',
@@ -411,6 +421,67 @@ class SXS_Comparison_Set {
         <?php
         // Add nonce field
         wp_nonce_field('sxs_header_content_nonce', 'sxs_header_content_nonce');
+    }
+
+    public function render_position_brief_scorecard_meta_box($post) {
+        wp_nonce_field('sxs_position_brief_scorecard_nonce', 'sxs_position_brief_scorecard_nonce');
+        
+        // Get saved values
+        $position_brief_enabled = get_post_meta($post->ID, '_sxs_position_brief_enabled', true);
+        $position_brief_url = get_post_meta($post->ID, '_sxs_position_brief_url', true);
+        $scorecard_enabled = get_post_meta($post->ID, '_sxs_scorecard_enabled', true);
+        $scorecard_url = get_post_meta($post->ID, '_sxs_scorecard_url', true);
+        ?>
+        <div class="sxs-meta-row">
+            <h3 class="sxs-section-title"><?php _e('Position Brief Settings', 'sxs-candidate-comparison'); ?></h3>
+            <p>
+                <label>
+                    <input type="checkbox" name="sxs_position_brief_enabled" value="1" <?php checked($position_brief_enabled, '1'); ?>>
+                    <?php _e('Enable Position Brief Button', 'sxs-candidate-comparison'); ?>
+                </label>
+            </p>
+            <div class="sxs-position-brief-url" style="margin-left: 20px; margin-top: 10px; <?php echo $position_brief_enabled ? '' : 'display: none;'; ?>">
+                <label for="sxs_position_brief_url">
+                    <?php _e('Position Brief URL', 'sxs-candidate-comparison'); ?>
+                </label>
+                <input type="url" id="sxs_position_brief_url" name="sxs_position_brief_url" 
+                       value="<?php echo esc_url($position_brief_url); ?>" class="widefat">
+                <p class="description"><?php _e('Enter the URL where the position brief can be found.', 'sxs-candidate-comparison'); ?></p>
+            </div>
+        </div>
+
+        <div class="sxs-meta-row" style="margin-top: 20px;">
+            <h3 class="sxs-section-title"><?php _e('Scorecard Settings', 'sxs-candidate-comparison'); ?></h3>
+            <p>
+                <label>
+                    <input type="checkbox" name="sxs_scorecard_enabled" value="1" <?php checked($scorecard_enabled, '1'); ?>>
+                    <?php _e('Enable Scorecard Button', 'sxs-candidate-comparison'); ?>
+                </label>
+            </p>
+            <div class="sxs-scorecard-url" style="margin-left: 20px; margin-top: 10px; <?php echo $scorecard_enabled ? '' : 'display: none;'; ?>">
+                <label for="sxs_scorecard_url">
+                    <?php _e('Scorecard URL', 'sxs-candidate-comparison'); ?>
+                </label>
+                <input type="url" id="sxs_scorecard_url" name="sxs_scorecard_url" 
+                       value="<?php echo esc_url($scorecard_url); ?>" class="widefat">
+                <p class="description"><?php _e('Enter the URL where the scorecard can be found.', 'sxs-candidate-comparison'); ?></p>
+            </div>
+        </div>
+
+        <script>
+        jQuery(document).ready(function($) {
+            // Position Brief toggle
+            $('input[name="sxs_position_brief_enabled"]').on('change', function() {
+                $('.sxs-position-brief-url').toggle(this.checked);
+            });
+
+            // Scorecard toggle
+            $('input[name="sxs_scorecard_enabled"]').on('change', function() {
+                $('.sxs-scorecard-url').toggle(this.checked);
+            });
+        });
+        </script>
+        <?php
     }
 
     public function render_recruiters_meta_box($post) {
@@ -1046,6 +1117,27 @@ class SXS_Comparison_Set {
                 update_post_meta($post_id, '_sxs_header_content', wp_kses_post($_POST['sxs_header_content']));
             } else {
                 delete_post_meta($post_id, '_sxs_header_content');
+            }
+        }
+
+        // Save position brief and scorecard settings
+        if (isset($_POST['sxs_position_brief_scorecard_nonce']) && 
+            wp_verify_nonce($_POST['sxs_position_brief_scorecard_nonce'], 'sxs_position_brief_scorecard_nonce')) {
+            
+            // Save position brief settings
+            $position_brief_enabled = isset($_POST['sxs_position_brief_enabled']) ? '1' : '0';
+            update_post_meta($post_id, '_sxs_position_brief_enabled', $position_brief_enabled);
+            
+            if (isset($_POST['sxs_position_brief_url'])) {
+                update_post_meta($post_id, '_sxs_position_brief_url', esc_url_raw($_POST['sxs_position_brief_url']));
+            }
+            
+            // Save scorecard settings
+            $scorecard_enabled = isset($_POST['sxs_scorecard_enabled']) ? '1' : '0';
+            update_post_meta($post_id, '_sxs_scorecard_enabled', $scorecard_enabled);
+            
+            if (isset($_POST['sxs_scorecard_url'])) {
+                update_post_meta($post_id, '_sxs_scorecard_url', esc_url_raw($_POST['sxs_scorecard_url']));
             }
         }
     }

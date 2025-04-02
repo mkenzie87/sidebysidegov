@@ -290,6 +290,47 @@ class SXS_Candidate_Comparison {
             z-index: 20 !important;
             box-shadow: 5px 0 5px -2px rgba(0,0,0,0.1) !important;
         }
+        
+        /* Add styles for buttons */
+        .sxs-buttons-row {
+            background-color: #f5f5f5 !important;
+        }
+        
+        .sxs-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 10px;
+        }
+        
+        .sxs-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #F26724;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        
+        .sxs-button:hover {
+            background-color: #d55a1f;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .sxs-position-brief-button {
+            background-color: #F26724;
+        }
+        
+        .sxs-scorecard-button {
+            background-color: #1C2856;
+        }
+        
+        .sxs-scorecard-button:hover {
+            background-color: #16203f;
+        }
         </style>
         <?php
         
@@ -333,6 +374,37 @@ class SXS_Candidate_Comparison {
                         </div>
                     <?php endforeach; ?>
                 </div>
+
+                <?php
+                // Get position brief and scorecard settings
+                $position_brief_enabled = get_post_meta($atts['set'], '_sxs_position_brief_enabled', true);
+                $position_brief_url = get_post_meta($atts['set'], '_sxs_position_brief_url', true);
+                $scorecard_enabled = get_post_meta($atts['set'], '_sxs_scorecard_enabled', true);
+                $scorecard_url = get_post_meta($atts['set'], '_sxs_scorecard_url', true);
+
+                // Only show buttons if at least one is enabled
+                if ($position_brief_enabled || $scorecard_enabled) :
+                ?>
+                <div class="sxs-row sxs-buttons-row">
+                    <div class="sxs-col sxs-col-header"></div>
+                    <?php foreach ($candidates as $candidate) : ?>
+                        <div class="sxs-col">
+                            <div class="sxs-buttons">
+                                <?php if ($position_brief_enabled && !empty($position_brief_url)) : ?>
+                                    <a href="<?php echo esc_url($position_brief_url); ?>" class="sxs-button sxs-position-brief-button" target="_blank">
+                                        <?php _e('Position Brief', 'sxs-candidate-comparison'); ?>
+                                    </a>
+                                <?php endif; ?>
+                                <?php if ($scorecard_enabled && !empty($scorecard_url)) : ?>
+                                    <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button sxs-scorecard-button" target="_blank">
+                                        <?php _e('Scorecard', 'sxs-candidate-comparison'); ?>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
             </div>
 
             <div class="sxs-comparison-body">
