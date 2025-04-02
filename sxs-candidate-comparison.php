@@ -99,6 +99,10 @@ function sxs_cc_activate() {
 // Deactivation hook
 register_deactivation_hook(__FILE__, 'sxs_cc_deactivate');
 function sxs_cc_deactivate() {
+    // Clean up header content meta
+    global $wpdb;
+    $wpdb->delete($wpdb->postmeta, array('meta_key' => '_sxs_header_content'));
+    
     // Flush rewrite rules
     flush_rewrite_rules();
 }

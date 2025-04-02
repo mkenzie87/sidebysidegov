@@ -72,16 +72,6 @@ class SXS_Comparison_Set {
             );
         }
         
-        // Header Content metabox
-        add_meta_box(
-            'sxs_header_content',
-            __('Header Content Area', 'sxs-candidate-comparison'),
-            array($this, 'render_header_content_meta_box'),
-            'sxs_comparison',
-            'normal',
-            'high'
-        );
-        
         // Position Brief and Scorecard metabox
         add_meta_box(
             'sxs_position_brief_scorecard',
@@ -358,69 +348,6 @@ class SXS_Comparison_Set {
         });
         </script>
         <?php
-    }
-
-    public function render_header_content_meta_box($post) {
-        // Get saved content
-        $header_content = get_post_meta($post->ID, '_sxs_header_content', true);
-        ?>
-        <p class="description">
-            <?php _e('Add content to display alongside the recruiters in the header section. This content will appear in the right column next to the recruiter slider.', 'sxs-candidate-comparison'); ?>
-        </p>
-        
-        <style>
-            #sxs_header_content {
-                border: 1px solid #ddd;
-                box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
-                padding: 15px;
-                font-family: Consolas, Monaco, monospace;
-                font-size: 14px;
-                line-height: 1.6;
-                margin-top: 10px;
-                min-height: 250px;
-                resize: vertical;
-            }
-            .sxs-header-examples {
-                background: #f9f9f9;
-                border: 1px solid #e5e5e5;
-                padding: 10px 15px;
-                margin-top: 10px;
-                border-radius: 3px;
-            }
-            .sxs-header-examples code {
-                background: #f1f1f1;
-                padding: 2px 4px;
-                border-radius: 3px;
-                color: #0073aa;
-            }
-        </style>
-        
-        <textarea 
-            name="sxs_header_content" 
-            id="sxs_header_content" 
-            class="large-text"
-            rows="15"
-        ><?php echo esc_textarea($header_content); ?></textarea>
-        
-        <p class="description" style="margin-top: 10px; font-style: italic;">
-            <span class="dashicons dashicons-info" style="color: #666; font-size: 16px; vertical-align: middle; margin-right: 5px;"></span>
-            <?php _e('You can use HTML for formatting. The content will be displayed with white text to ensure visibility against the dark background.', 'sxs-candidate-comparison'); ?>
-        </p>
-        
-        <div class="sxs-header-examples">
-            <p><strong><?php _e('HTML Examples:', 'sxs-candidate-comparison'); ?></strong></p>
-            <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
-                <li><?php _e('Heading: <code>&lt;h2&gt;Welcome to Our Recruitment Process&lt;/h2&gt;</code>', 'sxs-candidate-comparison'); ?></li>
-                <li><?php _e('Paragraph: <code>&lt;p&gt;We are excited to have you here.&lt;/p&gt;</code>', 'sxs-candidate-comparison'); ?></li>
-                <li><?php _e('Bold text: <code>&lt;strong&gt;Important information&lt;/strong&gt;</code>', 'sxs-candidate-comparison'); ?></li>
-                <li><?php _e('List: <code>&lt;ul&gt;&lt;li&gt;First item&lt;/li&gt;&lt;li&gt;Second item&lt;/li&gt;&lt;/ul&gt;</code>', 'sxs-candidate-comparison'); ?></li>
-                <li><?php _e('Link: <code>&lt;a href="https://example.com"&gt;Click here&lt;/a&gt;</code>', 'sxs-candidate-comparison'); ?></li>
-            </ul>
-        </div>
-        
-        <?php
-        // Add nonce field
-        wp_nonce_field('sxs_header_content_nonce', 'sxs_header_content_nonce');
     }
 
     public function render_position_brief_scorecard_meta_box($post) {
@@ -1106,17 +1033,6 @@ class SXS_Comparison_Set {
             } else {
                 // If no recruiters selected, save empty array
                 update_post_meta($post_id, '_sxs_selected_recruiters', array());
-            }
-        }
-
-        // Save header content
-        if (isset($_POST['sxs_header_content_nonce']) && 
-            wp_verify_nonce($_POST['sxs_header_content_nonce'], 'sxs_header_content_nonce')) {
-            
-            if (isset($_POST['sxs_header_content'])) {
-                update_post_meta($post_id, '_sxs_header_content', wp_kses_post($_POST['sxs_header_content']));
-            } else {
-                delete_post_meta($post_id, '_sxs_header_content');
             }
         }
 
