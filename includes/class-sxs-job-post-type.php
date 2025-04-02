@@ -12,17 +12,25 @@ if (!defined('ABSPATH')) {
 class SXS_Job_Post_Type {
     
     public function init() {
-        add_action('init', array($this, 'register_post_type'));
-        add_filter('manage_sxs_job_posts_columns', array($this, 'set_custom_columns'));
-        add_action('manage_sxs_job_posts_custom_column', array($this, 'custom_column'), 10, 2);
-        add_filter('manage_edit-sxs_job_sortable_columns', array($this, 'sortable_columns'));
-        add_action('pre_get_posts', array($this, 'sort_columns'));
+        // Only register the post type if jobs are enabled
+        if (class_exists('SXS_Settings') && SXS_Settings::is_jobs_enabled()) {
+            add_action('init', array($this, 'register_post_type'));
+            add_filter('manage_sxs_job_posts_columns', array($this, 'set_custom_columns'));
+            add_action('manage_sxs_job_posts_custom_column', array($this, 'custom_column'), 10, 2);
+            add_filter('manage_edit-sxs_job_sortable_columns', array($this, 'sortable_columns'));
+            add_action('pre_get_posts', array($this, 'sort_columns'));
+        }
     }
     
     /**
      * Register the Job post type
      */
     public function register_post_type() {
+        // Double check if jobs are enabled before registering
+        if (!class_exists('SXS_Settings') || !SXS_Settings::is_jobs_enabled()) {
+            return;
+        }
+
         $labels = array(
             'name'                  => _x('Jobs', 'Post type general name', 'sxs-candidate-comparison'),
             'singular_name'         => _x('Job', 'Post type singular name', 'sxs-candidate-comparison'),

@@ -12,8 +12,11 @@ if (!defined('ABSPATH')) {
 class SXS_Job_Metaboxes {
     
     public function init() {
-        add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
-        add_action('save_post_sxs_job', array($this, 'save_meta_boxes'));
+        // Only initialize if jobs are enabled
+        if (class_exists('SXS_Settings') && SXS_Settings::is_jobs_enabled()) {
+            add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
+            add_action('save_post_sxs_job', array($this, 'save_meta_boxes'));
+        }
     }
     
     /**

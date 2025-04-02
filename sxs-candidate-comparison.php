@@ -33,6 +33,10 @@ require_once SXS_CC_PLUGIN_DIR . 'admin/class-sxs-dashboard-widget.php';
 
 // Initialize plugin
 function sxs_cc_init() {
+    // Initialize settings
+    $settings = SXS_Settings::get_instance();
+    $settings->init();
+    
     // Initialize post types
     $candidate_post_type = new SXS_Candidate_Post_Type();
     $candidate_post_type->init();
@@ -77,14 +81,24 @@ add_action('plugins_loaded', 'sxs_cc_init');
 // Activation hook
 register_activation_hook(__FILE__, 'sxs_cc_activate');
 function sxs_cc_activate() {
-    // Create required database tables
     // Set up initial options
+    $default_settings = array(
+        'jobs_enabled' => false
+    );
+    
+    // Only add the option if it doesn't exist
+    if (!get_option('sxs_settings')) {
+        add_option('sxs_settings', $default_settings);
+    }
+    
+    // Flush rewrite rules
     flush_rewrite_rules();
 }
 
 // Deactivation hook
 register_deactivation_hook(__FILE__, 'sxs_cc_deactivate');
 function sxs_cc_deactivate() {
+    // Flush rewrite rules
     flush_rewrite_rules();
 }
 
