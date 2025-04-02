@@ -20,6 +20,7 @@ define('SXS_CC_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SXS_CC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // Include required files
+require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-settings.php';
 require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-candidate-post-type.php';
 require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-candidate-metaboxes.php';
 require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-company-post-type.php';
