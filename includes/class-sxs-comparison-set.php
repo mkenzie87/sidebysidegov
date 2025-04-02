@@ -60,15 +60,17 @@ class SXS_Comparison_Set {
     }
 
     public function add_meta_boxes() {
-        // Job Selection metabox
-        add_meta_box(
-            'sxs_job_selection',
-            __('Job Selection', 'sxs-candidate-comparison'),
-            array($this, 'render_job_selection_meta_box'),
-            'sxs_comparison',
-            'normal',
-            'high'
-        );
+        // Only add job selection if jobs are enabled
+        if (class_exists('SXS_Settings') && SXS_Settings::is_jobs_enabled()) {
+            add_meta_box(
+                'sxs_job_selection',
+                __('Job Selection', 'sxs-candidate-comparison'),
+                array($this, 'render_job_selection_meta_box'),
+                'sxs_comparison',
+                'normal',
+                'high'
+            );
+        }
         
         // Header Content metabox
         add_meta_box(
@@ -968,22 +970,25 @@ class SXS_Comparison_Set {
             }
         }
         
-        // Verify job selection nonce
-        if (isset($_POST['sxs_job_selection_nonce']) &&
-            wp_verify_nonce($_POST['sxs_job_selection_nonce'], 'sxs_job_selection_nonce')) {
-            
-            // Save selected job
-            if (isset($_POST['sxs_selected_job'])) {
-                $selected_job = intval($_POST['sxs_selected_job']);
-                update_post_meta($post_id, '_sxs_selected_job', $selected_job);
+        // Only save job-related data if jobs are enabled
+        if (class_exists('SXS_Settings') && SXS_Settings::is_jobs_enabled()) {
+            // Verify job selection nonce
+            if (isset($_POST['sxs_job_selection_nonce']) &&
+                wp_verify_nonce($_POST['sxs_job_selection_nonce'], 'sxs_job_selection_nonce')) {
                 
-                // If this is just a preview update, redirect back to the edit page
-                if (isset($_POST['sxs_preview_update'])) {
-                    wp_redirect(admin_url('post.php?post=' . $post_id . '&action=edit'));
-                    exit;
+                // Save selected job
+                if (isset($_POST['sxs_selected_job'])) {
+                    $selected_job = intval($_POST['sxs_selected_job']);
+                    update_post_meta($post_id, '_sxs_selected_job', $selected_job);
+                    
+                    // If this is just a preview update, redirect back to the edit page
+                    if (isset($_POST['sxs_preview_update'])) {
+                        wp_redirect(admin_url('post.php?post=' . $post_id . '&action=edit'));
+                        exit;
+                    }
+                } else {
+                    delete_post_meta($post_id, '_sxs_selected_job');
                 }
-            } else {
-                delete_post_meta($post_id, '_sxs_selected_job');
             }
         }
         
