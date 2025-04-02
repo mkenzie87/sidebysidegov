@@ -9,14 +9,13 @@ class SXS_Candidate_Post_Type {
     public function init() {
         add_action('init', array($this, 'register_post_type'));
         add_action('init', array($this, 'register_taxonomies'));
-        add_action('admin_init', array($this, 'hide_editor'));
     }
 
     public function register_post_type() {
         $labels = array(
-            'name'                  => _x('All Candidates', 'Post type general name', 'sxs-candidate-comparison'),
-            'singular_name'         => _x('Candidate', 'Post type singular name', 'sxs-candidate-comparison'),
-            'menu_name'            => _x('Side by Side', 'Admin Menu text', 'sxs-candidate-comparison'),
+            'name'                  => _x('SxS Candidates', 'Post type general name', 'sxs-candidate-comparison'),
+            'singular_name'         => _x('SxS Candidate', 'Post type singular name', 'sxs-candidate-comparison'),
+            'menu_name'            => _x('SxS Candidates', 'Admin Menu text', 'sxs-candidate-comparison'),
             'add_new'              => __('Add New', 'sxs-candidate-comparison'),
             'add_new_item'         => __('Add New Candidate', 'sxs-candidate-comparison'),
             'edit_item'            => __('Edit Candidate', 'sxs-candidate-comparison'),
@@ -25,29 +24,29 @@ class SXS_Candidate_Post_Type {
             'search_items'         => __('Search Candidates', 'sxs-candidate-comparison'),
             'not_found'            => __('No candidates found', 'sxs-candidate-comparison'),
             'not_found_in_trash'   => __('No candidates found in Trash', 'sxs-candidate-comparison'),
-            'all_items'            => __('All Candidates', 'sxs-candidate-comparison'),
         );
 
         $args = array(
             'labels'              => $labels,
-            'public'              => false,
-            'publicly_queryable'  => false,
+            'public'              => true,
+            'publicly_queryable'  => true,
             'show_ui'            => true,
             'show_in_menu'       => true,
-            'query_var'          => false,
-            'rewrite'            => false,
+            'query_var'          => true,
+            'rewrite'            => array('slug' => 'sxs-candidate'),
             'capability_type'    => 'post',
-            'has_archive'        => false,
+            'has_archive'        => true,
             'hierarchical'       => false,
             'menu_position'      => 5,
             'menu_icon'          => 'dashicons-groups',
             'supports'           => array(
                 'title',
+                'editor',
                 'thumbnail',
                 'revisions',
                 'custom-fields',
             ),
-            'show_in_rest'       => false, // Disable Gutenberg editor
+            'show_in_rest'       => true, // Enable Gutenberg editor
         );
 
         register_post_type('sxs_candidate', $args);
@@ -78,36 +77,5 @@ class SXS_Candidate_Post_Type {
             'rewrite'          => array('slug' => 'candidate-category'),
             'show_in_rest'     => true,
         ));
-    }
-
-    /**
-     * Hide the standard editor on candidate edit screens
-     */
-    public function hide_editor() {
-        global $pagenow;
-        
-        if (!('post.php' == $pagenow || 'post-new.php' == $pagenow)) {
-            return;
-        }
-        
-        // Get the post type
-        global $post;
-        $post_type = isset($_GET['post_type']) ? $_GET['post_type'] : (isset($post) ? $post->post_type : '');
-        
-        // If we're on the candidate edit screen
-        if ('sxs_candidate' == $post_type) {
-            // Remove editor
-            remove_post_type_support('sxs_candidate', 'editor');
-            
-            // Add CSS to hide any remaining editor elements
-            add_action('admin_head', function() {
-                echo '<style type="text/css">
-                    #postdivrich, #wp-content-editor-container, 
-                    #wp-content-editor-tools, .wp-editor-area {
-                        display: none;
-                    }
-                </style>';
-            });
-        }
     }
 } 

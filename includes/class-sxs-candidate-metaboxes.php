@@ -48,13 +48,35 @@ class SXS_Candidate_Metaboxes {
         
         ?>
         <div class="sxs-meta-row">
+            <h3 class="sxs-section-title"><?php _e('Current Position', 'sxs-candidate-comparison'); ?></h3>
             <p>
-                <label for="sxs_current_company"><?php _e('Current Company', 'sxs-candidate-comparison'); ?></label>
-                <input type="text" id="sxs_current_company" name="sxs_current_company" value="<?php echo esc_attr($current_company); ?>" class="widefat">
+                <label for="sxs_current_company">
+                    <?php _e('Current Company', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-required">*</span>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Enter the name of the company where the candidate is currently employed.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
+                <input type="text" id="sxs_current_company" name="sxs_current_company" 
+                       value="<?php echo esc_attr($current_company); ?>" 
+                       class="widefat" 
+                       placeholder="<?php _e('e.g., Acme Corporation', 'sxs-candidate-comparison'); ?>" required>
             </p>
+            
             <p>
-                <label for="sxs_current_title"><?php _e('Current Title', 'sxs-candidate-comparison'); ?></label>
-                <input type="text" id="sxs_current_title" name="sxs_current_title" value="<?php echo esc_attr($current_title); ?>" class="widefat">
+                <label for="sxs_current_title">
+                    <?php _e('Current Title', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-required">*</span>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Enter the job title of the candidate at their current company.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
+                <input type="text" id="sxs_current_title" name="sxs_current_title" 
+                       value="<?php echo esc_attr($current_title); ?>" 
+                       class="widefat" 
+                       placeholder="<?php _e('e.g., Marketing Director', 'sxs-candidate-comparison'); ?>" required>
             </p>
         </div>
         <?php
@@ -77,23 +99,52 @@ class SXS_Candidate_Metaboxes {
         
         ?>
         <div class="sxs-meta-row">
+            <h3 class="sxs-section-title"><?php _e('Experience', 'sxs-candidate-comparison'); ?></h3>
             <p>
-                <label for="sxs_industry_experience"><?php _e('Years of Industry Experience', 'sxs-candidate-comparison'); ?></label>
-                <input type="number" id="sxs_industry_experience" name="sxs_industry_experience" value="<?php echo esc_attr($industry_experience); ?>" class="small-text">
+                <label for="sxs_industry_experience">
+                    <?php _e('Years of Industry Experience', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-required">*</span>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Enter the total number of years the candidate has worked in this industry.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
+                <input type="number" id="sxs_industry_experience" name="sxs_industry_experience" 
+                       value="<?php echo esc_attr($industry_experience); ?>" 
+                       class="small-text" min="0" max="50" required>
             </p>
             <p>
-                <label for="sxs_role_experience"><?php _e('Years of Role-Specific Experience', 'sxs-candidate-comparison'); ?></label>
-                <input type="number" id="sxs_role_experience" name="sxs_role_experience" value="<?php echo esc_attr($role_experience); ?>" class="small-text">
+                <label for="sxs_role_experience">
+                    <?php _e('Years of Role-Specific Experience', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-required">*</span>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Enter the number of years the candidate has worked specifically in this role or similar positions.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
+                <input type="number" id="sxs_role_experience" name="sxs_role_experience" 
+                       value="<?php echo esc_attr($role_experience); ?>" 
+                       class="small-text" min="0" max="50" required>
             </p>
         </div>
 
         <div class="sxs-meta-row">
+            <h3 class="sxs-section-title"><?php _e('Education/Certifications', 'sxs-candidate-comparison'); ?></h3>
             <p>
-                <label><?php _e('Education/Certifications', 'sxs-candidate-comparison'); ?></label>
+                <label>
+                    <?php _e('Education/Certifications', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('List relevant degrees, certifications, and educational achievements. Add multiple entries as needed.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
                 <div id="sxs_education_fields">
                     <?php foreach ($education as $index => $edu) : ?>
                         <div class="education-field">
-                            <input type="text" name="sxs_education[]" value="<?php echo esc_attr($edu); ?>" class="widefat">
+                            <input type="text" name="sxs_education[]" 
+                                   value="<?php echo esc_attr($edu); ?>" 
+                                   class="widefat" 
+                                   placeholder="<?php _e('e.g., MBA from Harvard University, CPA certification', 'sxs-candidate-comparison'); ?>">
                             <button type="button" class="button remove-field"><?php _e('Remove', 'sxs-candidate-comparison'); ?></button>
                         </div>
                     <?php endforeach; ?>
@@ -103,12 +154,21 @@ class SXS_Candidate_Metaboxes {
         </div>
 
         <div class="sxs-meta-row">
+            <h3 class="sxs-section-title"><?php _e('Relevant Experience', 'sxs-candidate-comparison'); ?></h3>
             <p>
-                <label><?php _e('Relevant Experience', 'sxs-candidate-comparison'); ?></label>
+                <label>
+                    <?php _e('Key Accomplishments', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Add notable achievements, qualifications, or experiences that are relevant to this position. Include one achievement per entry.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
                 <div id="sxs_relevant_experience_fields">
                     <?php foreach ($relevant_experience as $index => $exp) : ?>
                         <div class="experience-field">
-                            <textarea name="sxs_relevant_experience[]" class="widefat" rows="2"><?php echo esc_textarea($exp); ?></textarea>
+                            <textarea name="sxs_relevant_experience[]" 
+                                      class="widefat" rows="2" 
+                                      placeholder="<?php _e('e.g., Led a team of 10 developers to deliver a major project under budget', 'sxs-candidate-comparison'); ?>"><?php echo esc_textarea($exp); ?></textarea>
                             <button type="button" class="button remove-field"><?php _e('Remove', 'sxs-candidate-comparison'); ?></button>
                         </div>
                     <?php endforeach; ?>
@@ -116,30 +176,6 @@ class SXS_Candidate_Metaboxes {
                 <button type="button" class="button add-experience-field"><?php _e('Add Experience', 'sxs-candidate-comparison'); ?></button>
             </p>
         </div>
-
-        <script>
-        jQuery(document).ready(function($) {
-            $('.add-education-field').on('click', function() {
-                var field = '<div class="education-field">' +
-                           '<input type="text" name="sxs_education[]" value="" class="widefat">' +
-                           '<button type="button" class="button remove-field">Remove</button>' +
-                           '</div>';
-                $('#sxs_education_fields').append(field);
-            });
-
-            $('.add-experience-field').on('click', function() {
-                var field = '<div class="experience-field">' +
-                           '<textarea name="sxs_relevant_experience[]" class="widefat" rows="2"></textarea>' +
-                           '<button type="button" class="button remove-field">Remove</button>' +
-                           '</div>';
-                $('#sxs_relevant_experience_fields').append(field);
-            });
-
-            $(document).on('click', '.remove-field', function() {
-                $(this).parent().remove();
-            });
-        });
-        </script>
         <?php
     }
 
@@ -152,17 +188,45 @@ class SXS_Candidate_Metaboxes {
         
         ?>
         <div class="sxs-meta-row">
+            <h3 class="sxs-section-title"><?php _e('Compensation Details', 'sxs-candidate-comparison'); ?></h3>
             <p>
-                <label for="sxs_current_base"><?php _e('Current Base Salary', 'sxs-candidate-comparison'); ?></label>
-                <input type="text" id="sxs_current_base" name="sxs_current_base" value="<?php echo esc_attr($current_base); ?>" class="widefat">
+                <label for="sxs_current_base">
+                    <?php _e('Current Base Salary', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Enter the candidate\'s current base salary. Include currency symbol if needed.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
+                <input type="text" id="sxs_current_base" name="sxs_current_base" 
+                       value="<?php echo esc_attr($current_base); ?>" 
+                       class="widefat" 
+                       placeholder="<?php _e('e.g., $120,000', 'sxs-candidate-comparison'); ?>">
             </p>
             <p>
-                <label for="sxs_current_bonus"><?php _e('Current Bonus/Additional Compensation', 'sxs-candidate-comparison'); ?></label>
-                <input type="text" id="sxs_current_bonus" name="sxs_current_bonus" value="<?php echo esc_attr($current_bonus); ?>" class="widefat">
+                <label for="sxs_current_bonus">
+                    <?php _e('Current Bonus/Additional Compensation', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Enter any additional compensation such as bonuses, stock options, etc.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
+                <input type="text" id="sxs_current_bonus" name="sxs_current_bonus" 
+                       value="<?php echo esc_attr($current_bonus); ?>" 
+                       class="widefat" 
+                       placeholder="<?php _e('e.g., 15% bonus + $10k signing bonus', 'sxs-candidate-comparison'); ?>">
             </p>
             <p>
-                <label for="sxs_application_compensation"><?php _e('Application Compensation Range', 'sxs-candidate-comparison'); ?></label>
-                <input type="text" id="sxs_application_compensation" name="sxs_application_compensation" value="<?php echo esc_attr($application_compensation); ?>" class="widefat">
+                <label for="sxs_application_compensation">
+                    <?php _e('Application Compensation Range', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Enter the compensation range the candidate is seeking or has been offered for this position.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
+                <input type="text" id="sxs_application_compensation" name="sxs_application_compensation" 
+                       value="<?php echo esc_attr($application_compensation); ?>" 
+                       class="widefat" 
+                       placeholder="<?php _e('e.g., $130,000 - $150,000', 'sxs-candidate-comparison'); ?>">
             </p>
         </div>
         <?php

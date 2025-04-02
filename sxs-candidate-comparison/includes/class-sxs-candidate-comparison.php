@@ -71,13 +71,9 @@ class SXS_Candidate_Comparison {
             'set' => 0,
         ), $atts);
 
-        // If a comparison set ID is provided, use its candidates and company
+        // If a comparison set ID is provided, use its candidates
         if (!empty($atts['set'])) {
-            $set_id = intval($atts['set']);
-            $selected_candidates = get_post_meta($set_id, '_sxs_selected_candidates', true);
-            $selected_company = get_post_meta($set_id, '_sxs_selected_company', true);
-            
-            // Always use selected candidates
+            $selected_candidates = get_post_meta($atts['set'], '_sxs_selected_candidates', true);
             if (is_array($selected_candidates) && !empty($selected_candidates)) {
                 $args = array(
                     'post_type' => 'sxs_candidate',
@@ -85,51 +81,8 @@ class SXS_Candidate_Comparison {
                     'post__in' => $selected_candidates,
                     'orderby' => 'post__in',
                 );
-                
-                $candidates = get_posts($args);
-                
-                if (empty($candidates)) {
-                    return '<p>' . __('No candidates found for this comparison.', 'sxs-candidate-comparison') . '</p>';
-                }
             } else {
                 return '<p>' . __('No candidates selected for this comparison.', 'sxs-candidate-comparison') . '</p>';
-            }
-            
-            // Get company data if selected
-            $company_data = false;
-            if (!empty($selected_company)) {
-                $company = get_post($selected_company);
-                if ($company && $company->post_type === 'sxs_company') {
-                    $company_data = array(
-                        'id' => $company->ID,
-                        'name' => $company->post_title,
-                        'logo' => '',
-                        'logo_id' => get_post_meta($company->ID, '_sxs_company_logo_id', true),
-                        'cover_id' => get_post_meta($company->ID, '_sxs_company_cover_id', true),
-                        'location' => get_post_meta($company->ID, '_sxs_company_location', true),
-                        'website' => get_post_meta($company->ID, '_sxs_company_website', true),
-                        'industry' => get_post_meta($company->ID, '_sxs_company_industry', true),
-                        'description' => get_post_meta($company->ID, '_sxs_company_description', true),
-                        'header_color' => get_post_meta($company->ID, '_sxs_company_header_color', true) ?: '#1C2856',
-                        'text_color' => get_post_meta($company->ID, '_sxs_company_text_color', true) ?: '#FFFFFF'
-                    );
-                    
-                    // Get company logo
-                    if (!empty($company_data['logo_id'])) {
-                        $logo_img = wp_get_attachment_image_src($company_data['logo_id'], array(50, 50));
-                        if ($logo_img) {
-                            $company_data['logo'] = $logo_img[0];
-                        }
-                    }
-                    
-                    // Get company cover
-                    if (!empty($company_data['cover_id'])) {
-                        $cover_img = wp_get_attachment_image_src($company_data['cover_id'], 'medium');
-                        if ($cover_img) {
-                            $company_data['cover'] = $cover_img[0];
-                        }
-                    }
-                }
             }
         } else {
             // Use the traditional shortcode parameters
@@ -153,15 +106,12 @@ class SXS_Candidate_Comparison {
                     ),
                 );
             }
-            
-            $candidates = get_posts($args);
-            
-            if (empty($candidates)) {
-                return '<p>' . __('No candidates found.', 'sxs-candidate-comparison') . '</p>';
-            }
-            
-            // No company data for shortcode without set
-            $company_data = false;
+        }
+
+        $candidates = get_posts($args);
+
+        if (empty($candidates)) {
+            return '<p>' . __('No candidates found.', 'sxs-candidate-comparison') . '</p>';
         }
 
         ob_start();
@@ -303,33 +253,9 @@ class SXS_Candidate_Comparison {
                             <?php _e('Print Comparison', 'sxs-candidate-comparison'); ?>
                         </button>
                     </div>
-                    <?php foreach ($candidates as $candidate) : 
-                        // Default header styling
-                        $header_style = '';
-                        $header_classes = '';
-                        
-                        // If we have company data, apply it to all candidates
-                        if ($company_data) {
-                            $header_style = sprintf(
-                                'style="background-color: %s; color: %s;"',
-                                esc_attr($company_data['header_color']),
-                                esc_attr($company_data['text_color'])
-                            );
-                            $header_classes = 'sxs-company-branded';
-                        }
-                    ?>
-                        <div class="sxs-col <?php echo $header_classes; ?>" <?php echo $header_style; ?>>
-                            <?php if ($company_data && !empty($company_data['logo'])) : ?>
-                                <div class="sxs-company-logo">
-                                    <img src="<?php echo esc_url($company_data['logo']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Logo">
-                                </div>
-                            <?php endif; ?>
-                            <div class="sxs-candidate-info">
-                                <h3><?php echo esc_html($candidate->post_title); ?></h3>
-                                <?php if ($company_data) : ?>
-                                    <span class="sxs-company-name"><?php echo esc_html($company_data['name']); ?></span>
-                                <?php endif; ?>
-                            </div>
+                    <?php foreach ($candidates as $candidate) : ?>
+                        <div class="sxs-col">
+                            <h3><?php echo esc_html($candidate->post_title); ?></h3>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -341,42 +267,7 @@ class SXS_Candidate_Comparison {
                     <div class="sxs-col sxs-col-header"><?php _e('CURRENT COMPANY/<br>TITLE', 'sxs-candidate-comparison'); ?></div>
                     <?php foreach ($candidates as $candidate) : ?>
                         <div class="sxs-col">
-                            <?php if ($company_data && !empty($company_data['cover'])) : ?>
-                                <div class="sxs-company-cover">
-                                    <img src="<?php echo esc_url($company_data['cover']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Cover">
-                                </div>
-                            <?php endif; ?>
-                            
-                            <div class="sxs-company-details">
-                                <?php if ($company_data && !empty($company_data['logo'])) : ?>
-                                    <div class="sxs-company-logo-detail">
-                                        <img src="<?php echo esc_url($company_data['logo']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Logo">
-                                    </div>
-                                <?php endif; ?>
-                                <div class="sxs-company-info">
-                                    <p class="company">
-                                        <?php 
-                                        // Use company name from comparison set if available, otherwise use candidate's company
-                                        if ($company_data) {
-                                            echo esc_html($company_data['name']);
-                                        } else {
-                                            echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true));
-                                        }
-                                        ?>
-                                    </p>
-                                    <?php if ($company_data && !empty($company_data['location'])) : ?>
-                                        <p class="location"><i class="dashicons dashicons-location"></i> <?php echo esc_html($company_data['location']); ?></p>
-                                    <?php endif; ?>
-                                    <?php if ($company_data && !empty($company_data['website'])) : ?>
-                                        <p class="website">
-                                            <a href="<?php echo esc_url($company_data['website']); ?>" target="_blank">
-                                                <i class="dashicons dashicons-admin-links"></i> <?php _e('Website', 'sxs-candidate-comparison'); ?>
-                                            </a>
-                                        </p>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                            
+                            <p class="company"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true)); ?></p>
                             <p class="title"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_title', true)); ?></p>
                         </div>
                     <?php endforeach; ?>

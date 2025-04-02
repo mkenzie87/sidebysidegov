@@ -4,33 +4,49 @@ A WordPress plugin for creating beautiful side-by-side candidate comparisons for
 
 ## Features
 
-- Custom post type for managing candidate profiles
+- Custom post types for managing candidate profiles, companies, and jobs
 - Side-by-side comparison of multiple candidates
 - Responsive design for all devices
 - Print-friendly layouts
 - Shortcode support for easy embedding
 - Customizable styling options
 - Modern, clean interface
+- Multiple layout options (Standard, Premium, Minimal, Branded)
 
 ## Installation
 
 1. Upload the `sxs-candidate-comparison` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Start creating candidate profiles under the 'SxS Candidates' menu item
+3. Start creating candidate profiles under the 'Side by Side > All Candidates' menu item
 
 ## Usage
 
-### Creating Candidate Profiles
+### Managing Internal Data
 
-1. Navigate to 'SxS Candidates' in the WordPress admin menu
-2. Click 'Add New' to create a new candidate profile
-3. Fill in the candidate details:
-   - Name/Title
-   - Current Company/Title
-   - Education/Certifications
-   - Years of Experience
-   - Relevant Experience Summary
-   - Compensation Details
+The plugin uses several custom post types to organize your data internally. These don't create public-facing pages:
+
+#### Candidate Profiles
+1. Navigate to 'Side by Side > All Candidates' in the WordPress admin menu
+2. Click 'Add New' to create a new candidate profile in your internal database
+3. Fill in the candidate details for use in comparisons
+
+#### Company Profiles
+1. Navigate to 'Side by Side > Companies' in the WordPress admin menu
+2. Click 'Add New' to create a new company profile in your internal database
+3. Fill in the company details for branding your comparisons
+
+#### Job Listings
+1. Navigate to 'Side by Side > Jobs' in the WordPress admin menu
+2. Click 'Add New' to create a new job in your internal database
+3. Fill in the job details to provide context for your comparisons
+
+### Creating Public Comparisons
+
+1. Navigate to 'Side by Side > Comparisons' in the WordPress admin menu
+2. Click 'Add New' to create a comparison set
+3. Select a job, candidates, and layout 
+4. Publish the comparison
+5. Use the generated shortcode to display the comparison on any page
 
 ### Displaying Comparisons
 
@@ -38,6 +54,8 @@ Use the shortcode `[sxs_candidate_comparison]` to display candidate comparisons.
 
 - `ids`: Comma-separated list of candidate IDs to compare
 - `category`: Category slug to filter candidates
+- `job`: ID of a job to use for comparison context
+- `layout`: Style to use (standard, premium, minimal, branded)
 - `limit`: Maximum number of candidates to display (default: 3)
 
 Examples:
@@ -45,7 +63,22 @@ Examples:
 ```
 [sxs_candidate_comparison ids="1,2,3"]
 [sxs_candidate_comparison category="executive" limit="4"]
+[sxs_candidate_comparison job="45" layout="premium"]
 ```
+
+### Layout Options
+
+The plugin provides four distinct layout options for candidate comparisons:
+
+1. **Standard**: The default layout with clean, professional design. Includes job details in the header and all candidate information.
+   
+2. **Premium**: Enhanced layout with additional visual elements and more detailed profiles. Ideal for executive searches and client presentations.
+   
+3. **Minimal**: Simplified layout with only essential information. Perfect for internal reviews or preliminary candidate screenings.
+   
+4. **Branded**: Company-focused layout that uses brand colors and emphasizes company identity. Best for client-facing reports.
+
+You can select a layout when creating a comparison set or specify it in the shortcode with the `layout` parameter.
 
 ### Styling
 

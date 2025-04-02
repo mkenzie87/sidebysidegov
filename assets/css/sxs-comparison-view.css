@@ -6,6 +6,67 @@
     position: relative;
 }
 
+/* Hero header styles */
+.sxs-hero-header {
+    position: relative;
+    width: 100%;
+    height: 780px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #1C2856;
+    margin-bottom: 50px;
+}
+
+.sxs-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.7);
+    z-index: 1;
+}
+
+.sxs-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.sxs-hero-logo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    overflow: hidden;
+    padding: 20px;
+}
+
+.sxs-hero-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.sxs-hero-title {
+    margin-top: 30px;
+    color: white;
+    font-size: 64px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
 /* Container styles */
 .sxs-comparison-container {
     width: auto;
@@ -86,13 +147,48 @@
     text-align: center;
     border-color: rgba(255,255,255,0.2);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
     line-height: 1.3;
-    min-height: 60px;
+    min-height: 90px;
+    padding: 15px;
+}
+
+/* Company logo in header */
+.sxs-company-logo {
+    margin-bottom: 10px;
+}
+
+.sxs-company-logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 5px;
+    background-color: white;
+    padding: 2px;
+}
+
+.sxs-candidate-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.sxs-candidate-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.sxs-company-name {
+    font-size: 13px;
+    opacity: 0.9;
 }
 
 /* Orange "SIDE BY SIDE" cell */
@@ -120,6 +216,85 @@
     text-align: center;
 }
 
+.sxs-company-cover {
+    margin: -20px -20px 15px -20px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+}
+
+.sxs-company-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sxs-company-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.sxs-company-logo-detail {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+    background: white;
+    padding: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.sxs-company-logo-detail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sxs-company-info {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.sxs-company-info .company {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.location, .website {
+    font-size: 13px;
+    margin: 0 0 5px 0;
+    color: #666666;
+    display: flex;
+    align-items: center;
+}
+
+.sxs-company-info .location,
+.sxs-company-info .website {
+    justify-content: flex-start;
+}
+
+.location .dashicons, .website .dashicons {
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.website a {
+    color: #1C2856;
+    text-decoration: none;
+}
+
+.website a:hover {
+    text-decoration: underline;
+    color: #F26724;
+}
+
 .title {
     font-size: 14px;
     margin: 0;
@@ -127,6 +302,8 @@
     font-weight: normal;
     line-height: 1.4;
     text-align: center;
+    border-top: 1px dotted #ddd;
+    padding-top: 8px;
 }
 
 /* Add text centering for lists */
@@ -208,5 +385,143 @@
         width: 150px;
         font-size: 14px;
         padding: 15px 10px;
+    }
+    
+    .sxs-hero-header {
+        height: 580px;
+    }
+    
+    .sxs-hero-logo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .sxs-hero-title {
+        font-size: 48px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sxs-hero-header {
+        height: 480px;
+    }
+    
+    .sxs-hero-logo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .sxs-hero-title {
+        font-size: 36px;
+    }
+}
+
+/* Recruiter Card Styles */
+.recruiter-slides {
+    max-width: 350px;
+    margin: 30px auto 0;
+    position: relative;
+    z-index: 3;
+}
+
+section.recruiter-info {
+    background: #1C2856;
+    padding: 30px 20px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+}
+
+.recruiter-info h5.contact-title {
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.recruiter-info h5.team-name {
+    color: white;
+    margin-top: 15px;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.recruiter-info p.team-title {
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.recruiter-info .pres-team-social a {
+    background: #F26724;
+    color: white;
+    border: 1px solid #F26724;
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 32px;
+    margin: 0 5px;
+}
+
+.recruiter-info p.team-phone {
+    margin-top: 7px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.recruiter-info .pres-team-social a:hover {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+.recruiter-info .team-picture img {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border: 5px solid white;
+    margin: 0 auto;
+    text-align: center;
+    object-position: top;
+}
+
+li.slick-active:only-child {
+    display: none;
+}
+
+.team-divider {
+    background: white;
+    height: 1px;
+    width: 22px;
+    margin: 0 auto 15px;
+}
+
+.pres-team-social {
+    position: relative;
+    display: block;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    margin-bottom: 0;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* Responsive styles for recruiter card */
+@media screen and (max-width: 768px) {
+    .recruiter-slides {
+        max-width: 290px;
     }
 } 

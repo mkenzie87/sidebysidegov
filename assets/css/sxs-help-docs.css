@@ -1,0 +1,184 @@
+/**
+ * Help Documentation Styles
+ */
+
+.sxs-help-docs {
+    max-width: 1200px;
+    margin: 20px auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.sxs-help-docs h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sxs-help-docs h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 20px 0;
+    color: #23282d;
+}
+
+.sxs-help-docs h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 20px 0 15px;
+    color: #1C2856;
+}
+
+.sxs-help-docs h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 15px 0 10px;
+    color: #23282d;
+}
+
+.sxs-help-section {
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+/* Tabs */
+.sxs-help-tabs {
+    margin-top: 20px;
+}
+
+.sxs-help-tabs .nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.sxs-help-tabs .nav-tab {
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+.sxs-tab-content {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.sxs-tab-content .tab-pane {
+    display: none;
+}
+
+.sxs-tab-content .tab-pane.active {
+    display: block;
+}
+
+/* Lists */
+.sxs-help-docs ul,
+.sxs-help-docs ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.sxs-help-docs li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.sxs-help-docs ul li {
+    list-style-type: disc;
+}
+
+.sxs-help-docs ol li {
+    list-style-type: decimal;
+}
+
+/* Tables */
+.sxs-help-table {
+    margin: 15px 0 25px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.sxs-help-table th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.sxs-help-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.sxs-help-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Code blocks */
+.sxs-help-docs code {
+    background: #f5f5f5;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 13px;
+}
+
+.sxs-help-docs pre {
+    background: #f5f5f5;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 13px;
+    overflow-x: auto;
+    margin: 15px 0;
+}
+
+/* Colors */
+.sxs-help-docs a {
+    color: #F26724;
+}
+
+.sxs-help-docs a:hover {
+    color: #d55a1d;
+}
+
+.sxs-help-docs .nav-tab-active,
+.sxs-help-docs .nav-tab-active:focus,
+.sxs-help-docs .nav-tab-active:focus:active,
+.sxs-help-docs .nav-tab-active:hover {
+    border-bottom: 1px solid #fff;
+    background: #fff;
+    color: #F26724;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .sxs-help-tabs .nav-tab {
+        margin: 0 2px -1px 0;
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .sxs-tab-content {
+        padding: 15px;
+    }
+    
+    .sxs-help-docs h1 {
+        font-size: 22px;
+    }
+    
+    .sxs-help-docs h2 {
+        font-size: 20px;
+    }
+    
+    .sxs-help-docs h3 {
+        font-size: 16px;
+    }
+    
+    .sxs-help-docs h4 {
+        font-size: 15px;
+    }
+} 
