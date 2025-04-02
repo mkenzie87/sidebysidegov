@@ -1,0 +1,309 @@
+/**
+ * SxS Candidate Comparison Admin Styles
+ */
+
+/* Meta box styling */
+.sxs-meta-row {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fbfbfb;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.sxs-meta-row:last-child {
+    margin-bottom: 0;
+}
+
+.sxs-meta-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #23282d;
+}
+
+.sxs-meta-row input[type="text"],
+.sxs-meta-row input[type="number"],
+.sxs-meta-row textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.07);
+    padding: 8px 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.sxs-meta-row input[type="text"]:focus,
+.sxs-meta-row input[type="number"]:focus,
+.sxs-meta-row textarea:focus {
+    border-color: #F26724;
+    box-shadow: 0 0 2px rgba(242, 103, 36, 0.8);
+}
+
+/* Section titles */
+.sxs-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    color: #1C2856;
+}
+
+/* Education and Experience fields */
+.education-field,
+.experience-field {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.education-field:hover,
+.experience-field:hover {
+    border-color: #F26724;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+}
+
+.education-field:last-child,
+.experience-field:last-child {
+    margin-bottom: 0;
+}
+
+.education-field .remove-field,
+.experience-field .remove-field {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #f7f7f7;
+    border-color: #ccc;
+    color: #555;
+}
+
+.education-field .remove-field:hover,
+.experience-field .remove-field:hover {
+    background-color: #f1f1f1;
+    border-color: #999;
+    color: #23282d;
+}
+
+/* Add field buttons */
+.add-education-field,
+.add-experience-field {
+    margin-top: 10px !important;
+    background-color: #f7f7f7;
+    border-color: #ccc;
+    color: #555;
+}
+
+.add-education-field:hover,
+.add-experience-field:hover {
+    background-color: #f1f1f1;
+    border-color: #999;
+    color: #23282d;
+}
+
+/* Compensation fields */
+.sxs-meta-row input[type="text"].small-text {
+    width: 150px;
+}
+
+/* Help text */
+.sxs-help-text {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+/* Required fields */
+.sxs-required {
+    color: #dc3232;
+    margin-left: 3px;
+}
+
+/* Field validation */
+.sxs-meta-row input.invalid,
+.sxs-meta-row textarea.invalid,
+.sxs-meta-row select.invalid {
+    border-color: #dc3232;
+    box-shadow: 0 0 2px rgba(220, 50, 50, 0.8);
+}
+
+/* Error messages */
+.sxs-error-message {
+    color: #dc3232;
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    background: #ffeaea;
+    border-left: 4px solid #dc3232;
+}
+
+/* Success messages */
+.sxs-success-message {
+    color: #46b450;
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    background: #ecf7ed;
+    border-left: 4px solid #46b450;
+}
+
+/* Loading state */
+.sxs-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Tooltip styling */
+.sxs-tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.sxs-tooltip-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #F26724;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: help;
+}
+
+.sxs-tooltip-text {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    padding: 8px 12px;
+    background: #23282d;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.4;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.sxs-tooltip-text:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #23282d transparent transparent transparent;
+}
+
+/* Candidate selector */
+.sxs-candidate-selector {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.sxs-available-candidates,
+.sxs-selected-candidates {
+    flex: 1;
+}
+
+.sxs-candidates-list {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    height: 200px !important;
+    background: #fff;
+}
+
+.sxs-candidate-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 40px;
+}
+
+.sxs-candidate-search {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.07);
+}
+
+/* Option styling for select boxes */
+#sxs-selected-candidates option,
+#sxs-available-candidates option {
+    padding: 5px;
+    margin-bottom: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#sxs-selected-candidates option {
+    background-color: #f1f8ff;
+    border-left: 3px solid #1C2856;
+}
+
+#sxs-selected-candidates option.dragged {
+    background-color: #e6f3ff;
+    border-left: 3px solid #F26724;
+}
+
+/* Responsive admin */
+@media screen and (max-width: 782px) {
+    .education-field,
+    .experience-field {
+        padding-right: 0;
+    }
+
+    .education-field .remove-field,
+    .experience-field .remove-field {
+        position: static;
+        margin-top: 5px;
+    }
+    
+    .sxs-candidate-selector {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .sxs-candidate-controls {
+        flex-direction: row;
+        padding-top: 0;
+        justify-content: center;
+    }
+}
+
+/* Admin badges */
+.sxs-badge {
+    display: inline-block;
+    background: #F26724;
+    color: #fff;
+    border-radius: 10px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.sxs-badge-company {
+    background: #1C2856;
+} 
