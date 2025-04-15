@@ -222,7 +222,9 @@ class SXS_Candidate_Comparison {
             align-items: center !important;
             justify-content: space-between !important;
             padding: 30px 0 !important;
-            margin-bottom: 40px !important;
+            margin: 40px auto !important;
+            max-width: 1400px !important;
+            gap: 30px !important;
         }
 
         .sxs-recruiter-card {
@@ -233,7 +235,8 @@ class SXS_Candidate_Comparison {
             display: flex !important;
             align-items: center !important;
             gap: 20px !important;
-            max-width: 400px !important;
+            flex: 0 0 auto !important;
+            min-width: 350px !important;
         }
 
         .sxs-recruiter-photo {
@@ -288,15 +291,26 @@ class SXS_Candidate_Comparison {
             text-decoration: none !important;
         }
 
+        .sxs-position-info {
+            flex: 1 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 30px !important;
+        }
+
         .sxs-position-title {
-            font-size: 24px !important;
+            font-size: 28px !important;
             font-weight: bold !important;
             color: #1C2856 !important;
+            margin: 0 !important;
+            flex: 1 !important;
         }
 
         .sxs-action-buttons {
             display: flex !important;
             gap: 15px !important;
+            flex: 0 0 auto !important;
         }
 
         .sxs-button {
@@ -572,23 +586,25 @@ class SXS_Candidate_Comparison {
                 </div>
                 <?php endif; endif; ?>
 
-                <div class="sxs-position-title">
-                    <?php echo esc_html(get_the_title($atts['set'])); ?>
-                </div>
+                <div class="sxs-position-info">
+                    <div class="sxs-position-title">
+                        <?php echo esc_html(get_the_title($atts['set'])); ?>
+                    </div>
 
-                <div class="sxs-action-buttons">
-                    <?php if ($position_brief_enabled && !empty($position_brief_url)) : ?>
-                    <a href="<?php echo esc_url($position_brief_url); ?>" class="sxs-button position-brief" target="_blank">
-                        <?php _e('Position Brief', 'sxs-candidate-comparison'); ?>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <?php endif; ?>
-                    <?php if ($scorecard_enabled && !empty($scorecard_url)) : ?>
-                    <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button scorecard" target="_blank">
-                        <?php _e('Scorecard', 'sxs-candidate-comparison'); ?>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <?php endif; ?>
+                    <div class="sxs-action-buttons">
+                        <?php if ($position_brief_enabled && !empty($position_brief_url)) : ?>
+                        <a href="<?php echo esc_url($position_brief_url); ?>" class="sxs-button position-brief" target="_blank">
+                            <?php _e('Position Brief', 'sxs-candidate-comparison'); ?>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <?php endif; ?>
+                        <?php if ($scorecard_enabled && !empty($scorecard_url)) : ?>
+                        <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button scorecard" target="_blank">
+                            <?php _e('Scorecard', 'sxs-candidate-comparison'); ?>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
 
