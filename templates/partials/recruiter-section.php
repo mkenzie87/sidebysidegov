@@ -54,16 +54,14 @@ if (!empty($recruiters) && is_array($recruiters)) :
         </div>
 
         <div class="sxs-action-buttons">
-            <?php if ($enable_position_brief && !empty($position_brief_url)) : ?>
+            <?php if ($enable_position_brief && $position_brief_url) : ?>
             <a href="<?php echo esc_url($position_brief_url); ?>" class="sxs-button position-brief" target="_blank">
-                <?php _e('Position Brief', 'sxs-candidate-comparison'); ?>
-                <i class="fas fa-arrow-right"></i>
+                Position Brief <i class="fa-light fa-arrow-right"></i>
             </a>
             <?php endif; ?>
-            <?php if ($enable_scorecard && !empty($scorecard_url)) : ?>
+            <?php if ($enable_scorecard && $scorecard_url) : ?>
             <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button scorecard" target="_blank">
-                <?php _e('Scorecard', 'sxs-candidate-comparison'); ?>
-                <i class="fas fa-arrow-right"></i>
+                Scorecard <i class="fa-light fa-arrow-right"></i>
             </a>
             <?php endif; ?>
         </div>

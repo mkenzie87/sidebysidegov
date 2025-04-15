@@ -128,38 +128,27 @@
 
 /* Comparison table styles */
 .sxs-plugin .sxs-comparison-body {
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
     border: 1px solid #E5E5E5;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
     background: #fff;
 }
 
 .sxs-plugin .sxs-comparison-body .sxs-col {
     text-align: left;
-    padding: 20px;
+    padding: 15px 20px;
 }
 
 .sxs-plugin .sxs-list {
-    list-style-position: outside;
-    padding-left: 20px;
-    margin: 0;
-    text-align: left;
+    padding-left: 0;
+    list-style-position: inside;
 }
 
-.sxs-plugin .sxs-list li {
-    text-align: left;
-    margin-bottom: 8px;
-}
-
-/* Comparison table structure */
 .sxs-plugin .sxs-comparison-wrapper {
-    position: relative;
-    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    overflow: hidden;
+    padding: 0;
 }
 
 .sxs-plugin .sxs-comparison-container {
