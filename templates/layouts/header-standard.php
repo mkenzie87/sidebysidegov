@@ -517,15 +517,6 @@ section.recruiter-info {
             </section>
             <?php endforeach; ?>
         </section>
-
-        <div class="position-buttons">
-            <a href="#position-brief" class="position-button primary">
-                Position Brief <i class="fas fa-arrow-right"></i>
-            </a>
-            <a href="#scorecard" class="position-button secondary">
-                Scorecard <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
         <?php endif; ?>
     </div>
 
@@ -534,7 +525,26 @@ section.recruiter-info {
         // Get and display the header content
         if (isset($args['post_id'])) {
             $header_content = get_post_meta($args['post_id'], '_sxs_header_content', true);
+            $position_brief = get_post_meta($args['post_id'], '_sxs_position_brief', true);
+            $scorecard = get_post_meta($args['post_id'], '_sxs_scorecard', true);
+            
             echo wp_kses_post($header_content);
+            
+            if (!empty($position_brief) || !empty($scorecard)) : ?>
+                <div class="position-buttons">
+                    <?php if (!empty($position_brief)) : ?>
+                        <a href="<?php echo esc_url($position_brief); ?>" class="position-button primary" target="_blank">
+                            Position Brief <i class="fas fa-arrow-right"></i>
+                        </a>
+                    <?php endif; ?>
+                    
+                    <?php if (!empty($scorecard)) : ?>
+                        <a href="<?php echo esc_url($scorecard); ?>" class="position-button secondary" target="_blank">
+                            Scorecard <i class="fas fa-arrow-right"></i>
+                        </a>
+                    <?php endif; ?>
+                </div>
+            <?php endif;
         }
         ?>
     </div>
