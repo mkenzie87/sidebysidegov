@@ -192,150 +192,152 @@ class SXS_Candidate_Comparison {
         echo '<!-- Debug: Scorecard URL: ' . esc_html($scorecard_url) . ' -->';
         
         ?>
-        <div class="sxs-comparison-wrapper">
-            <?php 
-            // Include header section
-            include(plugin_dir_path(dirname(__FILE__)) . 'templates/partials/comparison-header.php');
-            
-            // Include recruiter section
-            $post_id = $atts['set'];
-            include(plugin_dir_path(dirname(__FILE__)) . 'templates/partials/recruiter-section.php');
-            ?>
+        <div class="sxs-plugin">
+            <div class="sxs-comparison-wrapper">
+                <?php 
+                // Include header section
+                include(plugin_dir_path(dirname(__FILE__)) . 'templates/partials/comparison-header.php');
+                
+                // Include recruiter section
+                $post_id = $atts['set'];
+                include(plugin_dir_path(dirname(__FILE__)) . 'templates/partials/recruiter-section.php');
+                ?>
 
-            <div class="sxs-comparison-body">
-                <!-- Candidate Names Header -->
-                <div class="sxs-row sxs-comparison-header">
-                    <div class="sxs-col-header">SIDE BY SIDE</div>
-                    <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-col"><?php echo strtoupper(esc_html($candidate->post_title)); ?></div>
-                    <?php endforeach; ?>
-                </div>
+                <div class="sxs-comparison-body">
+                    <!-- Candidate Names Header -->
+                    <div class="sxs-row sxs-comparison-header">
+                        <div class="sxs-col-header">SIDE BY SIDE</div>
+                        <?php foreach ($candidates as $candidate) : ?>
+                            <div class="sxs-col"><?php echo strtoupper(esc_html($candidate->post_title)); ?></div>
+                        <?php endforeach; ?>
+                    </div>
 
-                <!-- Current Company/Title -->
-                <div class="sxs-row">
-                    <div class="sxs-col sxs-col-header"><?php _e('CURRENT COMPANY/<br>TITLE', 'sxs-candidate-comparison'); ?></div>
-                    <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-col">
-                            <?php if ($company_data && !empty($company_data['cover'])) : ?>
-                                <div class="sxs-company-cover">
-                                    <img src="<?php echo esc_url($company_data['cover']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Cover">
-                                </div>
-                            <?php endif; ?>
-                            
-                            <div class="sxs-company-details">
-                                <?php if ($company_data && !empty($company_data['logo'])) : ?>
-                                    <div class="sxs-company-logo-detail">
-                                        <img src="<?php echo esc_url($company_data['logo']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Logo">
+                    <!-- Current Company/Title -->
+                    <div class="sxs-row">
+                        <div class="sxs-col sxs-col-header"><?php _e('CURRENT COMPANY/<br>TITLE', 'sxs-candidate-comparison'); ?></div>
+                        <?php foreach ($candidates as $candidate) : ?>
+                            <div class="sxs-col">
+                                <?php if ($company_data && !empty($company_data['cover'])) : ?>
+                                    <div class="sxs-company-cover">
+                                        <img src="<?php echo esc_url($company_data['cover']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Cover">
                                     </div>
                                 <?php endif; ?>
-                                <div class="sxs-company-info">
-                                    <p class="company">
-                                        <?php 
-                                        // Use company name from comparison set if available, otherwise use candidate's company
-                                        if ($company_data) {
-                                            echo esc_html($company_data['name']);
-                                        } else {
-                                            echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true));
-                                        }
-                                        ?>
-                                    </p>
-                                    <?php if ($company_data && !empty($company_data['location'])) : ?>
-                                        <p class="location"><i class="dashicons dashicons-location"></i> <?php echo esc_html($company_data['location']); ?></p>
+                                
+                                <div class="sxs-company-details">
+                                    <?php if ($company_data && !empty($company_data['logo'])) : ?>
+                                        <div class="sxs-company-logo-detail">
+                                            <img src="<?php echo esc_url($company_data['logo']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Logo">
+                                        </div>
                                     <?php endif; ?>
-                                    <?php if ($company_data && !empty($company_data['website'])) : ?>
-                                        <p class="website">
-                                            <a href="<?php echo esc_url($company_data['website']); ?>" target="_blank">
-                                                <i class="dashicons dashicons-admin-links"></i> <?php _e('Website', 'sxs-candidate-comparison'); ?>
-                                            </a>
+                                    <div class="sxs-company-info">
+                                        <p class="company">
+                                            <?php 
+                                            // Use company name from comparison set if available, otherwise use candidate's company
+                                            if ($company_data) {
+                                                echo esc_html($company_data['name']);
+                                            } else {
+                                                echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true));
+                                            }
+                                            ?>
                                         </p>
-                                    <?php endif; ?>
+                                        <?php if ($company_data && !empty($company_data['location'])) : ?>
+                                            <p class="location"><i class="dashicons dashicons-location"></i> <?php echo esc_html($company_data['location']); ?></p>
+                                        <?php endif; ?>
+                                        <?php if ($company_data && !empty($company_data['website'])) : ?>
+                                            <p class="website">
+                                                <a href="<?php echo esc_url($company_data['website']); ?>" target="_blank">
+                                                    <i class="dashicons dashicons-admin-links"></i> <?php _e('Website', 'sxs-candidate-comparison'); ?>
+                                                </a>
+                                            </p>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
+                                
+                                <p class="title"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_title', true)); ?></p>
                             </div>
-                            
-                            <p class="title"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_title', true)); ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                        <?php endforeach; ?>
+                    </div>
 
-                <!-- Education -->
-                <div class="sxs-row">
-                    <div class="sxs-col sxs-col-header"><?php _e('DEGREES/<br>CERTIFICATIONS', 'sxs-candidate-comparison'); ?></div>
-                    <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-col">
-                            <?php
-                            $education = get_post_meta($candidate->ID, '_sxs_education', true);
-                            if (is_array($education)) :
-                                echo '<ul class="sxs-list">';
-                                foreach ($education as $edu) :
-                                    echo '<li>' . esc_html($edu) . '</li>';
-                                endforeach;
-                                echo '</ul>';
-                            endif;
-                            ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                    <!-- Education -->
+                    <div class="sxs-row">
+                        <div class="sxs-col sxs-col-header"><?php _e('DEGREES/<br>CERTIFICATIONS', 'sxs-candidate-comparison'); ?></div>
+                        <?php foreach ($candidates as $candidate) : ?>
+                            <div class="sxs-col">
+                                <?php
+                                $education = get_post_meta($candidate->ID, '_sxs_education', true);
+                                if (is_array($education)) :
+                                    echo '<ul class="sxs-list">';
+                                    foreach ($education as $edu) :
+                                        echo '<li>' . esc_html($edu) . '</li>';
+                                    endforeach;
+                                    echo '</ul>';
+                                endif;
+                                ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
 
-                <!-- Experience -->
-                <div class="sxs-row">
-                    <div class="sxs-col sxs-col-header"><?php _e('YEARS OF INDUSTRY<br>EXPERIENCE/ROLE<br>EXPERIENCE', 'sxs-candidate-comparison'); ?></div>
-                    <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-col">
-                            <?php
-                            $industry_exp = get_post_meta($candidate->ID, '_sxs_industry_experience', true);
-                            $role_exp = get_post_meta($candidate->ID, '_sxs_role_experience', true);
-                            printf(
-                                __('%d years\' industry experience; %d years\' specific role experience', 'sxs-candidate-comparison'),
-                                intval($industry_exp),
-                                intval($role_exp)
-                            );
-                            ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                    <!-- Experience -->
+                    <div class="sxs-row">
+                        <div class="sxs-col sxs-col-header"><?php _e('YEARS OF INDUSTRY<br>EXPERIENCE/ROLE<br>EXPERIENCE', 'sxs-candidate-comparison'); ?></div>
+                        <?php foreach ($candidates as $candidate) : ?>
+                            <div class="sxs-col">
+                                <?php
+                                $industry_exp = get_post_meta($candidate->ID, '_sxs_industry_experience', true);
+                                $role_exp = get_post_meta($candidate->ID, '_sxs_role_experience', true);
+                                printf(
+                                    __('%d years\' industry experience; %d years\' specific role experience', 'sxs-candidate-comparison'),
+                                    intval($industry_exp),
+                                    intval($role_exp)
+                                );
+                                ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
 
-                <!-- Relevant Experience -->
-                <div class="sxs-row">
-                    <div class="sxs-col sxs-col-header"><?php _e('RELEVANT EXPERIENCE<br>SUMMARY', 'sxs-candidate-comparison'); ?></div>
-                    <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-col">
-                            <?php
-                            $experience = get_post_meta($candidate->ID, '_sxs_relevant_experience', true);
-                            if (is_array($experience)) :
-                                echo '<ul class="sxs-list">';
-                                foreach ($experience as $exp) :
-                                    echo '<li>' . esc_html($exp) . '</li>';
-                                endforeach;
-                                echo '</ul>';
-                            endif;
-                            ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                    <!-- Relevant Experience -->
+                    <div class="sxs-row">
+                        <div class="sxs-col sxs-col-header"><?php _e('RELEVANT EXPERIENCE<br>SUMMARY', 'sxs-candidate-comparison'); ?></div>
+                        <?php foreach ($candidates as $candidate) : ?>
+                            <div class="sxs-col">
+                                <?php
+                                $experience = get_post_meta($candidate->ID, '_sxs_relevant_experience', true);
+                                if (is_array($experience)) :
+                                    echo '<ul class="sxs-list">';
+                                    foreach ($experience as $exp) :
+                                        echo '<li>' . esc_html($exp) . '</li>';
+                                    endforeach;
+                                    echo '</ul>';
+                                endif;
+                                ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
 
-                <!-- Compensation -->
-                <div class="sxs-row">
-                    <div class="sxs-col sxs-col-header"><?php _e('COMPENSATION', 'sxs-candidate-comparison'); ?></div>
-                    <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-col">
-                            <?php
-                            $current_base = get_post_meta($candidate->ID, '_sxs_current_base', true);
-                            $current_bonus = get_post_meta($candidate->ID, '_sxs_current_bonus', true);
-                            $application = get_post_meta($candidate->ID, '_sxs_application_compensation', true);
-                            ?>
-                            <p><strong><?php _e('Current:', 'sxs-candidate-comparison'); ?></strong> 
-                               <?php echo esc_html($current_base); ?>
-                               <?php if (!empty($current_bonus)) : ?>
-                                   <?php echo ' + ' . esc_html($current_bonus); ?>
-                               <?php endif; ?>
-                            </p>
-                            <?php if (!empty($application)) : ?>
-                                <p><strong><?php _e('Application:', 'sxs-candidate-comparison'); ?></strong> 
-                                   <?php echo esc_html($application); ?>
+                    <!-- Compensation -->
+                    <div class="sxs-row">
+                        <div class="sxs-col sxs-col-header"><?php _e('COMPENSATION', 'sxs-candidate-comparison'); ?></div>
+                        <?php foreach ($candidates as $candidate) : ?>
+                            <div class="sxs-col">
+                                <?php
+                                $current_base = get_post_meta($candidate->ID, '_sxs_current_base', true);
+                                $current_bonus = get_post_meta($candidate->ID, '_sxs_current_bonus', true);
+                                $application = get_post_meta($candidate->ID, '_sxs_application_compensation', true);
+                                ?>
+                                <p><strong><?php _e('Current:', 'sxs-candidate-comparison'); ?></strong> 
+                                   <?php echo esc_html($current_base); ?>
+                                   <?php if (!empty($current_bonus)) : ?>
+                                       <?php echo ' + ' . esc_html($current_bonus); ?>
+                                   <?php endif; ?>
                                 </p>
-                            <?php endif; ?>
-                        </div>
-                    <?php endforeach; ?>
+                                <?php if (!empty($application)) : ?>
+                                    <p><strong><?php _e('Application:', 'sxs-candidate-comparison'); ?></strong> 
+                                       <?php echo esc_html($application); ?>
+                                    </p>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
