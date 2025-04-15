@@ -191,20 +191,16 @@
 /* Column header styles */
 .sxs-plugin .sxs-col-header {
     width: 200px;
-    flex: 0 0 200px;
-    padding: 20px;
+    min-width: 200px;
     background: #F26724;
     color: #fff;
+    padding: 15px 20px;
+    font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
+    text-align: left;
     display: flex;
     align-items: center;
-    font-size: 14px;
-    line-height: 1.4;
-    position: sticky;
-    left: 0;
-    z-index: 10;
-    box-shadow: 5px 0 5px -2px rgba(0,0,0,0.1);
 }
 
 .sxs-plugin .sxs-comparison-header .sxs-col-header {
@@ -220,13 +216,13 @@
 /* Column styles */
 .sxs-plugin .sxs-col {
     flex: 1;
-    padding: 20px;
-    border-left: 1px solid #E5E5E5;
-    text-align: left;
+    padding: 15px 20px;
+    border-right: 1px solid #E5E5E5;
+    background: #fff;
 }
 
-.sxs-plugin .sxs-col:first-child {
-    border-left: none;
+.sxs-plugin .sxs-col:last-child {
+    border-right: none;
 }
 
 /* Alternating column colors */
@@ -332,5 +328,96 @@
     .sxs-plugin .sxs-col-header {
         width: 150px;
         flex: 0 0 150px;
+    }
+}
+
+/* Candidate Names Header */
+.sxs-plugin .sxs-candidate-names {
+    background: #1C2856;
+    width: 100%;
+}
+
+.sxs-plugin .sxs-candidate-names .sxs-col-header {
+    background: #1C2856;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.sxs-plugin .sxs-candidate-names .sxs-col {
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
+}
+
+.sxs-plugin .sxs-candidate-names .sxs-col:last-child {
+    border-right: none;
+}
+
+/* Content Styles */
+.sxs-plugin .sxs-col p {
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+}
+
+.sxs-plugin .sxs-col p:last-child {
+    margin-bottom: 0;
+}
+
+/* List Styles */
+.sxs-plugin .sxs-col ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style-type: disc;
+}
+
+.sxs-plugin .sxs-col ul li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.sxs-plugin .sxs-col ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Current Company/Title */
+.sxs-plugin .sxs-col .company {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.sxs-plugin .sxs-col .title {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    .sxs-plugin .sxs-comparison-wrapper {
+        margin: 0;
+        padding: 0 15px;
+    }
+
+    .sxs-plugin .sxs-comparison-body {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sxs-plugin .sxs-row {
+        min-width: max-content;
+    }
+
+    .sxs-plugin .sxs-col {
+        min-width: 280px;
+    }
+
+    .sxs-plugin .sxs-col-header {
+        min-width: 160px;
+        width: 160px;
     }
 } 

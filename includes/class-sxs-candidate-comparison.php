@@ -205,9 +205,9 @@ class SXS_Candidate_Comparison {
             <div class="sxs-comparison-body">
                 <!-- Candidate Names Header -->
                 <div class="sxs-row sxs-candidate-names">
-                    <div class="sxs-col sxs-col-header">SIDE BY SIDE</div>
+                    <div class="sxs-col-header">SIDE BY SIDE</div>
                     <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-col"><?php echo esc_html($candidate->post_title); ?></div>
+                        <div class="sxs-col"><?php echo strtoupper(esc_html($candidate->post_title)); ?></div>
                     <?php endforeach; ?>
                 </div>
 
