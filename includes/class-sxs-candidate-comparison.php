@@ -20,6 +20,14 @@ class SXS_Candidate_Comparison {
             '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css'
         );
 
+        // Enqueue Font Awesome
+        wp_enqueue_style(
+            'font-awesome',
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+            array(),
+            '6.5.1'
+        );
+
         // Main plugin CSS
         wp_enqueue_style(
             'sxs-candidate-comparison',
@@ -169,6 +177,180 @@ class SXS_Candidate_Comparison {
         // Add inline styles
         ?>
         <style>
+        /* Container max-width */
+        .sxs-comparison-wrapper {
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 0 20px !important;
+        }
+
+        /* Header styles */
+        .sxs-company-header {
+            text-align: center !important;
+            padding: 40px 0 !important;
+            background-position: center !important;
+            background-size: cover !important;
+            position: relative !important;
+        }
+
+        .sxs-company-logo {
+            width: 120px !important;
+            height: 120px !important;
+            margin: 0 auto 20px !important;
+            background: #fff !important;
+            border-radius: 50% !important;
+            padding: 10px !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        }
+
+        .sxs-company-logo img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+        }
+
+        .sxs-company-name {
+            font-size: 32px !important;
+            font-weight: bold !important;
+            margin-bottom: 20px !important;
+            color: #fff !important;
+        }
+
+        /* Recruiter section */
+        .sxs-recruiter-section {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 30px 0 !important;
+            margin-bottom: 40px !important;
+        }
+
+        .sxs-recruiter-card {
+            background: #1C2856 !important;
+            color: #fff !important;
+            padding: 20px !important;
+            border-radius: 8px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 20px !important;
+            max-width: 400px !important;
+        }
+
+        .sxs-recruiter-photo {
+            width: 80px !important;
+            height: 80px !important;
+            border-radius: 50% !important;
+            overflow: hidden !important;
+        }
+
+        .sxs-recruiter-photo img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
+        .sxs-recruiter-info {
+            flex: 1 !important;
+        }
+
+        .sxs-recruiter-name {
+            font-size: 18px !important;
+            font-weight: bold !important;
+            margin-bottom: 5px !important;
+        }
+
+        .sxs-recruiter-title {
+            font-size: 14px !important;
+            margin-bottom: 5px !important;
+            opacity: 0.9 !important;
+        }
+
+        .sxs-recruiter-contact {
+            font-size: 14px !important;
+        }
+
+        .sxs-recruiter-social {
+            display: flex !important;
+            gap: 10px !important;
+            margin-top: 10px !important;
+        }
+
+        .sxs-recruiter-social a {
+            color: #fff !important;
+            opacity: 0.9 !important;
+            transition: opacity 0.2s !important;
+            font-size: 18px !important;
+        }
+
+        .sxs-recruiter-social a:hover {
+            opacity: 1 !important;
+            color: #fff !important;
+            text-decoration: none !important;
+        }
+
+        .sxs-position-title {
+            font-size: 24px !important;
+            font-weight: bold !important;
+            color: #1C2856 !important;
+        }
+
+        .sxs-action-buttons {
+            display: flex !important;
+            gap: 15px !important;
+        }
+
+        .sxs-button {
+            display: inline-flex !important;
+            align-items: center !important;
+            padding: 10px 20px !important;
+            border-radius: 4px !important;
+            font-weight: 500 !important;
+            text-decoration: none !important;
+            transition: background-color 0.2s !important;
+        }
+
+        .sxs-button.position-brief {
+            background-color: #F26724 !important;
+            color: #fff !important;
+        }
+
+        .sxs-button.scorecard {
+            background-color: #fff !important;
+            color: #1C2856 !important;
+            border: 1px solid #1C2856 !important;
+        }
+
+        .sxs-button:hover {
+            opacity: 0.9 !important;
+        }
+
+        .sxs-button i {
+            margin-left: 8px !important;
+        }
+
+        /* Update comparison table styles */
+        .sxs-comparison-body .sxs-col {
+            text-align: left !important;
+            padding: 20px !important;
+        }
+
+        .sxs-list {
+            list-style-position: outside !important;
+            padding-left: 20px !important;
+            margin: 0 !important;
+            text-align: left !important;
+        }
+
+        .sxs-list li {
+            text-align: left !important;
+            margin-bottom: 8px !important;
+        }
+
+        /* Keep the header cells centered */
+        .sxs-col-header {
+            text-align: center !important;
+        }
+        
         /* Ensure correct styling for left column */
         .sxs-col-header {
             width: 200px !important;
@@ -336,75 +518,78 @@ class SXS_Candidate_Comparison {
         
         ?>
         <div class="sxs-comparison-wrapper">
-            <div class="sxs-comparison-header">
-                <div class="sxs-row">
-                    <div class="sxs-col sxs-col-header">
-                        <?php _e('SIDE BY SIDE', 'sxs-candidate-comparison'); ?>
-                        <button class="sxs-print-button button">
-                            <?php _e('Print Comparison', 'sxs-candidate-comparison'); ?>
-                        </button>
+            <?php if ($company_data) : ?>
+            <div class="sxs-company-header" style="background-color: <?php echo esc_attr($company_data['header_color']); ?>">
+                <?php if (!empty($company_data['logo'])) : ?>
+                    <div class="sxs-company-logo">
+                        <img src="<?php echo esc_url($company_data['logo']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Logo">
                     </div>
-                    <?php foreach ($candidates as $candidate) : 
-                        // Default header styling
-                        $header_style = '';
-                        $header_classes = '';
-                        
-                        // If we have company data, apply it to all candidates
-                        if ($company_data) {
-                            $header_style = sprintf(
-                                'style="background-color: %s; color: %s;"',
-                                esc_attr($company_data['header_color']),
-                                esc_attr($company_data['text_color'])
-                            );
-                            $header_classes = 'sxs-company-branded';
-                        }
-                    ?>
-                        <div class="sxs-col <?php echo $header_classes; ?>" <?php echo $header_style; ?>>
-                            <?php if ($company_data && !empty($company_data['logo'])) : ?>
-                                <div class="sxs-company-logo">
-                                    <img src="<?php echo esc_url($company_data['logo']); ?>" alt="<?php echo esc_attr($company_data['name']); ?> Logo">
-                                </div>
-                            <?php endif; ?>
-                            <div class="sxs-candidate-info">
-                                <h3><?php echo esc_html($candidate->post_title); ?></h3>
-                                <?php if ($company_data) : ?>
-                                    <span class="sxs-company-name"><?php echo esc_html($company_data['name']); ?></span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-
-                <?php
-                // Get position brief and scorecard settings
-                $position_brief_enabled = get_post_meta($atts['set'], '_sxs_position_brief_enabled', true);
-                $position_brief_url = get_post_meta($atts['set'], '_sxs_position_brief_url', true);
-                $scorecard_enabled = get_post_meta($atts['set'], '_sxs_scorecard_enabled', true);
-                $scorecard_url = get_post_meta($atts['set'], '_sxs_scorecard_url', true);
-
-                // Only show buttons if at least one is enabled
-                if ($position_brief_enabled || $scorecard_enabled) :
-                ?>
-                <div class="sxs-row sxs-buttons-row">
-                    <div class="sxs-col sxs-col-header"></div>
-                    <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-col">
-                            <div class="sxs-buttons">
-                                <?php if ($position_brief_enabled && !empty($position_brief_url)) : ?>
-                                    <a href="<?php echo esc_url($position_brief_url); ?>" class="sxs-button sxs-position-brief-button" target="_blank">
-                                        <?php _e('Position Brief', 'sxs-candidate-comparison'); ?>
-                                    </a>
-                                <?php endif; ?>
-                                <?php if ($scorecard_enabled && !empty($scorecard_url)) : ?>
-                                    <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button sxs-scorecard-button" target="_blank">
-                                        <?php _e('Scorecard', 'sxs-candidate-comparison'); ?>
-                                    </a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
                 <?php endif; ?>
+                <div class="sxs-company-name"><?php echo esc_html($company_data['name']); ?></div>
+            </div>
+            <?php endif; ?>
+
+            <div class="sxs-recruiter-section">
+                <?php
+                // Get recruiter data
+                $recruiters = get_post_meta($atts['set'], '_sxs_selected_recruiters', true);
+                if (!empty($recruiters) && is_array($recruiters)) :
+                    $recruiter = get_post($recruiters[0]); // Get first recruiter
+                    if ($recruiter) :
+                        $photo = get_the_post_thumbnail_url($recruiter->ID, 'thumbnail');
+                        $title = get_post_meta($recruiter->ID, '_team_title', true);
+                        $phone = get_post_meta($recruiter->ID, '_team_phone', true);
+                        $linkedin = get_post_meta($recruiter->ID, '_team_linkedin', true);
+                        $email = get_post_meta($recruiter->ID, '_team_email', true);
+                ?>
+                <div class="sxs-recruiter-card">
+                    <?php if ($photo) : ?>
+                    <div class="sxs-recruiter-photo">
+                        <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($recruiter->post_title); ?>">
+                    </div>
+                    <?php endif; ?>
+                    <div class="sxs-recruiter-info">
+                        <div class="sxs-recruiter-name"><?php echo esc_html($recruiter->post_title); ?></div>
+                        <?php if ($title) : ?>
+                        <div class="sxs-recruiter-title"><?php echo esc_html($title); ?></div>
+                        <?php endif; ?>
+                        <?php if ($phone) : ?>
+                        <div class="sxs-recruiter-contact"><?php echo esc_html($phone); ?></div>
+                        <?php endif; ?>
+                        <div class="sxs-recruiter-social">
+                            <?php if ($linkedin) : ?>
+                            <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <?php endif; ?>
+                            <?php if ($email) : ?>
+                            <a href="mailto:<?php echo esc_attr($email); ?>">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; endif; ?>
+
+                <div class="sxs-position-title">
+                    <?php echo esc_html(get_the_title($atts['set'])); ?>
+                </div>
+
+                <div class="sxs-action-buttons">
+                    <?php if ($position_brief_enabled && !empty($position_brief_url)) : ?>
+                    <a href="<?php echo esc_url($position_brief_url); ?>" class="sxs-button position-brief" target="_blank">
+                        <?php _e('Position Brief', 'sxs-candidate-comparison'); ?>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <?php endif; ?>
+                    <?php if ($scorecard_enabled && !empty($scorecard_url)) : ?>
+                    <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button scorecard" target="_blank">
+                        <?php _e('Scorecard', 'sxs-candidate-comparison'); ?>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="sxs-comparison-body">
