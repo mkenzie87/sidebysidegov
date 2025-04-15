@@ -473,15 +473,32 @@
         padding: 0;
         width: 100%;
         overflow: hidden;
+        position: relative;
     }
 
     .sxs-comparison-container {
         margin: 0;
-        padding: 0;
+        padding: 0 0 0 160px; /* Add left padding equal to fixed column width */
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         position: relative;
         width: 100%;
+    }
+
+    /* Fixed left column container */
+    .sxs-comparison-container .sxs-col-header {
+        position: absolute;
+        left: 0;
+        width: 160px;
+        min-width: 160px;
+        background: #F26724;
+        z-index: 10;
+    }
+
+    /* Ensure header column in navy stays on top */
+    .sxs-comparison-container .sxs-comparison-header .sxs-col-header {
+        background: #1C2856;
+        z-index: 11;
     }
 
     /* Ensure rows extend full width */
@@ -489,6 +506,7 @@
         display: flex;
         min-width: max-content;
         width: auto;
+        position: relative;
     }
 
     /* Fixed width for data columns */
@@ -497,22 +515,6 @@
         width: 280px;
         flex: 0 0 280px;
         padding: 15px 20px;
-    }
-
-    /* Sticky left column */
-    .sxs-comparison-container .sxs-col-header {
-        position: sticky;
-        left: 0;
-        z-index: 10;
-        width: 160px;
-        min-width: 160px;
-        background: #F26724;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    }
-
-    /* Ensure header stays on top when scrolling */
-    .sxs-comparison-container .sxs-comparison-header .sxs-col-header {
-        z-index: 11;
     }
 
     /* Show scroll indicator */
@@ -524,10 +526,16 @@
         background: rgba(0,0,0,0.05);
         margin: 10px 0;
         border-radius: 4px;
+        margin-left: 160px; /* Align with content */
+    }
+
+    /* Ensure proper height matching between fixed and scrollable columns */
+    .sxs-comparison-container .sxs-row {
+        min-height: 60px; /* Adjust this value based on your content */
     }
 }
 
-/* Hide scrollbar but keep functionality */
+/* Scrollbar Styles */
 .sxs-comparison-container {
     scrollbar-width: thin;
     scrollbar-color: rgba(0,0,0,0.2) transparent;
