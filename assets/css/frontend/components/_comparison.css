@@ -483,8 +483,8 @@
         width: 100%;
     }
 
-    /* Make all left column headers sticky */
-    .sxs-comparison-container .sxs-col-header {
+    /* Base styles for all header cells in the first column */
+    .sxs-comparison-container .sxs-row .sxs-col-header {
         position: sticky;
         left: 0;
         width: 160px;
@@ -494,18 +494,17 @@
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     }
 
-    /* Ensure the navy header stays on top */
+    /* Navy header specific styles */
     .sxs-comparison-container .sxs-comparison-header .sxs-col-header {
         background: #1C2856;
         z-index: 11;
     }
 
-    /* Ensure rows extend full width and maintain structure */
+    /* Ensure rows extend full width */
     .sxs-comparison-container .sxs-row {
         display: flex;
         min-width: max-content;
         width: auto;
-        position: relative; /* This helps with stacking context */
     }
 
     /* Fixed width for scrollable columns */
@@ -516,14 +515,7 @@
         padding: 15px 20px;
     }
 
-    /* Ensure proper stacking for all orange headers */
-    .sxs-comparison-container .sxs-row .sxs-col-header {
-        position: sticky;
-        left: 0;
-        z-index: 10;
-    }
-
-    /* Ensure proper background colors persist during scroll */
+    /* Ensure all orange headers maintain their color */
     .sxs-comparison-container .sxs-row:not(.sxs-comparison-header) .sxs-col-header {
         background: #F26724;
     }
@@ -531,7 +523,6 @@
 
 /* Ensure background colors are applied correctly */
 .sxs-comparison-container .sxs-col-header {
-    background: #F26724;
     color: #fff;
 }
 
