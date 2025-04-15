@@ -26,16 +26,18 @@
 }
 
 /* Header Column */
-.sxs-col-header {
-    flex: 0 0 200px;
-    background: white;
-    color: #F26724;
+.sxs-comparison-container .sxs-col-header {
+    width: 200px;
+    min-width: 200px;
+    background: #F26724;
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 13px;
     font-weight: 600;
-    padding: 20px;
+    text-transform: uppercase;
+    text-align: left;
     display: flex;
     align-items: center;
-    font-size: 14px;
-    line-height: 1.4;
 }
 
 /* Candidate Names Header */
@@ -376,6 +378,110 @@
     }
 
     .sxs-plugin .sxs-col-header {
+        min-width: 160px;
+        width: 160px;
+    }
+}
+
+/* Comparison Header Row */
+.sxs-comparison-container .sxs-comparison-header {
+    background: #1C2856;
+    width: 100%;
+}
+
+.sxs-comparison-container .sxs-comparison-header .sxs-col-header {
+    background: #1C2856;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.sxs-comparison-container .sxs-comparison-header .sxs-col {
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
+    background: #1C2856;
+}
+
+.sxs-comparison-container .sxs-comparison-header .sxs-col:last-child {
+    border-right: none;
+}
+
+/* Column Styles */
+.sxs-comparison-container .sxs-col {
+    flex: 1;
+    padding: 15px 20px;
+    border-right: 1px solid #E5E5E5;
+    background: #fff;
+}
+
+.sxs-comparison-container .sxs-col:last-child {
+    border-right: none;
+}
+
+/* Content Styles */
+.sxs-comparison-container .sxs-col p {
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+}
+
+.sxs-comparison-container .sxs-col p:last-child {
+    margin-bottom: 0;
+}
+
+/* List Styles */
+.sxs-comparison-container .sxs-col ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style-type: disc;
+}
+
+.sxs-comparison-container .sxs-col ul li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.sxs-comparison-container .sxs-col ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Current Company/Title */
+.sxs-comparison-container .sxs-col .company {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.sxs-comparison-container .sxs-col .title {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    .sxs-comparison-wrapper {
+        margin: 0;
+        padding: 0 15px;
+    }
+
+    .sxs-comparison-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sxs-comparison-container .sxs-row {
+        min-width: max-content;
+    }
+
+    .sxs-comparison-container .sxs-col {
+        min-width: 280px;
+    }
+
+    .sxs-comparison-container .sxs-col-header {
         min-width: 160px;
         width: 160px;
     }
