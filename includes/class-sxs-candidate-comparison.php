@@ -28,13 +28,16 @@ class SXS_Candidate_Comparison {
             '6.5.1'
         );
 
-        // Main plugin CSS
-        wp_enqueue_style(
-            'sxs-candidate-comparison',
-            plugins_url('assets/css/frontend/comparison-view.css', dirname(__FILE__)),
-            array(),
-            SXS_CC_VERSION
-        );
+        // Component CSS files
+        $components = array('layout', 'header', 'comparison', 'recruiter', 'buttons');
+        foreach ($components as $component) {
+            wp_enqueue_style(
+                "sxs-component-{$component}",
+                plugins_url("assets/css/frontend/components/_{$component}.css", dirname(__FILE__)),
+                array(),
+                SXS_CC_VERSION
+            );
+        }
 
         wp_enqueue_script(
             'sxs-candidate-comparison',
