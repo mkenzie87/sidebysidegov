@@ -525,21 +525,26 @@ section.recruiter-info {
         // Get and display the header content
         if (isset($args['post_id'])) {
             $header_content = get_post_meta($args['post_id'], '_sxs_header_content', true);
-            $position_brief = get_post_meta($args['post_id'], '_sxs_position_brief', true);
-            $scorecard = get_post_meta($args['post_id'], '_sxs_scorecard', true);
+            
+            // Get button settings and URLs
+            $enable_position_brief = get_post_meta($args['post_id'], '_sxs_enable_position_brief', true);
+            $enable_scorecard = get_post_meta($args['post_id'], '_sxs_enable_scorecard', true);
+            $position_brief_url = get_post_meta($args['post_id'], '_sxs_position_brief_url', true);
+            $scorecard_url = get_post_meta($args['post_id'], '_sxs_scorecard_url', true);
             
             echo wp_kses_post($header_content);
             
-            if (!empty($position_brief) || !empty($scorecard)) : ?>
+            // Only show buttons section if at least one button is enabled and has a URL
+            if (($enable_position_brief && !empty($position_brief_url)) || ($enable_scorecard && !empty($scorecard_url))) : ?>
                 <div class="position-buttons">
-                    <?php if (!empty($position_brief)) : ?>
-                        <a href="<?php echo esc_url($position_brief); ?>" class="position-button primary" target="_blank">
+                    <?php if ($enable_position_brief && !empty($position_brief_url)) : ?>
+                        <a href="<?php echo esc_url($position_brief_url); ?>" class="position-button primary" target="_blank">
                             Position Brief <i class="fas fa-arrow-right"></i>
                         </a>
                     <?php endif; ?>
                     
-                    <?php if (!empty($scorecard)) : ?>
-                        <a href="<?php echo esc_url($scorecard); ?>" class="position-button secondary" target="_blank">
+                    <?php if ($enable_scorecard && !empty($scorecard_url)) : ?>
+                        <a href="<?php echo esc_url($scorecard_url); ?>" class="position-button secondary" target="_blank">
                             Scorecard <i class="fas fa-arrow-right"></i>
                         </a>
                     <?php endif; ?>
