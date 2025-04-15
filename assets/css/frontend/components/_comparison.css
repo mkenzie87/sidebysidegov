@@ -114,6 +114,7 @@
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
     padding-bottom: 20px; /* Space for scrollbar */
+    position: relative; /* For sticky positioning context */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -127,56 +128,72 @@
     border-collapse: separate;
     border-spacing: 0;
     margin: 0;
+    background: white;
 }
 
-/* Header Row */
-.sxs-plugin .sxs-comparison-header {
-    background: #1C2856;
-    color: white;
+/* Fixed first column */
+.sxs-plugin .sxs-col-header {
     position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.sxs-plugin .sxs-comparison-header th {
+    left: 0;
+    z-index: 2;
+    width: 200px;
+    min-width: 200px;
+    background: #F26724;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
     padding: 20px;
     text-align: left;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Make the header cell sticky and above other cells */
+.sxs-plugin .sxs-comparison-header .sxs-col-header {
+    z-index: 3;
+    background: #F26724;
+}
+
+/* Regular header cells */
+.sxs-plugin .sxs-comparison-header .sxs-col {
+    background: #1C2856;
+    color: white;
     font-weight: 600;
-    font-size: 18px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    text-align: left;
+    min-width: 300px;
 }
 
-/* Data Rows */
-.sxs-plugin .sxs-comparison-row {
-    transition: background-color 0.3s ease;
+/* Body rows */
+.sxs-plugin .sxs-comparison-row td.sxs-col-header {
+    background: #1C2856;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.1);
 }
 
-.sxs-plugin .sxs-comparison-row:nth-child(odd) {
-    background-color: rgba(28, 40, 86, 0.05);
-}
-
-.sxs-plugin .sxs-comparison-row:hover {
-    background-color: rgba(28, 40, 86, 0.1);
-}
-
-.sxs-plugin .sxs-comparison-row td {
-    padding: 15px 20px;
+.sxs-plugin .sxs-comparison-row td.sxs-col {
+    background: white;
+    padding: 20px;
+    min-width: 300px;
     border-bottom: 1px solid rgba(28, 40, 86, 0.1);
 }
 
-/* Column Widths */
-.sxs-plugin .sxs-col-header {
-    width: 200px;
-    min-width: 200px;
-    background: #1C2856;
-    color: white;
-    position: sticky;
-    left: 0;
-    z-index: 5;
+.sxs-plugin .sxs-comparison-row:nth-child(odd) td.sxs-col {
+    background: #f8f9fa;
 }
 
-.sxs-plugin .sxs-col {
-    min-width: 250px;
+/* Lists within cells */
+.sxs-plugin .education-list,
+.sxs-plugin .experience-list,
+.sxs-plugin .compensation-list {
+    margin: 0;
+    padding-left: 20px;
+    list-style-position: outside;
+}
+
+.sxs-plugin .education-list li,
+.sxs-plugin .experience-list li,
+.sxs-plugin .compensation-list li {
+    margin-bottom: 8px;
 }
 
 /* Mobile Scroll Indicators */
@@ -215,20 +232,19 @@
     .sxs-plugin .sxs-comparison-scroll {
         margin: 0 -20px;
         padding: 0 20px;
-        scroll-snap-type: x mandatory;
     }
 
-    .sxs-plugin .sxs-col {
-        scroll-snap-align: start;
-    }
-
-    .sxs-plugin .sxs-comparison-header th {
-        font-size: 16px;
+    .sxs-plugin .sxs-comparison-header .sxs-col,
+    .sxs-plugin .sxs-comparison-row td.sxs-col {
+        min-width: 260px;
+        font-size: 14px;
         padding: 15px;
     }
 
-    .sxs-plugin .sxs-comparison-row td {
-        padding: 12px 15px;
+    .sxs-plugin .sxs-col-header {
+        width: 160px;
+        min-width: 160px;
+        padding: 15px;
         font-size: 14px;
     }
 } 
