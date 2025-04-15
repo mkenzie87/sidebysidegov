@@ -169,7 +169,7 @@ while (have_posts()) :
                 <div class="sxs-comparison-container">
                     <!-- Header Row -->
                     <div class="sxs-row sxs-comparison-header">
-                        <div class="sxs-col-header">SIDE BY SIDE</div>
+                        <div class="sxs-col-header sticky-left-col">SIDE BY SIDE</div>
                         <?php foreach ($candidates as $candidate) : ?>
                             <div class="sxs-col">
                                 <?php echo esc_html($candidate->post_title); ?>
@@ -181,7 +181,7 @@ while (have_posts()) :
                     <div class="sxs-comparison-body">
                         <!-- Current Company/Title -->
                         <div class="sxs-row">
-                            <div class="sxs-col-header">CURRENT COMPANY/<br>TITLE</div>
+                            <div class="sxs-col-header sticky-left-col">CURRENT COMPANY/<br>TITLE</div>
                             <?php foreach ($candidates as $candidate) : ?>
                                 <div class="sxs-col">
                                     <div class="company"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true)); ?></div>
@@ -192,7 +192,7 @@ while (have_posts()) :
 
                         <!-- Degrees/Certifications -->
                         <div class="sxs-row">
-                            <div class="sxs-col-header">DEGREES/<br>CERTIFICATIONS</div>
+                            <div class="sxs-col-header sticky-left-col">DEGREES/<br>CERTIFICATIONS</div>
                             <?php foreach ($candidates as $candidate) : ?>
                                 <div class="sxs-col">
                                     <ul class="sxs-degrees">
@@ -210,7 +210,7 @@ while (have_posts()) :
 
                         <!-- Years of Experience -->
                         <div class="sxs-row">
-                            <div class="sxs-col-header">YEARS OF INDUSTRY<br>EXPERIENCE/ROLE<br>EXPERIENCE</div>
+                            <div class="sxs-col-header sticky-left-col">YEARS OF INDUSTRY<br>EXPERIENCE/ROLE<br>EXPERIENCE</div>
                             <?php foreach ($candidates as $candidate) : ?>
                                 <div class="sxs-col">
                                     <div class="sxs-experience">
@@ -226,7 +226,7 @@ while (have_posts()) :
 
                         <!-- Relevant Experience -->
                         <div class="sxs-row">
-                            <div class="sxs-col-header">RELEVANT EXPERIENCE<br>SUMMARY</div>
+                            <div class="sxs-col-header sticky-left-col">RELEVANT EXPERIENCE<br>SUMMARY</div>
                             <?php foreach ($candidates as $candidate) : ?>
                                 <div class="sxs-col">
                                     <ul class="sxs-list">
@@ -244,7 +244,7 @@ while (have_posts()) :
 
                         <!-- Compensation -->
                         <div class="sxs-row">
-                            <div class="sxs-col-header">COMPENSATION</div>
+                            <div class="sxs-col-header sticky-left-col">COMPENSATION</div>
                             <?php foreach ($candidates as $candidate) : ?>
                                 <div class="sxs-col">
                                     <div class="sxs-compensation">
