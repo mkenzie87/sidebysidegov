@@ -309,6 +309,14 @@ section.recruiter-info {
     gap: 15px;
 }
 
+.buttons-heading {
+    color: #fff;
+    font-size: 24px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
 .position-button {
     padding: 12px 24px;
     border-radius: 4px;
@@ -531,11 +539,15 @@ section.recruiter-info {
             $enable_scorecard = get_post_meta($args['post_id'], '_sxs_scorecard_enabled', true);
             $position_brief_url = get_post_meta($args['post_id'], '_sxs_position_brief_url', true);
             $scorecard_url = get_post_meta($args['post_id'], '_sxs_scorecard_url', true);
+            $buttons_message = get_post_meta($args['post_id'], '_sxs_buttons_message', true);
             
             echo wp_kses_post($header_content);
             
             // Only show buttons section if at least one button is enabled and has a URL
             if (($enable_position_brief && !empty($position_brief_url)) || ($enable_scorecard && !empty($scorecard_url))) : ?>
+                <?php if (!empty($buttons_message)) : ?>
+                    <h2 class="buttons-heading"><?php echo esc_html($buttons_message); ?></h2>
+                <?php endif; ?>
                 <div class="position-buttons">
                     <?php if ($enable_position_brief && !empty($position_brief_url)) : ?>
                         <a href="<?php echo esc_url($position_brief_url); ?>" class="position-button primary" target="_blank">

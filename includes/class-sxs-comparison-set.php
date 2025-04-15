@@ -358,6 +358,7 @@ class SXS_Comparison_Set {
         $position_brief_url = get_post_meta($post->ID, '_sxs_position_brief_url', true);
         $scorecard_enabled = get_post_meta($post->ID, '_sxs_scorecard_enabled', true);
         $scorecard_url = get_post_meta($post->ID, '_sxs_scorecard_url', true);
+        $buttons_message = get_post_meta($post->ID, '_sxs_buttons_message', true);
         ?>
         <div class="sxs-meta-row">
             <h3 class="sxs-section-title"><?php _e('Position Brief Settings', 'sxs-candidate-comparison'); ?></h3>
@@ -395,17 +396,38 @@ class SXS_Comparison_Set {
             </div>
         </div>
 
+        <div class="sxs-meta-row sxs-buttons-message" style="margin-top: 20px; <?php echo ($position_brief_enabled || $scorecard_enabled) ? '' : 'display: none;'; ?>">
+            <h3 class="sxs-section-title"><?php _e('Message Before Buttons', 'sxs-candidate-comparison'); ?></h3>
+            <p>
+                <label for="sxs_buttons_message">
+                    <?php _e('Enter a message to display above the buttons', 'sxs-candidate-comparison'); ?>
+                </label>
+                <input type="text" id="sxs_buttons_message" name="sxs_buttons_message" 
+                       value="<?php echo esc_attr($buttons_message); ?>" class="widefat"
+                       placeholder="<?php _e('e.g., Learn more about this position:', 'sxs-candidate-comparison'); ?>">
+                <p class="description"><?php _e('This message will appear as a heading above the Position Brief and Scorecard buttons.', 'sxs-candidate-comparison'); ?></p>
+            </p>
+        </div>
+
         <script>
         jQuery(document).ready(function($) {
             // Position Brief toggle
             $('input[name="sxs_position_brief_enabled"]').on('change', function() {
                 $('.sxs-position-brief-url').toggle(this.checked);
+                toggleButtonsMessage();
             });
 
             // Scorecard toggle
             $('input[name="sxs_scorecard_enabled"]').on('change', function() {
                 $('.sxs-scorecard-url').toggle(this.checked);
+                toggleButtonsMessage();
             });
+
+            function toggleButtonsMessage() {
+                var briefEnabled = $('input[name="sxs_position_brief_enabled"]').is(':checked');
+                var scorecardEnabled = $('input[name="sxs_scorecard_enabled"]').is(':checked');
+                $('.sxs-buttons-message').toggle(briefEnabled || scorecardEnabled);
+            }
         });
         </script>
         <?php
@@ -1054,6 +1076,11 @@ class SXS_Comparison_Set {
             
             if (isset($_POST['sxs_scorecard_url'])) {
                 update_post_meta($post_id, '_sxs_scorecard_url', esc_url_raw($_POST['sxs_scorecard_url']));
+            }
+
+            // Save buttons message
+            if (isset($_POST['sxs_buttons_message'])) {
+                update_post_meta($post_id, '_sxs_buttons_message', sanitize_text_field($_POST['sxs_buttons_message']));
             }
         }
     }
