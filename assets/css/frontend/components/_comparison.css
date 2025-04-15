@@ -1,9 +1,6 @@
 /* Comparison Table Styles */
 .sxs-comparison-body {
-    border: 1px solid #E5E5E5;
-    border-radius: 8px;
     overflow: hidden;
-    margin: 30px 0;
     background: #fff;
 }
 
@@ -31,8 +28,8 @@
 /* Header Column */
 .sxs-col-header {
     flex: 0 0 200px;
-    background: #F26724;
-    color: #fff;
+    background: white;
+    color: #F26724;
     font-weight: 600;
     padding: 20px;
     display: flex;
