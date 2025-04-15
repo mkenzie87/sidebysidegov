@@ -1,0 +1,149 @@
+/* Recruiter section */
+.sxs-plugin .sxs-recruiter-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0;
+    margin: 40px auto;
+    max-width: 1400px;
+    gap: 30px;
+}
+
+.sxs-plugin .sxs-recruiter-card {
+    background: #1C2856;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 0 0 auto;
+    min-width: 350px;
+}
+
+.sxs-plugin .sxs-recruiter-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.sxs-plugin .sxs-recruiter-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sxs-plugin .sxs-recruiter-info {
+    flex: 1;
+}
+
+.sxs-plugin .sxs-recruiter-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.sxs-plugin .sxs-recruiter-title {
+    font-size: 14px;
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+.sxs-plugin .sxs-recruiter-contact {
+    font-size: 14px;
+}
+
+.sxs-plugin .sxs-recruiter-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.sxs-plugin .sxs-recruiter-social a {
+    color: #fff;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+    font-size: 18px;
+}
+
+.sxs-plugin .sxs-recruiter-social a:hover {
+    opacity: 1;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Position info and buttons */
+.sxs-plugin .sxs-position-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.sxs-plugin .sxs-position-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1C2856;
+    margin: 0;
+    flex: 1;
+}
+
+.sxs-plugin .sxs-action-buttons {
+    display: flex;
+    gap: 15px;
+    flex: 0 0 auto;
+}
+
+.sxs-plugin .sxs-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.sxs-plugin .sxs-button.position-brief {
+    background-color: #F26724;
+    color: #fff;
+}
+
+.sxs-plugin .sxs-button.scorecard {
+    background-color: #fff;
+    color: #1C2856;
+    border: 1px solid #1C2856;
+}
+
+.sxs-plugin .sxs-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.sxs-plugin .sxs-button i {
+    margin-left: 8px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .sxs-plugin .sxs-recruiter-section {
+        flex-direction: column;
+    }
+
+    .sxs-plugin .sxs-position-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .sxs-plugin .sxs-action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .sxs-plugin .sxs-button {
+        width: 100%;
+        justify-content: center;
+    }
+} 

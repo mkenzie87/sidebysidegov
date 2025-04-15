@@ -1,0 +1,33 @@
+/* Container and general layout styles */
+.sxs-plugin .sxs-comparison-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Make container full width */
+.sxs-plugin .sxs-comparison-container {
+    width: 100%;
+    min-width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Row settings for horizontal scroll */
+.sxs-plugin .sxs-row {
+    display: flex;
+    width: 100%;
+    min-width: 100%;
+    flex-wrap: nowrap;
+}
+
+/* Fixed column widths */
+.sxs-plugin .sxs-col {
+    flex: 1;
+    min-width: 300px;
+    max-width: 350px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+} 

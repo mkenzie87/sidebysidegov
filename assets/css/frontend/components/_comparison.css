@@ -1,0 +1,94 @@
+/* Comparison table styles */
+.sxs-plugin .sxs-comparison-body {
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.sxs-plugin .sxs-comparison-body .sxs-col {
+    text-align: left;
+    padding: 20px;
+}
+
+.sxs-plugin .sxs-list {
+    list-style-position: outside;
+    padding-left: 20px;
+    margin: 0;
+    text-align: left;
+}
+
+.sxs-plugin .sxs-list li {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+/* Column header styles */
+.sxs-plugin .sxs-col-header {
+    width: 200px;
+    flex: 0 0 200px;
+    padding: 20px;
+    background: #FFFFFF;
+    color: #F26724;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    box-shadow: 5px 0 5px -2px rgba(0,0,0,0.1);
+}
+
+/* Header row styles */
+.sxs-plugin .sxs-comparison-header {
+    background: #1C2856;
+}
+
+.sxs-plugin .sxs-comparison-header .sxs-col-header {
+    background: #F26724;
+    color: white;
+    font-size: 18px;
+    z-index: 20;
+}
+
+.sxs-plugin .sxs-comparison-header .sxs-col {
+    background: #1C2856;
+    color: white;
+    border-color: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-height: 60px;
+}
+
+/* Alternating column colors */
+.sxs-plugin .sxs-comparison-body .sxs-row .sxs-col:nth-child(even) {
+    background-color: #F5F5F5;
+}
+
+.sxs-plugin .sxs-comparison-body .sxs-row .sxs-col:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+/* Text alignment for specific content */
+.sxs-plugin .company,
+.sxs-plugin .title,
+.sxs-plugin .sxs-experience,
+.sxs-plugin .sxs-compensation {
+    text-align: center;
+}
+
+.sxs-plugin .sxs-list,
+.sxs-plugin .sxs-degrees {
+    padding-left: 0;
+    list-style-position: inside;
+} 

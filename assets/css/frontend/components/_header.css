@@ -1,0 +1,33 @@
+/* Header styles */
+.sxs-plugin .sxs-company-header {
+    text-align: center;
+    padding: 40px 0;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.sxs-plugin .sxs-company-logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sxs-plugin .sxs-company-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sxs-plugin .sxs-company-name {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+} 
