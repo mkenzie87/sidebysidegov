@@ -472,30 +472,36 @@
         margin: 0;
         padding: 0;
         width: 100%;
+        position: relative; /* Create positioning context */
         overflow: hidden;
     }
 
     .sxs-comparison-container {
         margin: 0;
-        padding: 0;
+        padding-left: 160px; /* Add padding equal to sticky column width */
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         width: 100%;
+        box-sizing: border-box;
     }
 
-    /* Sticky left column class */
+    /* Base styles for all scrollable columns */
+    .sxs-comparison-container .sxs-col {
+        min-width: 280px;
+        width: 280px;
+        flex: 0 0 280px;
+        padding: 15px 20px;
+    }
+
+    /* Sticky left column */
     .sticky-left-col {
-        position: sticky !important;
+        position: absolute !important; /* Change to absolute positioning */
         left: 0;
         width: 160px;
         min-width: 160px;
+        background: #F26724;
         z-index: 10;
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    }
-
-    /* Style for orange headers */
-    .sticky-left-col.sxs-col-header {
-        background: #F26724;
     }
 
     /* Style for navy header */
@@ -504,19 +510,26 @@
         z-index: 11;
     }
 
-    /* Ensure rows extend full width */
+    /* Ensure rows extend full width and maintain structure */
     .sxs-comparison-container .sxs-row {
         display: flex;
         min-width: max-content;
         width: auto;
+        position: relative;
     }
 
-    /* Fixed width for scrollable columns */
-    .sxs-comparison-container .sxs-col {
-        min-width: 280px;
-        width: 280px;
-        flex: 0 0 280px;
+    /* Ensure proper vertical alignment of sticky headers */
+    .sxs-comparison-container .sxs-row {
+        min-height: 60px; /* Set a minimum height for rows */
+    }
+
+    /* Ensure sticky headers maintain proper height */
+    .sticky-left-col {
+        height: 100%; /* Match parent row height */
+        display: flex;
+        align-items: center;
         padding: 15px 20px;
+        box-sizing: border-box;
     }
 }
 
