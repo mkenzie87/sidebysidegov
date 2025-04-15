@@ -1,79 +1,124 @@
-.sxs-plugin .sxs-split-text {
-    color: white;
-    font-size: 16px;
+/* Base typography */
+.sxs-plugin {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     line-height: 1.6;
+    color: #333;
 }
 
-.sxs-plugin .sxs-split-text h1,
-.sxs-plugin .sxs-split-text h2,
-.sxs-plugin .sxs-split-text h3,
-.sxs-plugin .sxs-split-text h4,
-.sxs-plugin .sxs-split-text h5,
-.sxs-plugin .sxs-split-text h6 {
-    color: white;
-    margin-top: 0;
-    margin-bottom: 20px;
+/* Headings */
+.sxs-plugin h1,
+.sxs-plugin h2,
+.sxs-plugin h3,
+.sxs-plugin h4,
+.sxs-plugin h5,
+.sxs-plugin h6 {
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0 0 0.5em;
+    color: #1C2856;
 }
 
-.sxs-plugin .sxs-split-text p {
-    margin-bottom: 20px;
+.sxs-plugin h1 { font-size: 2.5em; }
+.sxs-plugin h2 { font-size: 2em; }
+.sxs-plugin h3 { font-size: 1.75em; }
+.sxs-plugin h4 { font-size: 1.5em; }
+.sxs-plugin h5 { font-size: 1.25em; }
+.sxs-plugin h6 { font-size: 1em; }
+
+/* Text elements */
+.sxs-plugin p {
+    margin: 0 0 1em;
 }
 
-.sxs-plugin .sxs-split-text a {
+.sxs-plugin strong {
+    font-weight: 600;
+}
+
+.sxs-plugin em {
+    font-style: italic;
+}
+
+/* Links */
+.sxs-plugin a {
     color: #F26724;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
-.sxs-plugin .sxs-split-text a:hover {
-    color: white;
+.sxs-plugin a:hover {
+    color: #1C2856;
     text-decoration: underline;
 }
 
-.sxs-plugin .sxs-split-text ul,
-.sxs-plugin .sxs-split-text ol {
-    margin-left: 20px;
-    margin-bottom: 20px;
+/* Lists */
+.sxs-plugin ul,
+.sxs-plugin ol {
+    margin: 0 0 1em;
+    padding-left: 1.5em;
 }
 
-.sxs-plugin .sxs-split-text li {
-    margin-bottom: 10px;
+.sxs-plugin li {
+    margin-bottom: 0.5em;
 }
 
-.sxs-plugin .sxs-split-text blockquote {
-    border-left: 4px solid #F26724;
-    margin: 20px 0;
-    padding: 10px 20px;
-    font-style: italic;
-    background: rgba(255, 255, 255, 0.1);
+/* Table text */
+.sxs-plugin .comparison-table {
+    font-size: 14px;
 }
 
-.sxs-plugin .sxs-split-text table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
+.sxs-plugin .comparison-header {
+    font-size: 16px;
+    font-weight: 600;
 }
 
-.sxs-plugin .sxs-split-text table th,
-.sxs-plugin .sxs-split-text table td {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    text-align: left;
+/* Labels and metadata */
+.sxs-plugin .label {
+    font-size: 0.875em;
+    font-weight: 500;
+    color: #666;
 }
 
-.sxs-plugin .sxs-split-text table th {
-    background: rgba(255, 255, 255, 0.1);
+.sxs-plugin .meta {
+    font-size: 0.875em;
+    color: #666;
 }
 
+/* Helper text classes */
+.sxs-plugin .text-primary {
+    color: #1C2856;
+}
+
+.sxs-plugin .text-secondary {
+    color: #F26724;
+}
+
+.sxs-plugin .text-muted {
+    color: #666;
+}
+
+.sxs-plugin .text-small {
+    font-size: 0.875em;
+}
+
+.sxs-plugin .text-large {
+    font-size: 1.125em;
+}
+
+/* Responsive typography */
 @media screen and (max-width: 768px) {
-    .sxs-plugin .sxs-split-text {
-        font-size: 15px;
+    .sxs-plugin h1 { font-size: 2em; }
+    .sxs-plugin h2 { font-size: 1.75em; }
+    .sxs-plugin h3 { font-size: 1.5em; }
+    .sxs-plugin h4 { font-size: 1.25em; }
+    .sxs-plugin h5 { font-size: 1.1em; }
+    .sxs-plugin h6 { font-size: 1em; }
+    
+    .sxs-plugin .comparison-table {
+        font-size: 13px;
     }
     
-    .sxs-plugin .sxs-split-text h1 { font-size: 28px; }
-    .sxs-plugin .sxs-split-text h2 { font-size: 24px; }
-    .sxs-plugin .sxs-split-text h3 { font-size: 20px; }
-    .sxs-plugin .sxs-split-text h4 { font-size: 18px; }
-    .sxs-plugin .sxs-split-text h5 { font-size: 16px; }
-    .sxs-plugin .sxs-split-text h6 { font-size: 14px; }
+    .sxs-plugin .comparison-header {
+        font-size: 15px;
+    }
 } 

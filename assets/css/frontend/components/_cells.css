@@ -1,0 +1,114 @@
+/* Cell content styles */
+.sxs-plugin .sxs-cell-content {
+    width: 100%;
+}
+
+/* List styles within cells */
+.sxs-plugin .sxs-list,
+.sxs-plugin .education-list,
+.sxs-plugin .experience-list,
+.sxs-plugin .compensation-list {
+    margin: 0;
+    padding-left: 20px;
+    list-style-position: outside;
+    text-align: left;
+}
+
+.sxs-plugin .sxs-list li,
+.sxs-plugin .education-list li,
+.sxs-plugin .experience-list li,
+.sxs-plugin .compensation-list li {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* Education cell styles */
+.sxs-plugin .education-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sxs-plugin .degree-item {
+    padding: 8px;
+    background: rgba(28, 40, 86, 0.05);
+    border-radius: 4px;
+}
+
+/* Experience cell styles */
+.sxs-plugin .experience-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sxs-plugin .experience-item {
+    text-align: left;
+    padding: 10px;
+    border-left: 3px solid #F26724;
+    background: rgba(242, 103, 36, 0.05);
+}
+
+.sxs-plugin .experience-company {
+    font-weight: bold;
+    color: #1C2856;
+    margin-bottom: 5px;
+}
+
+.sxs-plugin .experience-duration {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Compensation cell styles */
+.sxs-plugin .compensation-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sxs-plugin .compensation-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid rgba(28, 40, 86, 0.1);
+}
+
+.sxs-plugin .compensation-type {
+    color: #666;
+}
+
+.sxs-plugin .compensation-value {
+    font-weight: bold;
+    color: #1C2856;
+}
+
+/* Image cell styles */
+.sxs-plugin .image-cell {
+    padding: 10px;
+}
+
+.sxs-plugin .cell-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Link cell styles */
+.sxs-plugin .link-cell a {
+    color: #F26724;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.sxs-plugin .link-cell a:hover {
+    color: #1C2856;
+    text-decoration: underline;
+}
+
+/* Empty cell styles */
+.sxs-plugin .empty-cell {
+    color: #999;
+    font-style: italic;
+} 
