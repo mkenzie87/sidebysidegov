@@ -220,93 +220,126 @@ wp_add_inline_script('slick', "
 }
 
 section.recruiter-info {
-    background: #1C2856;
-    padding: 30px 20px;
-    border-radius: 15px;
+    background: #14213D;
+    padding: 30px;
+    border-radius: 8px;
     color: white;
-    text-align: center;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.recruiter-info .team-picture {
+    flex: 0 0 auto;
+}
+
+.recruiter-info .team-picture img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border: 3px solid white;
+    margin: 0;
+}
+
+.recruiter-info .team-info {
+    flex: 1;
 }
 
 .recruiter-info h5.contact-title {
-    color: white;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 0;
-    margin-bottom: 15px;
+    display: none;
 }
 
 .recruiter-info h5.team-name {
     color: white;
-    margin-top: 15px;
+    margin: 0;
     font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
 }
 
 .recruiter-info p.team-title {
     color: white;
-    text-transform: uppercase;
-    font-size: 14px;
-    margin-bottom: 15px;
-    margin-top: 0;
+    text-transform: none;
+    font-size: 16px;
+    margin: 5px 0 10px;
+    opacity: 0.9;
+}
+
+.recruiter-info p.team-phone {
+    margin: 0 0 10px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.team-divider {
+    display: none;
+}
+
+.pres-team-social {
+    display: flex;
+    gap: 10px;
 }
 
 .recruiter-info .pres-team-social a {
     background: #F26724;
     color: white;
-    border: 1px solid #F26724;
-    height: 32px;
-    width: 32px;
-    display: inline-block;
+    border: none;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     font-size: 16px;
-    line-height: 32px;
-    margin: 0 5px;
-}
-
-.recruiter-info p.team-phone {
-    margin-top: 7px;
-    margin-bottom: 10px;
-    font-size: 18px;
+    transition: all 0.3s ease;
 }
 
 .recruiter-info .pres-team-social a:hover {
-    background: transparent;
+    background: #d55314;
+    transform: translateY(-2px);
+}
+
+/* Position Buttons */
+.position-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.position-button {
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.position-button.primary {
+    background: #F26724;
     color: white;
-    border-color: white;
+    border: none;
 }
 
-.recruiter-info .team-picture img {
-    border-radius: 50%;
-    height: 150px;
-    width: 150px;
-    object-fit: cover;
-    border: 5px solid white;
-    margin: 0 auto;
-    object-position: top;
-}
-
-li.slick-active:only-child {
-    display: none;
-}
-
-.team-divider {
+.position-button.secondary {
     background: white;
-    height: 1px;
-    width: 22px;
-    margin: 0 auto 15px;
+    color: #14213D;
+    border: none;
 }
 
-.pres-team-social {
-    position: relative;
-    display: block;
-    -webkit-transition: all .5s ease-in-out;
-    -moz-transition: all .5s ease-in-out;
-    -o-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
-    margin-bottom: 0;
+.position-button i {
+    font-size: 14px;
+}
+
+.position-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 @media screen and (max-width: 768px) {
@@ -343,6 +376,17 @@ li.slick-active:only-child {
     .sxs-split-text h4 { font-size: 18px; }
     .sxs-split-text h5 { font-size: 16px; }
     .sxs-split-text h6 { font-size: 14px; }
+
+    section.recruiter-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .position-buttons {
+        flex-direction: column;
+    }
 }
 </style>
 
@@ -437,8 +481,6 @@ li.slick-active:only-child {
                 $recruiter_name = get_the_title($featured_post->ID);
             ?>
             <section class="recruiter-info">
-                <h5 class="contact-title">Recruiter Contact</h5>
-                
                 <div class="team-picture">
                     <?php
                     if (!empty($thumbnail)) {
@@ -446,20 +488,17 @@ li.slick-active:only-child {
                     } elseif (!empty($placeholder)) {
                         echo '<img src="' . esc_url($placeholder) . '">';
                     } else {
-                        // Default placeholder
                         echo '<img src="' . esc_url(plugins_url('assets/images/placeholder-user.jpg', dirname(dirname(__FILE__)))) . '">';
                     }
                     ?>
                 </div>
                 
                 <div class="team-info">
-                    <h5 class="team-name uppercase"><?php echo esc_html($recruiter_name); ?></h5>
+                    <h5 class="team-name"><?php echo esc_html($recruiter_name); ?></h5>
                     
                     <?php if(!empty($title)): ?>
-                        <p class="team-title uppercase"><?php echo esc_html($title); ?></p>
+                        <p class="team-title"><?php echo esc_html($title); ?></p>
                     <?php endif; ?>
-                    
-                    <div class="team-divider"></div>
                     
                     <?php if(!empty($phone)): ?>
                         <p class="team-phone"><?php echo esc_html($phone); ?></p>
@@ -467,17 +506,26 @@ li.slick-active:only-child {
                     
                     <div class="pres-team-social">
                         <?php if(!empty($linkedin)): ?>
-                            <a href="<?php echo esc_url($linkedin); ?>" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="<?php echo esc_url($linkedin); ?>" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                         <?php endif; ?>
                         
                         <?php if(!empty($email)): ?>
-                            <a id="pres-recruiter-email" data-email="<?php echo esc_attr($email); ?>" href="mailto:<?php echo esc_attr($email); ?>" target="_blank"><i class="fas fa-envelope"></i></a>
+                            <a href="mailto:<?php echo esc_attr($email); ?>" target="_blank" title="Send Email"><i class="fas fa-envelope"></i></a>
                         <?php endif; ?>
                     </div>
                 </div>
             </section>
             <?php endforeach; ?>
         </section>
+
+        <div class="position-buttons">
+            <a href="#position-brief" class="position-button primary">
+                Position Brief <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#scorecard" class="position-button secondary">
+                Scorecard <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
         <?php endif; ?>
     </div>
 
