@@ -1,0 +1,297 @@
+/* Container max-width */
+.sxs-comparison-wrapper {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+/* Header styles */
+.sxs-company-header {
+    text-align: center !important;
+    padding: 40px 0 !important;
+    background-position: center !important;
+    background-size: cover !important;
+    position: relative !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+}
+
+.sxs-company-logo {
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto 20px !important;
+    background: #fff !important;
+    border-radius: 50% !important;
+    padding: 10px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.sxs-company-logo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+.sxs-company-name {
+    font-size: 32px !important;
+    font-weight: bold !important;
+    margin-bottom: 20px !important;
+    color: #fff !important;
+}
+
+/* Recruiter section */
+.sxs-recruiter-section {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 30px 0 !important;
+    margin: 40px auto !important;
+    max-width: 1400px !important;
+    gap: 30px !important;
+}
+
+.sxs-recruiter-card {
+    background: #1C2856 !important;
+    color: #fff !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    flex: 0 0 auto !important;
+    min-width: 350px !important;
+}
+
+.sxs-recruiter-photo {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+}
+
+.sxs-recruiter-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.sxs-recruiter-info {
+    flex: 1 !important;
+}
+
+.sxs-recruiter-name {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin-bottom: 5px !important;
+}
+
+.sxs-recruiter-title {
+    font-size: 14px !important;
+    margin-bottom: 5px !important;
+    opacity: 0.9 !important;
+}
+
+.sxs-recruiter-contact {
+    font-size: 14px !important;
+}
+
+.sxs-recruiter-social {
+    display: flex !important;
+    gap: 10px !important;
+    margin-top: 10px !important;
+}
+
+.sxs-recruiter-social a {
+    color: #fff !important;
+    opacity: 0.9 !important;
+    transition: opacity 0.2s !important;
+    font-size: 18px !important;
+}
+
+.sxs-recruiter-social a:hover {
+    opacity: 1 !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+/* Comparison table styles */
+.sxs-comparison-body .sxs-col {
+    text-align: left !important;
+    padding: 20px !important;
+}
+
+.sxs-list {
+    list-style-position: outside !important;
+    padding-left: 20px !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+
+.sxs-list li {
+    text-align: left !important;
+    margin-bottom: 8px !important;
+}
+
+/* Keep the header cells centered */
+.sxs-col-header {
+    text-align: center !important;
+}
+
+/* Ensure correct styling for left column */
+.sxs-col-header {
+    width: 200px !important;
+    flex: 0 0 200px !important;
+    padding: 20px !important;
+    background: #FFFFFF !important;
+    color: #F26724 !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+    line-height: 1.3 !important;
+}
+
+.sxs-comparison-header {
+    background: #1C2856 !important;
+}
+
+.sxs-comparison-header .sxs-col-header {
+    background: #F26724 !important;
+    color: white !important;
+    font-size: 18px !important;
+}
+
+.sxs-comparison-header .sxs-col {
+    background: #1C2856 !important;
+    color: white !important;
+    border-color: rgba(255,255,255,0.2) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    min-height: 60px !important;
+}
+
+/* Alternating column colors */
+.sxs-comparison-body .sxs-row .sxs-col:nth-child(even) {
+    background-color: #F5F5F5 !important;
+}
+
+.sxs-comparison-body .sxs-row .sxs-col:nth-child(odd) {
+    background-color: #FFFFFF !important;
+}
+
+/* Comparison body styles */
+.sxs-comparison-body {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* Make container full width */
+.sxs-comparison-container {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+}
+
+/* Row settings for horizontal scroll */
+.sxs-row {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Fixed column widths */
+.sxs-col {
+    flex: 1 !important;
+    min-width: 300px !important;
+    max-width: 350px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    hyphens: auto !important;
+}
+
+/* Position Buttons */
+.sxs-position-info {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 30px !important;
+}
+
+.sxs-position-title {
+    font-size: 28px !important;
+    font-weight: bold !important;
+    color: #1C2856 !important;
+    margin: 0 !important;
+    flex: 1 !important;
+}
+
+.sxs-action-buttons {
+    display: flex !important;
+    gap: 15px !important;
+    flex: 0 0 auto !important;
+}
+
+.sxs-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 10px 20px !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: background-color 0.2s !important;
+}
+
+.sxs-button.position-brief {
+    background-color: #F26724 !important;
+    color: #fff !important;
+}
+
+.sxs-button.scorecard {
+    background-color: #fff !important;
+    color: #1C2856 !important;
+    border: 1px solid #1C2856 !important;
+}
+
+.sxs-button:hover {
+    opacity: 0.9 !important;
+}
+
+.sxs-button i {
+    margin-left: 8px !important;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .sxs-recruiter-section {
+        flex-direction: column !important;
+    }
+
+    .sxs-position-info {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+
+    .sxs-action-buttons {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    .sxs-button {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+} 
