@@ -2,8 +2,7 @@
 .sxs-plugin .sxs-comparison-body {
     max-width: 1400px;
     margin: 0 auto;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden; /* Contain everything inside */
 }
 
 .sxs-plugin .sxs-comparison-body .sxs-col {
@@ -26,13 +25,16 @@
 /* Comparison table structure */
 .sxs-plugin .sxs-comparison-wrapper {
     position: relative;
+    width: 100%;
+    overflow: hidden; /* Ensure wrapper contains everything */
 }
 
 .sxs-plugin .sxs-comparison-container {
-    width: auto;
-    min-width: 100%;
-    position: relative;
+    width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 auto;
+    position: relative;
 }
 
 .sxs-plugin .sxs-row {
@@ -179,7 +181,15 @@
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
     .sxs-plugin .sxs-comparison-wrapper {
-        padding: 20px 0;
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .sxs-plugin .sxs-comparison-container {
+        margin: 0;
+        padding: 0;
+        overflow-x: auto;
     }
 
     .sxs-plugin .scroll-indicator {
@@ -187,8 +197,9 @@
     }
 
     .sxs-plugin .sxs-comparison-scroll {
-        margin: 0 -20px;
-        padding: 0 20px;
+        margin: 0;
+        padding: 0 0 20px 0;
+        width: 100%;
     }
 
     .sxs-plugin .sxs-comparison-header .sxs-col,
