@@ -473,29 +473,28 @@
         padding: 0;
         width: 100%;
         overflow: hidden;
-        position: relative;
     }
 
     .sxs-comparison-container {
         margin: 0;
-        padding: 0 0 0 160px; /* Add left padding equal to fixed column width */
+        padding: 0;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        position: relative;
         width: 100%;
     }
 
-    /* Fixed left column container */
+    /* Make the entire left column sticky */
     .sxs-comparison-container .sxs-col-header {
-        position: absolute;
+        position: sticky;
         left: 0;
         width: 160px;
         min-width: 160px;
         background: #F26724;
         z-index: 10;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     }
 
-    /* Ensure header column in navy stays on top */
+    /* Ensure header stays on top */
     .sxs-comparison-container .sxs-comparison-header .sxs-col-header {
         background: #1C2856;
         z-index: 11;
@@ -506,7 +505,6 @@
         display: flex;
         min-width: max-content;
         width: auto;
-        position: relative;
     }
 
     /* Fixed width for data columns */
@@ -526,13 +524,17 @@
         background: rgba(0,0,0,0.05);
         margin: 10px 0;
         border-radius: 4px;
-        margin-left: 160px; /* Align with content */
     }
+}
 
-    /* Ensure proper height matching between fixed and scrollable columns */
-    .sxs-comparison-container .sxs-row {
-        min-height: 60px; /* Adjust this value based on your content */
-    }
+/* Ensure background colors are applied correctly */
+.sxs-comparison-container .sxs-col-header {
+    background: #F26724;
+    color: #fff;
+}
+
+.sxs-comparison-container .sxs-comparison-header .sxs-col-header {
+    background: #1C2856;
 }
 
 /* Scrollbar Styles */
