@@ -33,6 +33,14 @@ function sxs_get_template_part($slug, $name = null, $args = array()) {
     }
 }
 
+// Add inline styles to ensure correct styling
+?>
+
+<?php get_header(); ?>
+
+<div id="fl-main-content" class="fl-page-content" itemprop="mainContentOfPage" role="main">
+
+<?php
 // Get layout option
 $layout_option = get_post_meta(get_the_ID(), '_sxs_layout_option', true);
 if (empty($layout_option)) {
@@ -110,123 +118,6 @@ if (class_exists('SXS_Settings') && SXS_Settings::is_jobs_enabled()) {
     $job_location = get_post_meta(get_the_ID(), '_sxs_job_location', true);
     $job_description = get_post_meta(get_the_ID(), '_sxs_job_description', true);
 }
-
-// Add inline styles to ensure correct styling
-?>
-<style>
-/* Ensure this CSS takes precedence */
-.sxs-col-header {
-    width: 200px !important;
-    flex: 0 0 200px !important;
-    padding: 20px !important;
-    background: #FFFFFF !important;
-    color: #F26724 !important;
-    font-weight: bold !important;
-    text-transform: uppercase !important;
-    text-align: center !important;
-    border: 1px solid #d0d0d0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
-    line-height: 1.3 !important;
-    position: sticky !important;
-    left: 0 !important;
-    z-index: 10 !important;
-    box-shadow: 5px 0 5px -2px rgba(0,0,0,0.1) !important;
-}
-
-.sxs-comparison-header {
-    background: #1C2856 !important;
-}
-
-.sxs-comparison-header .sxs-col-header {
-    background: #F26724 !important;
-    color: white !important;
-    font-size: 18px !important;
-    position: sticky !important;
-    left: 0 !important;
-    z-index: 20 !important;
-    box-shadow: 5px 0 5px -2px rgba(0,0,0,0.1) !important;
-}
-
-.sxs-comparison-header .sxs-col {
-    background: #1C2856 !important;
-    color: white !important;
-    border-color: rgba(255,255,255,0.2) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    min-height: 60px !important;
-}
-
-/* Alternating column colors */
-.sxs-comparison-body .sxs-row .sxs-col:nth-child(even) {
-    background-color: #F5F5F5 !important;
-}
-
-.sxs-comparison-body .sxs-row .sxs-col:nth-child(odd) {
-    background-color: #FFFFFF !important;
-}
-
-/* Make container full width */
-.sxs-comparison-container {
-    width: auto !important;
-    min-width: 100% !important;
-    position: relative !important;
-}
-
-/* Row settings for horizontal scroll */
-.sxs-row {
-    display: flex !important;
-    width: max-content !important;
-    min-width: 100% !important;
-    flex-wrap: nowrap !important;
-    position: relative !important;
-}
-
-/* Fixed column widths */
-.sxs-col {
-    flex: 0 0 350px !important;
-    width: 350px !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    word-break: normal !important;
-    hyphens: auto !important;
-    text-align: center !important;
-}
-
-/* Cell text wrapping */
-.sxs-col {
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    word-break: normal !important;
-    hyphens: auto !important;
-    text-align: center !important;
-}
-
-/* Add text centering for all content */
-.company, .title, .sxs-experience, .sxs-compensation, 
-.sxs-list, .sxs-degrees, .sxs-list li, .sxs-degrees li {
-    text-align: center !important;
-}
-
-.sxs-list, .sxs-degrees {
-    padding-left: 0 !important;
-    list-style-position: inside !important;
-}
-
-.sxs-comparison-wrapper {
-    position: relative !important;
-}
-</style>
-<?php
-
-get_header();
 
 while (have_posts()) :
     the_post();
