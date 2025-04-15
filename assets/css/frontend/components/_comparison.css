@@ -169,43 +169,30 @@
 /* Header styles */
 .sxs-plugin .sxs-comparison-header {
     background: #1C2856;
-}
-
-.sxs-plugin .sxs-comparison-header .sxs-col {
-    background: #1C2856;
-    color: white;
-    border-color: rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    min-height: 60px;
-}
-
-/* Column header styles */
-.sxs-plugin .sxs-col-header {
-    width: 200px;
-    min-width: 200px;
-    background: #F26724;
-    color: #fff;
-    padding: 15px 20px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    text-align: left;
-    display: flex;
-    align-items: center;
+    width: 100%;
 }
 
 .sxs-plugin .sxs-comparison-header .sxs-col-header {
-    background: #F26724;
-    color: white;
-    font-size: 18px;
-    position: sticky;
-    left: 0;
-    z-index: 20;
-    box-shadow: 5px 0 5px -2px rgba(0,0,0,0.1);
+    background: #1C2856;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.sxs-plugin .sxs-comparison-header .sxs-col {
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
+    background: #1C2856;
+}
+
+.sxs-plugin .sxs-comparison-header .sxs-col:last-child {
+    border-right: none;
 }
 
 /* Column styles */
@@ -326,33 +313,9 @@
     }
 }
 
-/* Candidate Names Header */
+/* Remove old candidate names styles */
 .sxs-plugin .sxs-candidate-names {
-    background: #1C2856;
-    width: 100%;
-}
-
-.sxs-plugin .sxs-candidate-names .sxs-col-header {
-    background: #1C2856;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 600;
-    border-right: 1px solid rgba(255,255,255,0.1);
-}
-
-.sxs-plugin .sxs-candidate-names .sxs-col {
-    padding: 15px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    text-align: left;
-    background: #1C2856;
-}
-
-.sxs-plugin .sxs-candidate-names .sxs-col:last-child {
-    border-right: none;
+    display: none;
 }
 
 /* Content Styles */
