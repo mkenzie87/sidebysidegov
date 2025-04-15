@@ -38,6 +38,9 @@
     text-align: left;
     display: flex;
     align-items: center;
+    position: sticky;
+    left: 0;
+    z-index: 10;
 }
 
 /* Candidate Names Header */
@@ -395,6 +398,7 @@
     font-size: 14px;
     font-weight: 600;
     border-right: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
 .sxs-comparison-container .sxs-comparison-header .sxs-col {
@@ -406,6 +410,7 @@
     border-right: 1px solid rgba(255,255,255,0.1);
     text-align: left;
     background: #1C2856;
+    min-width: 280px;
 }
 
 .sxs-comparison-container .sxs-comparison-header .sxs-col:last-child {
@@ -465,24 +470,78 @@
 @media screen and (max-width: 768px) {
     .sxs-comparison-wrapper {
         margin: 0;
-        padding: 0 15px;
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
     }
 
     .sxs-comparison-container {
+        margin: 0;
+        padding: 0;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        position: relative;
+        width: 100%;
     }
 
+    /* Ensure rows extend full width */
     .sxs-comparison-container .sxs-row {
+        display: flex;
         min-width: max-content;
+        width: auto;
     }
 
+    /* Fixed width for data columns */
     .sxs-comparison-container .sxs-col {
         min-width: 280px;
+        width: 280px;
+        flex: 0 0 280px;
+        padding: 15px 20px;
     }
 
+    /* Sticky left column */
     .sxs-comparison-container .sxs-col-header {
-        min-width: 160px;
+        position: sticky;
+        left: 0;
+        z-index: 10;
         width: 160px;
+        min-width: 160px;
+        background: #F26724;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     }
+
+    /* Ensure header stays on top when scrolling */
+    .sxs-comparison-container .sxs-comparison-header .sxs-col-header {
+        z-index: 11;
+    }
+
+    /* Show scroll indicator */
+    .scroll-indicator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background: rgba(0,0,0,0.05);
+        margin: 10px 0;
+        border-radius: 4px;
+    }
+}
+
+/* Hide scrollbar but keep functionality */
+.sxs-comparison-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) transparent;
+}
+
+.sxs-comparison-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
 } 
