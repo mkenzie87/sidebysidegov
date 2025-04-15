@@ -28,22 +28,32 @@ class SXS_Candidate_Comparison {
             '6.5.1'
         );
 
-        // Component CSS files
-        $components = array('layout', 'header', 'comparison', 'recruiter', 'buttons');
+        // Define the components in the order they should be loaded
+        $components = array(
+            'layout',     // Base layout styles
+            'header',     // Header styles
+            'comparison', // Main comparison table styles
+            'cells',      // Individual cell styles
+            'recruiter',  // Recruiter section styles
+            'buttons'     // Button styles
+        );
+
+        // Enqueue each component
         foreach ($components as $component) {
             wp_enqueue_style(
-                "sxs-component-{$component}",
-                plugins_url("assets/css/frontend/components/_{$component}.css", dirname(__FILE__)),
+                'sxs-' . $component,
+                plugin_dir_url(dirname(__FILE__)) . 'assets/css/frontend/components/_' . $component . '.css',
                 array(),
-                SXS_CC_VERSION
+                filemtime(plugin_dir_path(dirname(__FILE__)) . 'assets/css/frontend/components/_' . $component . '.css')
             );
         }
 
+        // Enqueue the main script
         wp_enqueue_script(
             'sxs-candidate-comparison',
-            plugins_url('assets/js/sxs-candidate-comparison.js', dirname(__FILE__)),
+            plugin_dir_url(dirname(__FILE__)) . 'assets/js/sxs-candidate-comparison.js',
             array('jquery', 'jquery-ui-tooltip'),
-            SXS_CC_VERSION,
+            filemtime(plugin_dir_path(dirname(__FILE__)) . 'assets/js/sxs-candidate-comparison.js'),
             true
         );
 
