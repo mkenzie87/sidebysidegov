@@ -137,9 +137,6 @@ wp_add_inline_script('slick', "
     flex: 1;
     min-width: 300px;
     max-width: calc(50% - 20px);
-    color: white;
-    font-size: 16px;
-    line-height: 1.6;
 }
 
 .sxs-split-text h1,
@@ -148,7 +145,7 @@ wp_add_inline_script('slick', "
 .sxs-split-text h4,
 .sxs-split-text h5,
 .sxs-split-text h6 {
-    color: white;
+    color: black;
     margin-top: 0;
     margin-bottom: 20px;
 }
@@ -307,14 +304,6 @@ section.recruiter-info {
     margin-top: 30px;
     display: flex;
     gap: 15px;
-}
-
-.buttons-heading {
-    color: #fff;
-    font-size: 24px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    font-weight: 500;
 }
 
 .position-button {

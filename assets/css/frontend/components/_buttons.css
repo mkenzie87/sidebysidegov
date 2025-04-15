@@ -1,0 +1,73 @@
+.sxs-plugin .buttons-heading {
+    color: #fff;
+    font-size: 24px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.sxs-plugin .position-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.sxs-plugin .sxs-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    gap: 10px;
+}
+
+.sxs-plugin .sxs-button.position-brief {
+    background-color: #F26724;
+    color: #fff;
+}
+
+.sxs-plugin .sxs-button.position-brief:hover {
+    background-color: #d85615;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sxs-plugin .sxs-button.scorecard {
+    background-color: #1C2856;
+    color: #fff;
+}
+
+.sxs-plugin .sxs-button.scorecard:hover {
+    background-color: #141c3f;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sxs-plugin .sxs-button i {
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+.sxs-plugin .sxs-button:hover i {
+    transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .sxs-plugin .sxs-position-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .sxs-plugin .sxs-action-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .sxs-plugin .sxs-button {
+        width: 100%;
+        justify-content: center;
+    }
+} 
