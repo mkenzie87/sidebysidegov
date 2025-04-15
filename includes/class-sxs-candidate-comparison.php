@@ -191,6 +191,8 @@ class SXS_Candidate_Comparison {
             background-position: center !important;
             background-size: cover !important;
             position: relative !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
         }
 
         .sxs-company-logo {
@@ -415,38 +417,54 @@ class SXS_Candidate_Comparison {
             background-color: #FFFFFF !important;
         }
         
+        /* Comparison body styles */
+        .sxs-comparison-body {
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+        
         /* Make container full width */
         .sxs-comparison-container {
-            width: auto !important;
+            width: 100% !important;
             min-width: 100% !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
         }
         
         /* Row settings for horizontal scroll */
         .sxs-row {
             display: flex !important;
-            width: max-content !important;
+            width: 100% !important;
             min-width: 100% !important;
             flex-wrap: nowrap !important;
         }
         
-        /* Fixed column widths */
+        /* Fixed column widths - adjust to fit within 1400px */
         .sxs-col {
-            flex: 0 0 350px !important;
-            width: 350px !important;
+            flex: 1 !important;
+            min-width: 300px !important;
+            max-width: 350px !important;
             word-wrap: break-word !important;
             overflow-wrap: break-word !important;
             word-break: normal !important;
             hyphens: auto !important;
-            text-align: center !important;
         }
         
-        /* Cell text wrapping */
+        /* Left column header width */
+        .sxs-col-header {
+            width: 200px !important;
+            flex: 0 0 200px !important;
+            min-width: 200px !important;
+        }
+
+        /* Remove duplicate styles */
         .sxs-col {
             word-wrap: break-word !important;
             overflow-wrap: break-word !important;
             word-break: normal !important;
             hyphens: auto !important;
-            text-align: center !important;
         }
         
         /* Add text centering for all content */
