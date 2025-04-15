@@ -99,11 +99,12 @@
 .sxs-plugin .sxs-button {
     display: inline-flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 4px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     transition: all 0.2s;
+    gap: 10px;
 }
 
 .sxs-plugin .sxs-button.position-brief {
@@ -111,19 +112,30 @@
     color: #fff;
 }
 
-.sxs-plugin .sxs-button.scorecard {
-    background-color: #fff;
-    color: #1C2856;
-    border: 1px solid #1C2856;
+.sxs-plugin .sxs-button.position-brief:hover {
+    background-color: #d85615;
+    color: #fff;
+    text-decoration: none;
 }
 
-.sxs-plugin .sxs-button:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
+.sxs-plugin .sxs-button.scorecard {
+    background-color: #1C2856;
+    color: #fff;
+}
+
+.sxs-plugin .sxs-button.scorecard:hover {
+    background-color: #141c3f;
+    color: #fff;
+    text-decoration: none;
 }
 
 .sxs-plugin .sxs-button i {
-    margin-left: 8px;
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+.sxs-plugin .sxs-button:hover i {
+    transform: translateX(4px);
 }
 
 /* Responsive styles */
@@ -134,12 +146,13 @@
 
     .sxs-plugin .sxs-position-info {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
+        gap: 15px;
     }
 
     .sxs-plugin .sxs-action-buttons {
-        flex-direction: column;
         width: 100%;
+        flex-direction: column;
     }
 
     .sxs-plugin .sxs-button {
