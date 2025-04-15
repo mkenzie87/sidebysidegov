@@ -527,8 +527,8 @@ section.recruiter-info {
             $header_content = get_post_meta($args['post_id'], '_sxs_header_content', true);
             
             // Get button settings and URLs
-            $enable_position_brief = get_post_meta($args['post_id'], '_sxs_enable_position_brief', true);
-            $enable_scorecard = get_post_meta($args['post_id'], '_sxs_enable_scorecard', true);
+            $enable_position_brief = get_post_meta($args['post_id'], '_sxs_position_brief_enabled', true);
+            $enable_scorecard = get_post_meta($args['post_id'], '_sxs_scorecard_enabled', true);
             $position_brief_url = get_post_meta($args['post_id'], '_sxs_position_brief_url', true);
             $scorecard_url = get_post_meta($args['post_id'], '_sxs_scorecard_url', true);
             

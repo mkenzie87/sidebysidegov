@@ -172,6 +172,12 @@ class SXS_Candidate_Comparison {
         $position_brief_url = get_post_meta($atts['set'], '_sxs_position_brief_url', true);
         $scorecard_url = get_post_meta($atts['set'], '_sxs_scorecard_url', true);
         
+        // Debug output
+        echo '<!-- Debug: Position Brief Enabled: ' . var_export($enable_position_brief, true) . ' -->';
+        echo '<!-- Debug: Position Brief URL: ' . esc_html($position_brief_url) . ' -->';
+        echo '<!-- Debug: Scorecard Enabled: ' . var_export($enable_scorecard, true) . ' -->';
+        echo '<!-- Debug: Scorecard URL: ' . esc_html($scorecard_url) . ' -->';
+        
         ?>
         <div class="sxs-comparison-wrapper">
             <?php 
