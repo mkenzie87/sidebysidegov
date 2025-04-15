@@ -483,9 +483,9 @@
         width: 100%;
     }
 
-    /* Base styles for all header cells in the first column */
-    .sxs-comparison-container .sxs-row .sxs-col-header {
-        position: sticky;
+    /* Make each cell in the first column sticky */
+    .sxs-comparison-container .sxs-col-header {
+        position: sticky !important; /* Need to override any other positioning */
         left: 0;
         width: 160px;
         min-width: 160px;
@@ -515,19 +515,32 @@
         padding: 15px 20px;
     }
 
-    /* Ensure all orange headers maintain their color */
+    /* Ensure all orange headers maintain their color and stickiness */
     .sxs-comparison-container .sxs-row:not(.sxs-comparison-header) .sxs-col-header {
         background: #F26724;
+        position: sticky !important;
+        left: 0;
+        z-index: 10;
+    }
+
+    /* Remove any conflicting positioning */
+    .sxs-plugin .sxs-col-header {
+        position: sticky !important;
+        left: 0;
     }
 }
 
-/* Ensure background colors are applied correctly */
+/* Base styles for header column - needed outside media query */
 .sxs-comparison-container .sxs-col-header {
+    position: sticky;
+    left: 0;
     color: #fff;
+    z-index: 10;
 }
 
 .sxs-comparison-container .sxs-comparison-header .sxs-col-header {
     background: #1C2856;
+    z-index: 11;
 }
 
 /* Scrollbar Styles */
