@@ -2,30 +2,30 @@
 .sxs-plugin .sxs-comparison-wrapper {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
+    overflow: hidden;
 }
 
-/* Make container full width */
+/* Make container full width with horizontal scroll */
 .sxs-plugin .sxs-comparison-container {
     width: 100%;
-    min-width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Row settings for horizontal scroll */
 .sxs-plugin .sxs-row {
     display: flex;
-    width: 100%;
+    width: max-content;
     min-width: 100%;
     flex-wrap: nowrap;
 }
 
 /* Fixed column widths */
 .sxs-plugin .sxs-col {
-    flex: 1;
+    flex: 0 0 300px;
     min-width: 300px;
-    max-width: 350px;
+    max-width: 300px;
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: normal;
@@ -38,54 +38,47 @@
     left: 0;
     z-index: 2;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    flex: 0 0 200px;
+    min-width: 200px;
+    max-width: 200px;
 }
 
-/* Mobile fixes for proper horizontal scrolling */
+/* Enhance scrollbar styling for better visibility */
+.sxs-plugin .sxs-comparison-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.sxs-plugin .sxs-comparison-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.sxs-plugin .sxs-comparison-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.sxs-plugin .sxs-comparison-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Mobile-specific adjustments */
 @media screen and (max-width: 768px) {
-    .sxs-plugin .sxs-comparison-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        width: 100%;
-    }
-    
-    .sxs-plugin .sxs-comparison-body {
-        min-width: 100%;
-        width: max-content;
-    }
-    
-    .sxs-plugin .sxs-row {
-        display: flex;
-        flex-wrap: nowrap;
-        width: 100%;
-    }
-    
     .sxs-plugin .sxs-col {
-        min-width: 280px;
         flex: 0 0 280px;
-        word-break: break-word;
+        min-width: 280px;
+        max-width: 280px;
     }
     
     .sxs-plugin .sxs-col-header {
-        min-width: 150px;
         flex: 0 0 150px;
+        min-width: 150px;
+        max-width: 150px;
         background-color: #E86224;
     }
-    
-    /* Enhance scrollbar styling for better visibility */
-    .sxs-plugin .sxs-comparison-wrapper::-webkit-scrollbar {
-        height: 8px;
-    }
-    
-    .sxs-plugin .sxs-comparison-wrapper::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-    
-    .sxs-plugin .sxs-comparison-wrapper::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 4px;
-    }
-    
-    .sxs-plugin .sxs-comparison-wrapper::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
+}
+
+/* Make sure comparison body extends properly for all candidates */
+.sxs-plugin .sxs-comparison-body {
+    width: max-content;
+    min-width: 100%;
 } 
