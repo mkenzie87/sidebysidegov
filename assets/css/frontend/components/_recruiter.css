@@ -1,162 +1,172 @@
-/* Recruiter section */
-.sxs-plugin .sxs-recruiter-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 30px 0;
-    margin: 40px auto;
+/* Recruiter Section Styles */
+.sxs-recruiter-section {
+    background: #fff;
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     max-width: 1400px;
-    gap: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.sxs-plugin .sxs-recruiter-card {
-    background: #1C2856;
-    color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+/* Position Info */
+.sxs-position-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.sxs-position-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1C2856;
+    margin: 0;
+    padding: 0;
+}
+
+/* Action Buttons */
+.sxs-action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.sxs-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.sxs-button i {
+    margin-left: 8px;
+}
+
+.sxs-button.position-brief {
+    background-color: #F26724;
+    color: #ffffff;
+}
+
+.sxs-button.position-brief:hover {
+    background-color: #e05816;
+}
+
+.sxs-button.scorecard {
+    background-color: #1C2856;
+    color: #ffffff;
+}
+
+.sxs-button.scorecard:hover {
+    background-color: #161f41;
+}
+
+/* Recruiters Container */
+.sxs-recruiters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Recruiter Card */
+.sxs-recruiter-card {
+    flex: 0 0 calc(50% - 10px);
     display: flex;
     align-items: center;
     gap: 20px;
-    flex: 0 0 auto;
-    min-width: 350px;
+    background: #1C2856;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
 }
 
-.sxs-plugin .sxs-recruiter-photo {
+/* Recruiter Photo */
+.sxs-recruiter-photo {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     overflow: hidden;
+    background: #fff;
+    flex-shrink: 0;
 }
 
-.sxs-plugin .sxs-recruiter-photo img {
+.sxs-recruiter-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.sxs-plugin .sxs-recruiter-info {
+/* Recruiter Info */
+.sxs-recruiter-info {
     flex: 1;
 }
 
-.sxs-plugin .sxs-recruiter-name {
+.sxs-recruiter-name {
     font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: #fff;
 }
 
-.sxs-plugin .sxs-recruiter-title {
+.sxs-recruiter-title {
     font-size: 14px;
-    margin-bottom: 5px;
+    margin: 0 0 8px 0;
     opacity: 0.9;
 }
 
-.sxs-plugin .sxs-recruiter-contact {
+.sxs-recruiter-contact {
     font-size: 14px;
+    margin: 0 0 8px 0;
 }
 
-.sxs-plugin .sxs-recruiter-social {
+/* Social Icons */
+.sxs-recruiter-social {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     margin-top: 10px;
 }
 
-.sxs-plugin .sxs-recruiter-social a {
+.sxs-recruiter-social a {
     color: #fff;
-    opacity: 0.9;
-    transition: opacity 0.2s;
-    font-size: 18px;
-}
-
-.sxs-plugin .sxs-recruiter-social a:hover {
-    opacity: 1;
-    color: #fff;
-    text-decoration: none;
-}
-
-/* Position info and buttons */
-.sxs-plugin .sxs-position-info {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-}
-
-.sxs-plugin .sxs-position-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #1C2856;
-    margin: 0;
-    flex: 1;
-}
-
-.sxs-plugin .sxs-action-buttons {
-    display: flex;
-    gap: 15px;
-    flex: 0 0 auto;
-}
-
-.sxs-plugin .sxs-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-    gap: 10px;
-}
-
-.sxs-plugin .sxs-button.position-brief {
-    background-color: #F26724;
-    color: #fff;
-}
-
-.sxs-plugin .sxs-button.position-brief:hover {
-    background-color: #d85615;
-    color: #fff;
-    text-decoration: none;
-}
-
-.sxs-plugin .sxs-button.scorecard {
-    background-color: #1C2856;
-    color: #fff;
-}
-
-.sxs-plugin .sxs-button.scorecard:hover {
-    background-color: #141c3f;
-    color: #fff;
-    text-decoration: none;
-}
-
-.sxs-plugin .sxs-button i {
     font-size: 16px;
-    transition: transform 0.2s;
+    transition: all 0.2s ease;
+    opacity: 0.9;
 }
 
-.sxs-plugin .sxs-button:hover i {
-    transform: translateX(4px);
+.sxs-recruiter-social a:hover {
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-    .sxs-plugin .sxs-recruiter-section {
-        flex-direction: column;
+/* Responsive Styles */
+@media screen and (max-width: 991px) {
+    .sxs-recruiter-card {
+        flex: 0 0 100%;
     }
+}
 
-    .sxs-plugin .sxs-position-info {
+@media screen and (max-width: 768px) {
+    .sxs-recruiter-section {
+        padding: 20px;
+    }
+    
+    .sxs-position-info {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
     }
-
-    .sxs-plugin .sxs-action-buttons {
+    
+    .sxs-action-buttons {
         width: 100%;
-        flex-direction: column;
     }
-
-    .sxs-plugin .sxs-button {
-        width: 100%;
+    
+    .sxs-button {
+        flex: 1;
         justify-content: center;
     }
 } 

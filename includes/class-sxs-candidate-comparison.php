@@ -13,54 +13,37 @@ class SXS_Candidate_Comparison {
     }
 
     public function enqueue_scripts() {
-        // Enqueue jQuery UI
-        wp_enqueue_script('jquery-ui-tooltip');
-        wp_enqueue_style(
-            'jquery-ui',
-            '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css'
-        );
-
-        // Enqueue Font Awesome
-        wp_enqueue_style(
-            'font-awesome',
-            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-            array(),
-            '6.5.1'
-        );
-
-        // Define the components in the order they should be loaded
-        $components = array(
-            'layout',     // Base layout styles
-            'header',     // Header styles
-            'comparison', // Main comparison table styles
-            'cells',      // Individual cell styles
-            'recruiter',  // Recruiter section styles
-            'buttons'     // Button styles
-        );
-
-        // Enqueue each component
+        // Define components in order of loading
+        $components = array('layout', 'header', 'comparison', 'cells', 'recruiter', 'buttons');
+        
+        // Enqueue each component's CSS
         foreach ($components as $component) {
             wp_enqueue_style(
                 'sxs-' . $component,
-                plugin_dir_url(dirname(__FILE__)) . 'assets/css/frontend/components/_' . $component . '.css',
+                SXS_CC_PLUGIN_URL . 'assets/css/frontend/components/_' . $component . '.css',
                 array(),
-                filemtime(plugin_dir_path(dirname(__FILE__)) . 'assets/css/frontend/components/_' . $component . '.css')
+                filemtime(SXS_CC_PLUGIN_DIR . 'assets/css/frontend/components/_' . $component . '.css')
             );
         }
-
-        // Enqueue the main script
+        
+        // Main JavaScript
         wp_enqueue_script(
             'sxs-candidate-comparison',
-            plugin_dir_url(dirname(__FILE__)) . 'assets/js/sxs-candidate-comparison.js',
-            array('jquery', 'jquery-ui-tooltip'),
-            filemtime(plugin_dir_path(dirname(__FILE__)) . 'assets/js/sxs-candidate-comparison.js'),
+            SXS_CC_PLUGIN_URL . 'assets/js/sxs-candidate-comparison.js',
+            array('jquery'),
+            filemtime(SXS_CC_PLUGIN_DIR . 'assets/js/sxs-candidate-comparison.js'),
             true
         );
-
-        wp_localize_script('sxs-candidate-comparison', 'sxsCC', array(
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('sxs_cc_nonce')
-        ));
+        
+        // Include Font Awesome if needed
+        if (!wp_script_is('font-awesome', 'enqueued')) {
+            wp_enqueue_style(
+                'font-awesome',
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+                array(),
+                '5.15.4'
+            );
+        }
     }
 
     public function enqueue_admin_scripts($hook) {
