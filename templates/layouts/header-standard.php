@@ -207,7 +207,7 @@ wp_add_inline_script('slick', "
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Recruiter Card Styles */
+/* Recruiter Card Styles - DEPRECATED - KEPT FOR REFERENCE
 .recruiter-slides {
     width: 100%;
     max-width: 100%;
@@ -298,6 +298,7 @@ section.recruiter-info {
     background: #d55314;
     transform: translateY(-2px);
 }
+*/
 
 /* Position Buttons */
 .position-buttons {
@@ -374,12 +375,14 @@ section.recruiter-info {
     .sxs-split-text h5 { font-size: 16px; }
     .sxs-split-text h6 { font-size: 14px; }
 
+    /* Deprecated recruiter styles 
     section.recruiter-info {
         flex-direction: column;
         align-items: center;
         text-align: center;
         padding: 20px;
     }
+    */
 
     .position-buttons {
         flex-direction: column;
@@ -443,77 +446,88 @@ section.recruiter-info {
         
         if (!empty($featured_posts)): 
         ?>
-        <section class="recruiter-slides">
-            <?php foreach($featured_posts as $featured_post):
-                // Try to get data from ACF fields if available
-                $title = '';
-                $phone = '';
-                $linkedin = '';
-                $email = '';
-                $thumbnail = '';
-                $placeholder = '';
-                
-                if (function_exists('get_field')) {
-                    $title_data = get_field('team_title_data_field', 'option');
-                    $phone_data = get_field('team_phone_data_field', 'option');
-                    $linkedin_data = get_field('linkedin_data_filed', 'option');
-                    $email_data = get_field('team_email_data_field', 'option');
-                    
-                    $title = get_field($title_data, $featured_post->ID);
-                    $phone = get_field($phone_data, $featured_post->ID);
-                    $linkedin = get_field($linkedin_data, $featured_post->ID);
-                    $email = get_field($email_data, $featured_post->ID);
-                    $placeholder = get_field('team_image_fallback', 'option');
-                }
-                
-                // Fallback to meta fields if ACF data isn't available
-                if (empty($title)) $title = get_post_meta($featured_post->ID, '_sxs_recruiter_title', true);
-                if (empty($phone)) $phone = get_post_meta($featured_post->ID, '_sxs_recruiter_phone', true);
-                if (empty($linkedin)) $linkedin = get_post_meta($featured_post->ID, '_sxs_recruiter_linkedin', true);
-                if (empty($email)) $email = get_post_meta($featured_post->ID, '_sxs_recruiter_email', true);
-                
-                $thumbnail = get_the_post_thumbnail_url($featured_post->ID);
-                if (empty($thumbnail)) $thumbnail = get_post_meta($featured_post->ID, '_sxs_recruiter_image', true);
-                
-                $recruiter_name = get_the_title($featured_post->ID);
+        <div class="sxs-recruiter-banner">
+            <?php 
+            // Add slider if multiple recruiters
+            $slider_class = count($featured_posts) > 1 ? 'sxs-recruiter-slider' : '';
             ?>
-            <section class="recruiter-info">
-                <div class="team-picture">
-                    <?php
-                    if (!empty($thumbnail)) {
-                        echo '<img src="' . esc_url($thumbnail) . '">';
-                    } elseif (!empty($placeholder)) {
-                        echo '<img src="' . esc_url($placeholder) . '">';
-                    } else {
-                        echo '<img src="' . esc_url(plugins_url('assets/images/placeholder-user.jpg', dirname(dirname(__FILE__)))) . '">';
-                    }
-                    ?>
-                </div>
-                
-                <div class="team-info">
-                    <h5 class="team-name"><?php echo esc_html($recruiter_name); ?></h5>
+            <div class="<?php echo $slider_class; ?>">
+                <?php foreach($featured_posts as $featured_post):
+                    // Try to get data from ACF fields if available
+                    $title = '';
+                    $phone = '';
+                    $linkedin = '';
+                    $email = '';
+                    $thumbnail = '';
+                    $placeholder = '';
                     
-                    <?php if(!empty($title)): ?>
-                        <p class="team-title"><?php echo esc_html($title); ?></p>
-                    <?php endif; ?>
-                    
-                    <?php if(!empty($phone)): ?>
-                        <p class="team-phone"><?php echo esc_html($phone); ?></p>
-                    <?php endif; ?>
-                    
-                    <div class="pres-team-social">
-                        <?php if(!empty($linkedin)): ?>
-                            <a href="<?php echo esc_url($linkedin); ?>" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                        <?php endif; ?>
+                    if (function_exists('get_field')) {
+                        $title_data = get_field('team_title_data_field', 'option');
+                        $phone_data = get_field('team_phone_data_field', 'option');
+                        $linkedin_data = get_field('linkedin_data_filed', 'option');
+                        $email_data = get_field('team_email_data_field', 'option');
                         
-                        <?php if(!empty($email)): ?>
-                            <a href="mailto:<?php echo esc_attr($email); ?>" target="_blank" title="Send Email"><i class="fas fa-envelope"></i></a>
-                        <?php endif; ?>
+                        $title = get_field($title_data, $featured_post->ID);
+                        $phone = get_field($phone_data, $featured_post->ID);
+                        $linkedin = get_field($linkedin_data, $featured_post->ID);
+                        $email = get_field($email_data, $featured_post->ID);
+                        $placeholder = get_field('team_image_fallback', 'option');
+                    }
+                    
+                    // Fallback to meta fields if ACF data isn't available
+                    if (empty($title)) $title = get_post_meta($featured_post->ID, '_sxs_recruiter_title', true);
+                    if (empty($phone)) $phone = get_post_meta($featured_post->ID, '_sxs_recruiter_phone', true);
+                    if (empty($linkedin)) $linkedin = get_post_meta($featured_post->ID, '_sxs_recruiter_linkedin', true);
+                    if (empty($email)) $email = get_post_meta($featured_post->ID, '_sxs_recruiter_email', true);
+                    
+                    $thumbnail = get_the_post_thumbnail_url($featured_post->ID);
+                    if (empty($thumbnail)) $thumbnail = get_post_meta($featured_post->ID, '_sxs_recruiter_image', true);
+                    
+                    $recruiter_name = get_the_title($featured_post->ID);
+                ?>
+                <div class="sxs-recruiter-slide">
+                    <div class="sxs-recruiter-photo">
+                        <?php
+                        if (!empty($thumbnail)) {
+                            echo '<img src="' . esc_url($thumbnail) . '" alt="' . esc_attr($recruiter_name) . '">';
+                        } elseif (!empty($placeholder)) {
+                            echo '<img src="' . esc_url($placeholder) . '" alt="' . esc_attr($recruiter_name) . '">';
+                        } else {
+                            echo '<img src="' . esc_url(plugins_url('assets/images/placeholder-user.jpg', dirname(dirname(__FILE__)))) . '" alt="' . esc_attr($recruiter_name) . '">';
+                        }
+                        ?>
                     </div>
+                    <h2 class="sxs-recruiter-name"><?php echo esc_html($recruiter_name); ?></h2>
+                    
+                    <?php if (count($featured_posts) > 1) : ?>
+                    <div class="sxs-slide-controls">
+                        <button class="sxs-prev-slide" aria-label="Previous recruiter"><i class="fas fa-chevron-left"></i></button>
+                        <button class="sxs-next-slide" aria-label="Next recruiter"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <?php endif; ?>
                 </div>
-            </section>
-            <?php endforeach; ?>
-        </section>
+                <?php endforeach; ?>
+            </div>
+            
+            <?php 
+            // Get button settings
+            $enable_position_brief = get_post_meta($args['post_id'], '_sxs_position_brief_enabled', true);
+            $enable_scorecard = get_post_meta($args['post_id'], '_sxs_scorecard_enabled', true);
+            $position_brief_url = get_post_meta($args['post_id'], '_sxs_position_brief_url', true);
+            $scorecard_url = get_post_meta($args['post_id'], '_sxs_scorecard_url', true);
+            
+            if ($enable_position_brief && !empty($position_brief_url) || $enable_scorecard && !empty($scorecard_url)) : ?>
+            <div class="sxs-action-buttons-container">
+                <?php if ($enable_position_brief && !empty($position_brief_url)) : ?>
+                    <a href="<?php echo esc_url($position_brief_url); ?>" class="sxs-button position-brief" target="_blank">Position Brief</a>
+                <?php endif; ?>
+                
+                <?php if ($enable_scorecard && !empty($scorecard_url)) : ?>
+                    <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button scorecard" target="_blank">Scorecard</a>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+        </div>
         <?php endif; ?>
     </div>
 
