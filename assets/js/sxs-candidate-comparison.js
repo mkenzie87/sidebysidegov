@@ -8,6 +8,7 @@ jQuery(document).ready(function($) {
             this.initializeTooltips();
             this.setupPrintHandler();
             this.setupResponsiveColumns();
+            this.setupSmoothScrolling();
         },
 
         bindEvents: function() {
@@ -62,6 +63,38 @@ jQuery(document).ready(function($) {
                     // Set all columns to the maximum height
                     $cols.css('height', maxHeight + 'px');
                 });
+            }
+        },
+
+        // Add smooth scrolling for horizontal scroll
+        setupSmoothScrolling: function() {
+            // Only apply this on desktop
+            if ($(window).width() > 768) {
+                // Check if we have more candidates than can fit in viewport
+                var $container = $('.sxs-comparison-container');
+                var $firstRow = $container.find('.sxs-row:first');
+                
+                if ($firstRow.width() > $container.width()) {
+                    // Add scroll indicator if needed
+                    if ($('.sxs-scroll-indicator').length === 0) {
+                        $('<div class="sxs-scroll-indicator">Scroll to see more candidates →</div>')
+                            .insertBefore($container)
+                            .fadeIn();
+                        
+                        // Hide indicator after scrolling
+                        $container.on('scroll', function() {
+                            $('.sxs-scroll-indicator').fadeOut();
+                        });
+                    }
+                    
+                    // Enable smoother scrolling with mouse wheel
+                    $container.on('wheel', function(e) {
+                        if (e.originalEvent.deltaY === 0) {
+                            e.preventDefault();
+                            $(this).scrollLeft($(this).scrollLeft() + e.originalEvent.deltaX);
+                        }
+                    });
+                }
             }
         },
 
