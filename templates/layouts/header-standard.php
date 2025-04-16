@@ -137,9 +137,9 @@ wp_add_inline_script('slick', "
     flex: 1;
     min-width: 300px;
     max-width: calc(50% - 20px);
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; */
 }
 
 .sxs-split-text h1,
