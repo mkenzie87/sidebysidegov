@@ -132,20 +132,41 @@ function sxs_cc_admin_scripts($hook) {
         
         // Enqueue admin scripts and styles for candidate and comparison post types
         if ('sxs_candidate' === $screen->post_type || 'sxs_comparison' === $screen->post_type || 'sxs_company' === $screen->post_type) {
+            // Admin CSS with filemtime for cache busting
             wp_enqueue_style(
                 'sxs-candidate-admin',
                 SXS_CC_PLUGIN_URL . 'assets/css/admin/admin.css',
-                array(),
-                SXS_CC_VERSION
+                array('jquery-ui-styles'),
+                filemtime(SXS_CC_PLUGIN_DIR . 'assets/css/admin/admin.css')
             );
             
+            // Add company-specific styles
+            wp_enqueue_style(
+                'sxs-company-admin',
+                SXS_CC_PLUGIN_URL . 'assets/css/admin/company.css',
+                array('sxs-candidate-admin'),
+                filemtime(SXS_CC_PLUGIN_DIR . 'assets/css/admin/company.css')
+            );
+            
+            // Main admin JS
             wp_enqueue_script(
                 'sxs-candidate-admin',
-                SXS_CC_PLUGIN_URL . 'assets/js/sxs-candidate-admin.js',
+                SXS_CC_PLUGIN_URL . 'assets/js/admin/index.js',
                 array('jquery', 'jquery-ui-sortable', 'jquery-ui-tooltip'),
-                SXS_CC_VERSION,
+                filemtime(SXS_CC_PLUGIN_DIR . 'assets/js/admin/index.js'),
                 true
             );
+            
+            // Company specific JS for preview and shortcode
+            if ('sxs_comparison' === $screen->post_type || 'sxs_company' === $screen->post_type) {
+                wp_enqueue_script(
+                    'sxs-company-admin',
+                    SXS_CC_PLUGIN_URL . 'assets/js/admin/company.js',
+                    array('jquery', 'sxs-candidate-admin'),
+                    filemtime(SXS_CC_PLUGIN_DIR . 'assets/js/admin/company.js'),
+                    true
+                );
+            }
             
             // Localize script for translations and variables
             wp_localize_script('sxs-candidate-admin', 'sxsAdmin', array(
@@ -165,9 +186,9 @@ function sxs_cc_admin_scripts($hook) {
     if ('sxs_candidate_page_sxs-help-docs' === $hook) {
         wp_enqueue_style(
             'sxs-help-docs',
-            SXS_CC_PLUGIN_URL . 'assets/css/sxs-help-docs.css',
+            SXS_CC_PLUGIN_URL . 'assets/css/admin/help-docs.css',
             array(),
-            SXS_CC_VERSION
+            filemtime(SXS_CC_PLUGIN_DIR . 'assets/css/admin/help-docs.css')
         );
     }
 }

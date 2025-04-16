@@ -353,49 +353,60 @@ class SXS_Comparison_Set {
     public function render_position_brief_scorecard_meta_box($post) {
         wp_nonce_field('sxs_position_brief_scorecard_nonce', 'sxs_position_brief_scorecard_nonce');
         
-        // Get saved values
-        $position_brief_enabled = get_post_meta($post->ID, '_sxs_position_brief_enabled', true);
+        // Get current values
+        $position_brief_enabled = get_post_meta($post->ID, '_sxs_position_brief_enabled', true) === '1';
         $position_brief_url = get_post_meta($post->ID, '_sxs_position_brief_url', true);
-        $scorecard_enabled = get_post_meta($post->ID, '_sxs_scorecard_enabled', true);
+        $scorecard_enabled = get_post_meta($post->ID, '_sxs_scorecard_enabled', true) === '1';
         $scorecard_url = get_post_meta($post->ID, '_sxs_scorecard_url', true);
         $buttons_message = get_post_meta($post->ID, '_sxs_buttons_message', true);
+        
         ?>
         <div class="sxs-meta-row">
-            <h3 class="sxs-section-title"><?php _e('Position Brief Settings', 'sxs-candidate-comparison'); ?></h3>
-            <p>
-                <label>
-                    <input type="checkbox" name="sxs_position_brief_enabled" value="1" <?php checked($position_brief_enabled, '1'); ?>>
-                    <?php _e('Enable Position Brief Button', 'sxs-candidate-comparison'); ?>
-                </label>
+            <h3 class="sxs-section-title"><?php _e('Position Brief & Scorecard Buttons', 'sxs-candidate-comparison'); ?></h3>
+            
+            <p class="description">
+                <?php _e('Enable buttons to link to Position Brief and Scorecard documents.', 'sxs-candidate-comparison'); ?>
             </p>
-            <div class="sxs-position-brief-url" style="margin-left: 20px; margin-top: 10px; <?php echo $position_brief_enabled ? '' : 'display: none;'; ?>">
-                <label for="sxs_position_brief_url">
-                    <?php _e('Position Brief URL', 'sxs-candidate-comparison'); ?>
-                </label>
-                <input type="url" id="sxs_position_brief_url" name="sxs_position_brief_url" 
-                       value="<?php echo esc_url($position_brief_url); ?>" class="widefat">
-                <p class="description"><?php _e('Enter the URL where the position brief can be found.', 'sxs-candidate-comparison'); ?></p>
+            
+            <div class="sxs-field-row">
+                <div>
+                    <label for="sxs_position_brief_enabled">
+                        <input type="checkbox" name="sxs_position_brief_enabled" id="sxs_position_brief_enabled" value="1" <?php checked($position_brief_enabled, true); ?>>
+                        <?php _e('Enable Position Brief Button', 'sxs-candidate-comparison'); ?>
+                    </label>
+                </div>
+                
+                <div class="sxs-position-brief-url" style="margin: 10px 0 20px 24px; <?php echo $position_brief_enabled ? '' : 'display: none;'; ?>">
+                    <label for="sxs_position_brief_url">
+                        <?php _e('Position Brief URL', 'sxs-candidate-comparison'); ?>
+                    </label>
+                    <input type="url" name="sxs_position_brief_url" id="sxs_position_brief_url" 
+                           value="<?php echo esc_attr($position_brief_url); ?>" class="widefat"
+                           placeholder="https://example.com/position-brief.pdf">
+                    <p class="description"><?php _e('URL to the Position Brief document (PDF or webpage).', 'sxs-candidate-comparison'); ?></p>
+                </div>
+            </div>
+            
+            <div class="sxs-field-row">
+                <div>
+                    <label for="sxs_scorecard_enabled">
+                        <input type="checkbox" name="sxs_scorecard_enabled" id="sxs_scorecard_enabled" value="1" <?php checked($scorecard_enabled, true); ?>>
+                        <?php _e('Enable Scorecard Button', 'sxs-candidate-comparison'); ?>
+                    </label>
+                </div>
+                
+                <div class="sxs-scorecard-url" style="margin: 10px 0 20px 24px; <?php echo $scorecard_enabled ? '' : 'display: none;'; ?>">
+                    <label for="sxs_scorecard_url">
+                        <?php _e('Scorecard URL', 'sxs-candidate-comparison'); ?>
+                    </label>
+                    <input type="url" name="sxs_scorecard_url" id="sxs_scorecard_url" 
+                           value="<?php echo esc_attr($scorecard_url); ?>" class="widefat"
+                           placeholder="https://example.com/scorecard.pdf">
+                    <p class="description"><?php _e('URL to the Scorecard document (PDF or webpage).', 'sxs-candidate-comparison'); ?></p>
+                </div>
             </div>
         </div>
-
-        <div class="sxs-meta-row" style="margin-top: 20px;">
-            <h3 class="sxs-section-title"><?php _e('Scorecard Settings', 'sxs-candidate-comparison'); ?></h3>
-            <p>
-                <label>
-                    <input type="checkbox" name="sxs_scorecard_enabled" value="1" <?php checked($scorecard_enabled, '1'); ?>>
-                    <?php _e('Enable Scorecard Button', 'sxs-candidate-comparison'); ?>
-                </label>
-            </p>
-            <div class="sxs-scorecard-url" style="margin-left: 20px; margin-top: 10px; <?php echo $scorecard_enabled ? '' : 'display: none;'; ?>">
-                <label for="sxs_scorecard_url">
-                    <?php _e('Scorecard URL', 'sxs-candidate-comparison'); ?>
-                </label>
-                <input type="url" id="sxs_scorecard_url" name="sxs_scorecard_url" 
-                       value="<?php echo esc_url($scorecard_url); ?>" class="widefat">
-                <p class="description"><?php _e('Enter the URL where the scorecard can be found.', 'sxs-candidate-comparison'); ?></p>
-            </div>
-        </div>
-
+        
         <div class="sxs-meta-row sxs-buttons-message" style="margin-top: 20px; <?php echo ($position_brief_enabled || $scorecard_enabled) ? '' : 'display: none;'; ?>">
             <h3 class="sxs-section-title"><?php _e('Message Before Buttons', 'sxs-candidate-comparison'); ?></h3>
             <p>
@@ -408,28 +419,6 @@ class SXS_Comparison_Set {
                 <p class="description"><?php _e('This message will appear as a heading above the Position Brief and Scorecard buttons.', 'sxs-candidate-comparison'); ?></p>
             </p>
         </div>
-
-        <script>
-        jQuery(document).ready(function($) {
-            // Position Brief toggle
-            $('input[name="sxs_position_brief_enabled"]').on('change', function() {
-                $('.sxs-position-brief-url').toggle(this.checked);
-                toggleButtonsMessage();
-            });
-
-            // Scorecard toggle
-            $('input[name="sxs_scorecard_enabled"]').on('change', function() {
-                $('.sxs-scorecard-url').toggle(this.checked);
-                toggleButtonsMessage();
-            });
-
-            function toggleButtonsMessage() {
-                var briefEnabled = $('input[name="sxs_position_brief_enabled"]').is(':checked');
-                var scorecardEnabled = $('input[name="sxs_scorecard_enabled"]').is(':checked');
-                $('.sxs-buttons-message').toggle(briefEnabled || scorecardEnabled);
-            }
-        });
-        </script>
         <?php
     }
 
@@ -739,86 +728,6 @@ class SXS_Comparison_Set {
                 <?php endif; ?>
             </div>
         </div>
-
-        <style>
-            .sxs-company-selector {
-                margin-top: 20px;
-            }
-            
-            #sxs_selected_company {
-                margin-top: 10px;
-                margin-bottom: 15px;
-            }
-            
-            .sxs-company-preview {
-                margin-top: 15px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                overflow: hidden;
-            }
-            
-            .sxs-company-header {
-                padding: 15px;
-                display: flex;
-                align-items: center;
-                font-weight: bold;
-                font-size: 16px;
-            }
-            
-            .sxs-company-logo {
-                margin-right: 10px;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .sxs-company-logo img {
-                max-width: 100%;
-                max-height: 100%;
-                border-radius: 4px;
-                background: white;
-            }
-        </style>
-        
-        <script>
-        jQuery(document).ready(function($) {
-            // Update preview when company selection changes
-            $('#sxs_selected_company').on('change', function() {
-                var companyId = $(this).val();
-                
-                if (companyId) {
-                    // Show loading message
-                    if (!$('.sxs-company-loading').length) {
-                        $('<p class="sxs-company-loading"><?php _e('Loading company preview...', 'sxs-candidate-comparison'); ?></p>').insertAfter($(this));
-                    }
-                    
-                    // Make AJAX call to get company preview
-                    $.ajax({
-                        url: ajaxurl,
-                        type: 'POST',
-                        data: {
-                            action: 'sxs_get_company_preview',
-                            company_id: companyId,
-                            nonce: '<?php echo wp_create_nonce('sxs_get_company_preview'); ?>'
-                        },
-                        success: function(response) {
-                            $('.sxs-company-loading').remove();
-                            $('.sxs-company-preview').remove();
-                            
-                            if (response.success) {
-                                $(response.data.html).insertAfter('#sxs_selected_company');
-                            }
-                        }
-                    });
-                } else {
-                    // Remove preview if no company is selected
-                    $('.sxs-company-loading, .sxs-company-preview').remove();
-                }
-            });
-        });
-        </script>
         <?php
     }
 
@@ -889,64 +798,6 @@ class SXS_Comparison_Set {
                 </div>
             <?php endif; ?>
         </div>
-        
-        <style>
-            .sxs-shortcode-container {
-                display: flex;
-                margin: 10px 0;
-            }
-            .sxs-shortcode {
-                flex: 1;
-                display: block;
-                padding: 8px 10px;
-                background: #f7f7f7;
-                border: 1px solid #ddd;
-                border-radius: 3px 0 0 3px;
-                font-family: monospace;
-                font-size: 13px;
-            }
-            .sxs-copy-shortcode {
-                border-radius: 0 3px 3px 0 !important;
-                border-left: 0 !important;
-            }
-            .sxs-notice {
-                margin: 15px 0 5px;
-                padding: 10px;
-                border-radius: 3px;
-            }
-            .sxs-notice p {
-                margin: 0;
-            }
-            .sxs-notice-info {
-                background-color: #f0f6fc;
-                border-left: 4px solid #72aee6;
-            }
-            .sxs-notice-warning {
-                background-color: #fcf9e8;
-                border-left: 4px solid #dba617;
-            }
-        </style>
-        
-        <script>
-        jQuery(document).ready(function($) {
-            $('.sxs-copy-shortcode').on('click', function() {
-                var shortcode = $(this).data('clipboard-text');
-                var tempInput = $('<input>');
-                $('body').append(tempInput);
-                tempInput.val(shortcode).select();
-                document.execCommand('copy');
-                tempInput.remove();
-                
-                var $button = $(this);
-                var originalText = $button.text();
-                $button.text('<?php _e('Copied!', 'sxs-candidate-comparison'); ?>');
-                
-                setTimeout(function() {
-                    $button.text(originalText);
-                }, 2000);
-            });
-        });
-        </script>
         <?php
     }
 
@@ -1109,11 +960,36 @@ class SXS_Comparison_Set {
 
     public function enqueue_frontend_scripts() {
         if (is_singular('sxs_comparison')) {
-            wp_enqueue_style(
-                'sxs-comparison-view',
-                plugins_url('assets/css/sxs-comparison-view.css', dirname(__FILE__)),
-                array(),
-                SXS_CC_VERSION
+            // Define components in order of loading
+            $components = array('layout', 'header', 'comparison', 'cells', 'recruiter', 'buttons');
+            
+            // Enqueue each component's CSS
+            foreach ($components as $component) {
+                wp_enqueue_style(
+                    'sxs-' . $component,
+                    plugins_url('assets/css/frontend/components/_' . $component . '.css', dirname(__FILE__)),
+                    array(),
+                    filemtime(plugin_dir_path(dirname(__FILE__)) . 'assets/css/frontend/components/_' . $component . '.css')
+                );
+            }
+            
+            // Include Font Awesome if needed
+            if (!wp_script_is('font-awesome', 'enqueued')) {
+                wp_enqueue_style(
+                    'font-awesome',
+                    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+                    array(),
+                    '5.15.4'
+                );
+            }
+            
+            // Main JavaScript
+            wp_enqueue_script(
+                'sxs-candidate-comparison',
+                plugins_url('assets/js/sxs-candidate-comparison.js', dirname(__FILE__)),
+                array('jquery'),
+                filemtime(plugin_dir_path(dirname(__FILE__)) . 'assets/js/sxs-candidate-comparison.js'),
+                true
             );
         }
     }
