@@ -2,64 +2,45 @@
 .sxs-plugin .sxs-comparison-wrapper {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0;
-    position: relative;
+    padding: 0 20px;
 }
 
-/* Make container full width with horizontal scroll */
+/* Make container full width */
 .sxs-plugin .sxs-comparison-container {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-}
-
-/* Make sure comparison body extends properly for all candidates */
-.sxs-plugin .sxs-comparison-body {
-    width: max-content;
     min-width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 /* Row settings for horizontal scroll */
 .sxs-plugin .sxs-row {
     display: flex;
-    width: max-content;
+    width: 100%;
     min-width: 100%;
     flex-wrap: nowrap;
 }
 
 /* Fixed column widths */
 .sxs-plugin .sxs-col {
-    flex: 0 0 300px;
+    flex: 1;
     min-width: 300px;
-    max-width: 300px;
+    max-width: 350px;
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: normal;
     hyphens: auto;
-    box-sizing: border-box;
-    border-right: 1px solid rgba(0,0,0,0.05);
 }
 
 /* Make the left column sticky for horizontal scrolling */
 .sxs-plugin .sxs-col-header {
     position: sticky;
     left: 0;
-    z-index: 10;
-    box-shadow: 5px 0 8px rgba(0, 0, 0, 0.15);
-    flex: 0 0 200px;
-    min-width: 200px;
-    max-width: 200px;
-    background-color: #F26724;
+    z-index: 2;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Special header styling for the "SIDE BY SIDE" cell */
-.sxs-plugin .sxs-comparison-header .sxs-col-header {
-    background-color: #1C2856;
-    z-index: 11;
-}
-
-/* Enhanced scrollbar styling for better visibility */
+/* Enhance scrollbar styling for better visibility */
 .sxs-plugin .sxs-comparison-container::-webkit-scrollbar {
     height: 8px;
 }
@@ -77,29 +58,6 @@
     background: #555;
 }
 
-/* Horizontal scroll indicator for desktop */
-.sxs-plugin .scroll-indicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 0;
-    color: #666;
-    font-size: 14px;
-    margin: 5px 0;
-    opacity: 0.7;
-}
-
-.sxs-plugin .scroll-indicator i {
-    margin-left: 5px;
-    animation: scroll-pulse 1.5s infinite;
-}
-
-@keyframes scroll-pulse {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
-    100% { transform: translateX(0); }
-}
-
 /* Mobile-specific adjustments */
 @media screen and (max-width: 768px) {
     .sxs-plugin .sxs-col {
@@ -112,80 +70,12 @@
         flex: 0 0 150px;
         min-width: 150px;
         max-width: 150px;
-    }
-    
-    /* Hide the mobile card layout if we're using the horizontal scroll approach */
-    .sxs-plugin .sxs-mobile-cards {
-        display: none;
-    }
-    
-    /* Show the regular comparison table */
-    .sxs-plugin .sxs-comparison-container {
-        display: block;
-    }
-    
-    /* Show scroll indicator on mobile */
-    .sxs-plugin .scroll-indicator {
-        display: flex;
+        background-color: #E86224;
     }
 }
 
-/* Enhanced horizontal scrolling fix for all widths below 1400px */
-@media screen and (max-width: 1400px) {
-    /* Configure containers for proper scrolling */
-    .sxs-plugin .sxs-comparison-wrapper {
-        width: 100%;
-        max-width: 100%;
-        overflow: hidden;
-        position: relative;
-    }
-    
-    /* Setup horizontal scrolling */
-    .sxs-plugin .sxs-comparison-container {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    /* Ensure rows extend fully */
-    .sxs-plugin .sxs-row {
-        display: flex;
-        width: max-content;
-        min-width: 100%;
-        flex-wrap: nowrap;
-    }
-    
-    /* Fixed column widths */
-    .sxs-plugin .sxs-col {
-        flex: 0 0 300px !important;
-        min-width: 300px !important;
-        max-width: 300px !important;
-        word-wrap: break-word;
-        box-sizing: border-box;
-    }
-    
-    /* Make the left orange column sticky */
-    .sxs-plugin .sxs-col-header {
-        position: sticky !important;
-        left: 0 !important;
-        z-index: 10 !important;
-        box-shadow: 3px 0 8px rgba(0,0,0,0.15) !important;
-        flex: 0 0 200px !important;
-        min-width: 200px !important;
-        max-width: 200px !important;
-        background-color: #F26724 !important;
-    }
-    
-    /* Special styling for the SIDE BY SIDE header */
-    .sxs-plugin .sxs-comparison-header .sxs-col-header {
-        background-color: #1C2856 !important;
-        z-index: 11 !important;
-    }
-}
-
-/* Enhanced sticky column behavior */
-.sxs-plugin .sticky-col {
-    position: sticky;
-    left: 0;
-    z-index: 10;
+/* Make sure comparison body extends properly for all candidates */
+.sxs-plugin .sxs-comparison-body {
+    width: max-content;
+    min-width: 100%;
 } 
