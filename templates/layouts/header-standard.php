@@ -300,7 +300,7 @@ section.recruiter-info {
 }
 */
 
-/* Position Buttons */
+/* Position Buttons - DEPRECATED - KEPT FOR REFERENCE
 .position-buttons {
     margin-top: 30px;
     display: flex;
@@ -339,6 +339,7 @@ section.recruiter-info {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+*/
 
 @media screen and (max-width: 768px) {
     .sxs-hero-header {
@@ -384,9 +385,11 @@ section.recruiter-info {
     }
     */
 
+    /* Deprecated position buttons styles
     .position-buttons {
         flex-direction: column;
     }
+    */
 }
 </style>
 
@@ -537,34 +540,11 @@ section.recruiter-info {
         if (isset($args['post_id'])) {
             $header_content = get_post_meta($args['post_id'], '_sxs_header_content', true);
             
-            // Get button settings and URLs
-            $enable_position_brief = get_post_meta($args['post_id'], '_sxs_position_brief_enabled', true);
-            $enable_scorecard = get_post_meta($args['post_id'], '_sxs_scorecard_enabled', true);
-            $position_brief_url = get_post_meta($args['post_id'], '_sxs_position_brief_url', true);
-            $scorecard_url = get_post_meta($args['post_id'], '_sxs_scorecard_url', true);
-            $buttons_message = get_post_meta($args['post_id'], '_sxs_buttons_message', true);
-            
+            // Display the header content (job description, etc.)
             echo wp_kses_post($header_content);
             
-            // Only show buttons section if at least one button is enabled and has a URL
-            if (($enable_position_brief && !empty($position_brief_url)) || ($enable_scorecard && !empty($scorecard_url))) : ?>
-                <?php if (!empty($buttons_message)) : ?>
-                    <h2 class="buttons-heading"><?php echo esc_html($buttons_message); ?></h2>
-                <?php endif; ?>
-                <div class="position-buttons">
-                    <?php if ($enable_position_brief && !empty($position_brief_url)) : ?>
-                        <a href="<?php echo esc_url($position_brief_url); ?>" class="position-button primary" target="_blank">
-                            Position Brief <i class="fas fa-arrow-right"></i>
-                        </a>
-                    <?php endif; ?>
-                    
-                    <?php if ($enable_scorecard && !empty($scorecard_url)) : ?>
-                        <a href="<?php echo esc_url($scorecard_url); ?>" class="position-button secondary" target="_blank">
-                            Scorecard <i class="fas fa-arrow-right"></i>
-                        </a>
-                    <?php endif; ?>
-                </div>
-            <?php endif;
+            // We've removed the duplicate buttons that were here previously
+            // The buttons are now only shown in the recruiter banner section
         }
         ?>
     </div>
