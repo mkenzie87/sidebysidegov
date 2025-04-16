@@ -177,17 +177,7 @@
     width: 100%;
     position: sticky;
     top: 0;
-    z-index: 3;
-}
-
-.sxs-plugin .sxs-comparison-header .sxs-col-header {
-    background: #1C2856;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 600;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: 4; /* Higher z-index to be above other columns */
+    z-index: 9;
 }
 
 .sxs-plugin .sxs-comparison-header .sxs-col {

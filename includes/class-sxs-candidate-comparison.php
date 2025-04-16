@@ -210,11 +210,17 @@ class SXS_Candidate_Comparison {
                 $post_id = $atts['set'];
                 include(plugin_dir_path(dirname(__FILE__)) . 'templates/partials/recruiter-section.php');
                 ?>
+                
+                <!-- Add scroll indicator for horizontal scrolling -->
+                <div class="scroll-indicator">
+                    <?php _e('Scroll to see more candidates', 'sxs-candidate-comparison'); ?> 
+                    <i class="fas fa-arrow-right"></i>
+                </div>
 
                 <div class="sxs-comparison-body">
                     <!-- Candidate Names Header -->
                     <div class="sxs-row sxs-comparison-header">
-                        <div class="sxs-col-header">SIDE BY SIDE</div>
+                        <div class="sxs-col-header sticky-col">SIDE BY SIDE</div>
                         <?php foreach ($candidates as $candidate) : ?>
                             <div class="sxs-col"><?php echo strtoupper(esc_html($candidate->post_title)); ?></div>
                         <?php endforeach; ?>
@@ -222,7 +228,7 @@ class SXS_Candidate_Comparison {
 
                     <!-- Current Company/Title -->
                     <div class="sxs-row">
-                        <div class="sxs-col sxs-col-header"><?php _e('CURRENT COMPANY/<br>TITLE', 'sxs-candidate-comparison'); ?></div>
+                        <div class="sxs-col sxs-col-header sticky-col"><?php _e('CURRENT COMPANY/<br>TITLE', 'sxs-candidate-comparison'); ?></div>
                         <?php foreach ($candidates as $candidate) : ?>
                             <div class="sxs-col">
                                 <?php if ($company_data && !empty($company_data['cover'])) : ?>
@@ -268,7 +274,7 @@ class SXS_Candidate_Comparison {
 
                     <!-- Education -->
                     <div class="sxs-row">
-                        <div class="sxs-col sxs-col-header"><?php _e('DEGREES/<br>CERTIFICATIONS', 'sxs-candidate-comparison'); ?></div>
+                        <div class="sxs-col sxs-col-header sticky-col"><?php _e('DEGREES/<br>CERTIFICATIONS', 'sxs-candidate-comparison'); ?></div>
                         <?php foreach ($candidates as $candidate) : ?>
                             <div class="sxs-col">
                                 <?php
@@ -287,7 +293,7 @@ class SXS_Candidate_Comparison {
 
                     <!-- Experience -->
                     <div class="sxs-row">
-                        <div class="sxs-col sxs-col-header"><?php _e('YEARS OF INDUSTRY<br>EXPERIENCE/ROLE<br>EXPERIENCE', 'sxs-candidate-comparison'); ?></div>
+                        <div class="sxs-col sxs-col-header sticky-col"><?php _e('YEARS OF INDUSTRY<br>EXPERIENCE/ROLE<br>EXPERIENCE', 'sxs-candidate-comparison'); ?></div>
                         <?php foreach ($candidates as $candidate) : ?>
                             <div class="sxs-col">
                                 <?php
@@ -305,7 +311,7 @@ class SXS_Candidate_Comparison {
 
                     <!-- Relevant Experience -->
                     <div class="sxs-row">
-                        <div class="sxs-col sxs-col-header"><?php _e('RELEVANT EXPERIENCE<br>SUMMARY', 'sxs-candidate-comparison'); ?></div>
+                        <div class="sxs-col sxs-col-header sticky-col"><?php _e('RELEVANT EXPERIENCE<br>SUMMARY', 'sxs-candidate-comparison'); ?></div>
                         <?php foreach ($candidates as $candidate) : ?>
                             <div class="sxs-col">
                                 <?php
@@ -324,7 +330,7 @@ class SXS_Candidate_Comparison {
 
                     <!-- Compensation -->
                     <div class="sxs-row">
-                        <div class="sxs-col sxs-col-header"><?php _e('COMPENSATION', 'sxs-candidate-comparison'); ?></div>
+                        <div class="sxs-col sxs-col-header sticky-col"><?php _e('COMPENSATION', 'sxs-candidate-comparison'); ?></div>
                         <?php foreach ($candidates as $candidate) : ?>
                             <div class="sxs-col">
                                 <?php
