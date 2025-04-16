@@ -309,12 +309,12 @@ section.recruiter-info {
 
 .position-button {
     padding: 12px 24px;
-    border-radius: 4px;
+    border-radius: 50px; /* Pill shape */
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
-    transition: all 0.3s ease;
-    display: flex;
+    transition: all 0.2s ease;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
 }
@@ -327,12 +327,13 @@ section.recruiter-info {
 
 .position-button.secondary {
     background: white;
-    color: #14213D;
-    border: none;
+    color: #1C2856;
+    border: 1px solid #F26724; /* Orange border */
 }
 
 .position-button i {
     font-size: 14px;
+    margin-left: 5px;
 }
 
 .position-button:hover {
