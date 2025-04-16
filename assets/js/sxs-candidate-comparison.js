@@ -2,13 +2,14 @@ jQuery(document).ready(function($) {
     'use strict';
 
     // Initialize the comparison functionality
-    var SxSComparison = {
+    var SXSComparison = {
         init: function() {
             this.bindEvents();
             this.initializeTooltips();
             this.setupPrintHandler();
             this.setupResponsiveColumns();
             this.setupSmoothScrolling();
+            this.initializeRecruiterSlider();
         },
 
         bindEvents: function() {
@@ -98,6 +99,55 @@ jQuery(document).ready(function($) {
             }
         },
 
+        // Initialize recruiter slider
+        initializeRecruiterSlider: function() {
+            // Check if we have multiple recruiters
+            if ($('.sxs-recruiter-slider').length) {
+                // If slick is available, initialize it
+                if ($.fn.slick) {
+                    $('.sxs-recruiter-slider').slick({
+                        arrows: false,
+                        dots: false,
+                        infinite: true,
+                        speed: 500,
+                        fade: true,
+                        cssEase: 'linear',
+                        adaptiveHeight: true
+                    });
+                    
+                    // Setup custom prev/next buttons
+                    $('.sxs-prev-slide').on('click', function() {
+                        $('.sxs-recruiter-slider').slick('slickPrev');
+                    });
+                    
+                    $('.sxs-next-slide').on('click', function() {
+                        $('.sxs-recruiter-slider').slick('slickNext');
+                    });
+                } else {
+                    // Simple slider if slick is not available
+                    var $slides = $('.sxs-recruiter-slide');
+                    var currentSlide = 0;
+                    var slideCount = $slides.length;
+                    
+                    // Hide all slides except the first one
+                    $slides.hide().eq(0).show();
+                    
+                    // Setup navigation
+                    $('.sxs-prev-slide').on('click', function() {
+                        $slides.eq(currentSlide).hide();
+                        currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                        $slides.eq(currentSlide).fadeIn();
+                    });
+                    
+                    $('.sxs-next-slide').on('click', function() {
+                        $slides.eq(currentSlide).hide();
+                        currentSlide = (currentSlide + 1) % slideCount;
+                        $slides.eq(currentSlide).fadeIn();
+                    });
+                }
+            }
+        },
+
         // Helper function to format currency
         formatCurrency: function(amount) {
             return new Intl.NumberFormat('en-US', {
@@ -115,8 +165,8 @@ jQuery(document).ready(function($) {
     };
 
     // Initialize the comparison functionality
-    SxSComparison.init();
+    SXSComparison.init();
 
     // Export for use in other scripts if needed
-    window.SxSComparison = SxSComparison;
+    window.SXSComparison = SXSComparison;
 }); 

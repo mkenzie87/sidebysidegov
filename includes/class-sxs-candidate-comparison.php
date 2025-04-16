@@ -26,15 +26,6 @@ class SXS_Candidate_Comparison {
             );
         }
         
-        // Main JavaScript
-        wp_enqueue_script(
-            'sxs-candidate-comparison',
-            SXS_CC_PLUGIN_URL . 'assets/js/sxs-candidate-comparison.js',
-            array('jquery'),
-            filemtime(SXS_CC_PLUGIN_DIR . 'assets/js/sxs-candidate-comparison.js'),
-            true
-        );
-        
         // Include Font Awesome if needed
         if (!wp_script_is('font-awesome', 'enqueued')) {
             wp_enqueue_style(
@@ -44,6 +35,31 @@ class SXS_Candidate_Comparison {
                 '5.15.4'
             );
         }
+        
+        // Enqueue Slick Slider for recruiter section
+        wp_enqueue_style(
+            'slick-slider',
+            'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css',
+            array(),
+            '1.8.1'
+        );
+        
+        wp_enqueue_script(
+            'slick-slider',
+            'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js',
+            array('jquery'),
+            '1.8.1',
+            true
+        );
+        
+        // Main JavaScript
+        wp_enqueue_script(
+            'sxs-candidate-comparison',
+            SXS_CC_PLUGIN_URL . 'assets/js/sxs-candidate-comparison.js',
+            array('jquery', 'slick-slider'),
+            filemtime(SXS_CC_PLUGIN_DIR . 'assets/js/sxs-candidate-comparison.js'),
+            true
+        );
     }
 
     public function enqueue_admin_scripts($hook) {
