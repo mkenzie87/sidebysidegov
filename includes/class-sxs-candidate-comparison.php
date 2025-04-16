@@ -36,6 +36,15 @@ class SXS_Candidate_Comparison {
             );
         }
         
+        // Enqueue jQuery UI Tooltip (needed for tooltips in admin)
+        wp_enqueue_script('jquery-ui-tooltip');
+        wp_enqueue_style(
+            'jquery-ui-styles',
+            'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css',
+            array(),
+            '1.13.2'
+        );
+        
         // Enqueue Slick Slider for recruiter section
         wp_enqueue_style(
             'slick-slider',
@@ -56,7 +65,7 @@ class SXS_Candidate_Comparison {
         wp_enqueue_script(
             'sxs-candidate-comparison',
             SXS_CC_PLUGIN_URL . 'assets/js/sxs-candidate-comparison.js',
-            array('jquery', 'slick-slider'),
+            array('jquery', 'slick-slider', 'jquery-ui-tooltip'),
             filemtime(SXS_CC_PLUGIN_DIR . 'assets/js/sxs-candidate-comparison.js'),
             true
         );

@@ -112,6 +112,15 @@ function sxs_cc_admin_scripts($hook) {
     if ('post.php' === $hook || 'post-new.php' === $hook) {
         $screen = get_current_screen();
         
+        // Enqueue jQuery UI Tooltip (needed for tooltips in admin)
+        wp_enqueue_script('jquery-ui-tooltip');
+        wp_enqueue_style(
+            'jquery-ui-styles',
+            'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css',
+            array(),
+            '1.13.2'
+        );
+        
         if ('sxs_comparison' === $screen->post_type) {
             wp_enqueue_script('jquery-ui-sortable');
         }
@@ -125,7 +134,7 @@ function sxs_cc_admin_scripts($hook) {
         if ('sxs_candidate' === $screen->post_type || 'sxs_comparison' === $screen->post_type || 'sxs_company' === $screen->post_type) {
             wp_enqueue_style(
                 'sxs-candidate-admin',
-                SXS_CC_PLUGIN_URL . 'assets/css/sxs-candidate-admin.css',
+                SXS_CC_PLUGIN_URL . 'assets/css/admin/admin.css',
                 array(),
                 SXS_CC_VERSION
             );
@@ -133,7 +142,7 @@ function sxs_cc_admin_scripts($hook) {
             wp_enqueue_script(
                 'sxs-candidate-admin',
                 SXS_CC_PLUGIN_URL . 'assets/js/sxs-candidate-admin.js',
-                array('jquery', 'jquery-ui-sortable'),
+                array('jquery', 'jquery-ui-sortable', 'jquery-ui-tooltip'),
                 SXS_CC_VERSION,
                 true
             );

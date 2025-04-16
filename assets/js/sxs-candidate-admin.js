@@ -24,16 +24,20 @@
      * Initialize tooltips
      */
     function initTooltips() {
-        $('.sxs-tooltip').hover(
-            function() {
-                var tooltip = $(this).find('.sxs-tooltip-text');
-                tooltip.fadeIn(200);
-            },
-            function() {
-                var tooltip = $(this).find('.sxs-tooltip-text');
-                tooltip.fadeOut(200);
-            }
-        );
+        $('.sxs-tooltip-icon').each(function() {
+            $(this).closest('.sxs-tooltip').tooltip({
+                items: ".sxs-tooltip",
+                content: function() {
+                    return $(this).find('.sxs-tooltip-text').html();
+                },
+                position: {
+                    my: "left+10 center",
+                    at: "right center"
+                },
+                hide: 300,
+                show: 300
+            });
+        });
     }
 
     /**
@@ -41,30 +45,31 @@
      */
     function initCandidateForm() {
         // Add field buttons for education
-        $('.add-education-field').on('click', function() {
-            var field = '<div class="education-field">' +
-                       '<input type="text" name="sxs_education[]" value="" class="widefat" placeholder="' + 
-                       'e.g., MBA from Harvard University, CPA certification' + '">' +
-                       '<button type="button" class="button remove-field">' + sxsAdmin.i18n.remove + '</button>' +
-                       '</div>';
-            $('#sxs_education_fields').append(field);
+        $('.add-education-field').on('click', function(e) {
+            e.preventDefault();
+            
+            var $template = $('<div class="education-field"></div>');
+            $template.append('<input type="text" name="sxs_education[]" value="" class="widefat" placeholder="e.g., MBA from Harvard University, CPA certification">');
+            $template.append('<button type="button" class="button remove-field">Remove</button>');
+            
+            $('#sxs_education_fields').append($template);
         });
 
         // Add field buttons for experience
-        $('.add-experience-field').on('click', function() {
-            var field = '<div class="experience-field">' +
-                       '<textarea name="sxs_relevant_experience[]" class="widefat" rows="2" placeholder="' + 
-                       'e.g., Led a team of 10 developers to deliver a major project under budget' + '"></textarea>' +
-                       '<button type="button" class="button remove-field">' + sxsAdmin.i18n.remove + '</button>' +
-                       '</div>';
-            $('#sxs_relevant_experience_fields').append(field);
+        $('.add-experience-field').on('click', function(e) {
+            e.preventDefault();
+            
+            var $template = $('<div class="experience-field"></div>');
+            $template.append('<textarea name="sxs_relevant_experience[]" class="widefat" rows="2" placeholder="e.g., Led a team of 10 developers to deliver a major project under budget"></textarea>');
+            $template.append('<button type="button" class="button remove-field">Remove</button>');
+            
+            $('#sxs_relevant_experience_fields').append($template);
         });
 
         // Remove field buttons
-        $(document).on('click', '.remove-field', function() {
-            $(this).parent().fadeOut(300, function() {
-                $(this).remove();
-            });
+        $(document).on('click', '.remove-field', function(e) {
+            e.preventDefault();
+            $(this).closest('div').remove();
         });
 
         // Form validation
