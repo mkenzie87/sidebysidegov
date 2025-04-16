@@ -30,4 +30,62 @@
     overflow-wrap: break-word;
     word-break: normal;
     hyphens: auto;
+}
+
+/* Make the left column sticky for horizontal scrolling */
+.sxs-plugin .sxs-col-header {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile fixes for proper horizontal scrolling */
+@media screen and (max-width: 768px) {
+    .sxs-plugin .sxs-comparison-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+    
+    .sxs-plugin .sxs-comparison-body {
+        min-width: 100%;
+        width: max-content;
+    }
+    
+    .sxs-plugin .sxs-row {
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+    
+    .sxs-plugin .sxs-col {
+        min-width: 280px;
+        flex: 0 0 280px;
+        word-break: break-word;
+    }
+    
+    .sxs-plugin .sxs-col-header {
+        min-width: 150px;
+        flex: 0 0 150px;
+        background-color: #E86224;
+    }
+    
+    /* Enhance scrollbar styling for better visibility */
+    .sxs-plugin .sxs-comparison-wrapper::-webkit-scrollbar {
+        height: 8px;
+    }
+    
+    .sxs-plugin .sxs-comparison-wrapper::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    .sxs-plugin .sxs-comparison-wrapper::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+    
+    .sxs-plugin .sxs-comparison-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 } 

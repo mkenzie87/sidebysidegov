@@ -389,6 +389,35 @@
         line-height: 1.5;
         color: #333;
     }
+
+    /* Ensure comparison header is properly aligned */
+    .sxs-plugin .sxs-comparison-header {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        background-color: #1C2856;
+    }
+    
+    /* Remove unnecessary padding */
+    .sxs-plugin .sxs-comparison-body {
+        padding: 0;
+    }
+    
+    /* Maintain consistent width for all cells */
+    .sxs-plugin .sxs-comparison-header .sxs-col,
+    .sxs-plugin .sxs-row .sxs-col {
+        min-width: 280px;
+        max-width: 280px;
+        box-sizing: border-box;
+    }
+    
+    /* Ensure the header column "SIDE BY SIDE" stays above other columns */
+    .sxs-plugin .sxs-comparison-header .sxs-col-header {
+        z-index: 4;
+        background-color: #1C2856;
+        min-width: 150px;
+        max-width: 150px;
+    }
 }
 
 /* Desktop-only styles */
