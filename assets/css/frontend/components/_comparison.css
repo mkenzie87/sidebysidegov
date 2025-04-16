@@ -283,107 +283,121 @@
 
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
-    .sxs-plugin .sxs-comparison-body {
-        padding: 0;
-        width: 100%;
-    }
-
-    .sxs-plugin .sxs-comparison-wrapper {
+    /* Main wrapper */
+    .sxs-comparison-wrapper {
+        margin: 0;
         padding: 0;
         width: 100%;
         overflow: hidden;
+        position: relative;
     }
 
-    .sxs-plugin .sxs-comparison-container {
+    /* Container with horizontal scroll */
+    .sxs-comparison-container {
         margin: 0;
-        padding: 0;
+        padding-left: 160px; /* Space for fixed column */
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        width: 100%;
+        box-sizing: border-box;
     }
 
-    .sxs-plugin .scroll-indicator {
+    /* Row structure */
+    .sxs-comparison-container .sxs-row {
+        display: flex;
+        min-width: max-content;
+        width: auto;
+        position: relative;
+    }
+
+    /* Scrollable columns */
+    .sxs-comparison-container .sxs-col {
+        min-width: 280px;
+        width: 280px;
+        flex: 0 0 280px;
+        padding: 15px 20px;
+    }
+
+    /* FIXED LEFT COLUMN STYLING */
+    /* Remove any conflicting styles first */
+    .sxs-comparison-container .sxs-col-header {
+        position: static;
+        width: auto;
+        min-width: auto;
+        box-shadow: none;
+    }
+
+    /* Now apply fixed positioning to sticky column */
+    .sticky-left-col {
+        position: absolute !important;
+        left: 0;
+        top: auto; /* Let it position naturally in the row */
+        width: 160px;
+        min-width: 160px;
+        background-color: #F26724;
+        color: #fff;
+        z-index: 10;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        padding: 15px 20px;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: flex-start;
         display: flex;
     }
-
-    .sxs-plugin .sxs-col {
-        flex: 0 0 300px;
-        width: 300px;
-        font-size: 14px;
-        padding: 15px;
-    }
     
-    .sxs-plugin .sxs-col-header {
-        width: 150px;
-        flex: 0 0 150px;
-    }
-}
-
-/* Remove old candidate names styles */
-.sxs-plugin .sxs-candidate-names {
-    display: none;
-}
-
-/* Content Styles */
-.sxs-plugin .sxs-col p {
-    margin: 0 0 10px 0;
-    line-height: 1.4;
-}
-
-.sxs-plugin .sxs-col p:last-child {
-    margin-bottom: 0;
-}
-
-/* List Styles */
-.sxs-plugin .sxs-col ul {
-    margin: 0;
-    padding: 0 0 0 20px;
-    list-style-type: disc;
-}
-
-.sxs-plugin .sxs-col ul li {
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-.sxs-plugin .sxs-col ul li:last-child {
-    margin-bottom: 0;
-}
-
-/* Current Company/Title */
-.sxs-plugin .sxs-col .company {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.sxs-plugin .sxs-col .title {
-    color: #666;
-    font-size: 14px;
-}
-
-/* Mobile Styles */
-@media screen and (max-width: 768px) {
-    .sxs-plugin .sxs-comparison-wrapper {
-        margin: 0;
-        padding: 0 15px;
+    /* Style for navy header */
+    .sxs-comparison-header .sticky-left-col {
+        background-color: #1C2856;
+        z-index: 11;
     }
 
-    .sxs-plugin .sxs-comparison-body {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .sxs-plugin .sxs-row {
-        min-width: max-content;
-    }
-
-    .sxs-plugin .sxs-col {
-        min-width: 280px;
-    }
-
-    .sxs-plugin .sxs-col-header {
+    /* Clear any plugin-specific overrides */
+    .sxs-plugin .sxs-col-header,
+    .sxs-plugin .sticky-left-col {
         min-width: 160px;
         width: 160px;
     }
+
+    /* Ensure rows don't collapse */
+    .sxs-comparison-container .sxs-row {
+        min-height: 60px;
+    }
+
+    /* Hide any scroll indicators */
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+/* Remove any other mobile styles that might conflict */
+.sxs-plugin .sxs-comparison-wrapper,
+.sxs-plugin .sxs-comparison-body,
+.sxs-plugin .sxs-comparison-container {
+    /* Reset any conflicting styles */
+}
+
+/* Scrollbar Styles */
+.sxs-comparison-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) transparent;
+}
+
+.sxs-comparison-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+/* Base styles for sticky column */
+.sticky-left-col {
+    color: #fff;
 }
 
 /* Comparison Header Row */
@@ -466,93 +480,39 @@
     font-size: 14px;
 }
 
-/* Mobile Styles */
-@media screen and (max-width: 768px) {
-    .sxs-comparison-wrapper {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        position: relative; /* Create positioning context */
-        overflow: hidden;
-    }
-
-    .sxs-comparison-container {
-        margin: 0;
-        padding-left: 160px; /* Add padding equal to sticky column width */
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* Base styles for all scrollable columns */
-    .sxs-comparison-container .sxs-col {
-        min-width: 280px;
-        width: 280px;
-        flex: 0 0 280px;
-        padding: 15px 20px;
-    }
-
-    /* Sticky left column */
-    .sticky-left-col {
-        position: absolute !important; /* Change to absolute positioning */
-        left: 0;
-        width: 160px;
-        min-width: 160px;
-        background: #F26724;
-        z-index: 10;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    }
-
-    /* Style for navy header */
-    .sxs-comparison-header .sticky-left-col {
-        background: #1C2856;
-        z-index: 11;
-    }
-
-    /* Ensure rows extend full width and maintain structure */
-    .sxs-comparison-container .sxs-row {
-        display: flex;
-        min-width: max-content;
-        width: auto;
-        position: relative;
-    }
-
-    /* Ensure proper vertical alignment of sticky headers */
-    .sxs-comparison-container .sxs-row {
-        min-height: 60px; /* Set a minimum height for rows */
-    }
-
-    /* Ensure sticky headers maintain proper height */
-    .sticky-left-col {
-        height: 100%; /* Match parent row height */
-        display: flex;
-        align-items: center;
-        padding: 15px 20px;
-        box-sizing: border-box;
-    }
+/* Content Styles */
+.sxs-comparison-container .sxs-col p {
+    margin: 0 0 10px 0;
+    line-height: 1.4;
 }
 
-/* Base styles for sticky column */
-.sticky-left-col {
-    color: #fff;
+.sxs-comparison-container .sxs-col p:last-child {
+    margin-bottom: 0;
 }
 
-/* Scrollbar Styles */
-.sxs-comparison-container {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0,0,0,0.2) transparent;
+/* List Styles */
+.sxs-comparison-container .sxs-col ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style-type: disc;
 }
 
-.sxs-comparison-container::-webkit-scrollbar {
-    height: 6px;
+.sxs-comparison-container .sxs-col ul li {
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
-.sxs-comparison-container::-webkit-scrollbar-track {
-    background: transparent;
+.sxs-comparison-container .sxs-col ul li:last-child {
+    margin-bottom: 0;
 }
 
-.sxs-comparison-container::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.2);
-    border-radius: 3px;
+/* Current Company/Title */
+.sxs-comparison-container .sxs-col .company {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.sxs-comparison-container .sxs-col .title {
+    color: #666;
+    font-size: 14px;
 } 

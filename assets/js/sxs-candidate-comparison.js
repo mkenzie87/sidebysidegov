@@ -86,4 +86,28 @@ jQuery(document).ready(function($) {
 
     // Export for use in other scripts if needed
     window.SxSComparison = SxSComparison;
+
+    // Fix the heights of sticky columns to match their rows
+    function fixStickyColumnHeights() {
+        // Only run on mobile
+        if (window.innerWidth <= 768) {
+            $('.sxs-comparison-container .sxs-row').each(function() {
+                var rowHeight = $(this).outerHeight();
+                var stickyCol = $(this).find('.sticky-left-col');
+                
+                if (stickyCol.length) {
+                    stickyCol.css('height', rowHeight + 'px');
+                }
+            });
+        }
+    }
+
+    // Run on page load
+    fixStickyColumnHeights();
+    
+    // Run on window resize
+    $(window).on('resize', fixStickyColumnHeights);
+    
+    // Run after any images load (which might change row heights)
+    $(window).on('load', fixStickyColumnHeights);
 }); 
