@@ -1,0 +1,98 @@
+/**
+ * Specific fixes for horizontal scrolling on the comparison table
+ * These rules have high specificity and use !important to override conflicting styles
+ */
+
+/* First, ensure container structure is correct */
+.sxs-plugin {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+.sxs-plugin .sxs-comparison-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Create proper scrolling container */
+.sxs-plugin .sxs-comparison-body {
+    width: max-content !important;
+    min-width: 100% !important;
+    overflow: visible !important;
+    border: 1px solid #E5E5E5 !important;
+}
+
+/* Ensure rows extend properly */
+.sxs-plugin .sxs-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    min-width: 100% !important;
+}
+
+/* Fix column widths - no flexibility */
+.sxs-plugin .sxs-col {
+    flex: 0 0 300px !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+    border-right: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+/* Make the left columns sticky */
+.sxs-plugin .sxs-col-header,
+.sxs-plugin .sticky-col {
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 10 !important;
+    box-shadow: 5px 0 8px rgba(0,0,0,0.15) !important;
+    flex: 0 0 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+    background-color: #F26724 !important;
+}
+
+/* Special styling for the first header cell */
+.sxs-plugin .sxs-comparison-header .sxs-col-header {
+    background-color: #1C2856 !important;
+    z-index: 11 !important;
+}
+
+/* Enable scroll on container */
+.sxs-plugin .sxs-comparison-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .sxs-plugin .sxs-col {
+        flex: 0 0 280px !important;
+        min-width: 280px !important;
+        max-width: 280px !important;
+    }
+    
+    .sxs-plugin .sxs-col-header,
+    .sxs-plugin .sticky-col {
+        flex: 0 0 150px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
+    }
+    
+    /* Force hide mobile card layout */
+    .sxs-plugin .sxs-mobile-cards {
+        display: none !important;
+    }
+    
+    /* Force show the table layout */
+    .sxs-plugin .sxs-comparison-container {
+        display: block !important;
+    }
+} 

@@ -69,33 +69,40 @@ jQuery(document).ready(function($) {
 
         // Add smooth scrolling for horizontal scroll
         setupSmoothScrolling: function() {
-            // Only apply this on desktop
-            if ($(window).width() > 768) {
-                // Check if we have more candidates than can fit in viewport
-                var $container = $('.sxs-comparison-container');
-                var $firstRow = $container.find('.sxs-row:first');
+            // For all viewport widths, not just mobile
+            var $container = $('.sxs-comparison-container');
+            var $body = $('.sxs-comparison-body');
+            var $rows = $body.find('.sxs-row');
+            
+            // Check if we need horizontal scrolling
+            if ($body.width() > $container.width()) {
+                // Make sure scroll indicator is visible
+                $('.scroll-indicator').show();
                 
-                if ($firstRow.width() > $container.width()) {
-                    // Add scroll indicator if needed
-                    if ($('.sxs-scroll-indicator').length === 0) {
-                        $('<div class="sxs-scroll-indicator">Scroll to see more candidates →</div>')
-                            .insertBefore($container)
-                            .fadeIn();
-                        
-                        // Hide indicator after scrolling
-                        $container.on('scroll', function() {
-                            $('.sxs-scroll-indicator').fadeOut();
-                        });
-                    }
-                    
-                    // Enable smoother scrolling with mouse wheel
-                    $container.on('wheel', function(e) {
-                        if (e.originalEvent.deltaY === 0) {
-                            e.preventDefault();
-                            $(this).scrollLeft($(this).scrollLeft() + e.originalEvent.deltaX);
-                        }
+                // Ensure sticky columns work correctly
+                $rows.find('.sticky-col, .sxs-col-header').each(function() {
+                    $(this).css({
+                        'position': 'sticky',
+                        'left': '0',
+                        'z-index': '10'
                     });
-                }
+                });
+                
+                // Make sure "SIDE BY SIDE" header has higher z-index
+                $('.sxs-comparison-header .sxs-col-header').css('z-index', '11');
+                
+                // Enable smoother scrolling with mouse wheel
+                $container.on('wheel', function(e) {
+                    if (e.originalEvent.deltaY === 0) {
+                        e.preventDefault();
+                        $(this).scrollLeft($(this).scrollLeft() + e.originalEvent.deltaX);
+                    }
+                });
+                
+                // Hide indicator after scrolling
+                $container.on('scroll', function() {
+                    $('.scroll-indicator').fadeOut();
+                });
             }
         },
 

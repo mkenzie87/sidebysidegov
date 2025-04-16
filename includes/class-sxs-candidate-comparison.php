@@ -26,6 +26,14 @@ class SXS_Candidate_Comparison {
             );
         }
         
+        // Load fix-scrolling.css last to override all other styles
+        wp_enqueue_style(
+            'sxs-fix-scrolling',
+            SXS_CC_PLUGIN_URL . 'assets/css/frontend/components/_fix-scrolling.css',
+            array('sxs-layout', 'sxs-comparison'), // Make it dependent on layout and comparison to load after them
+            filemtime(SXS_CC_PLUGIN_DIR . 'assets/css/frontend/components/_fix-scrolling.css')
+        );
+        
         // Include Font Awesome if needed
         if (!wp_script_is('font-awesome', 'enqueued')) {
             wp_enqueue_style(
