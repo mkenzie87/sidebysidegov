@@ -61,6 +61,59 @@
     background: #555;
 }
 
+/* Enhanced horizontal scrolling fix for all widths below 1400px */
+@media screen and (max-width: 1400px) {
+    /* Configure containers for proper scrolling */
+    .sxs-plugin .sxs-comparison-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    /* Setup horizontal scrolling */
+    .sxs-plugin .sxs-comparison-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Ensure rows extend fully */
+    .sxs-plugin .sxs-row {
+        display: flex;
+        width: max-content;
+        min-width: 100%;
+        flex-wrap: nowrap;
+    }
+    
+    /* Fixed column widths */
+    .sxs-plugin .sxs-col {
+        flex: 0 0 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        word-wrap: break-word;
+        box-sizing: border-box;
+    }
+    
+    /* Make the left orange column sticky */
+    .sxs-plugin .sxs-col-header {
+        position: sticky !important;
+        left: 0 !important;
+        z-index: 10 !important;
+        box-shadow: 3px 0 8px rgba(0,0,0,0.15) !important;
+        flex: 0 0 200px !important;
+        min-width: 200px !important;
+        max-width: 200px !important;
+        background-color: #F26724 !important;
+    }
+    
+    /* Special styling for the SIDE BY SIDE header */
+    .sxs-plugin .sxs-comparison-header .sxs-col-header {
+        background-color: #1C2856 !important;
+        z-index: 11 !important;
+    }
+}
+
 /* Mobile-specific adjustments */
 @media screen and (max-width: 768px) {
     .sxs-plugin .sxs-col {
