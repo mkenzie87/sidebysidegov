@@ -281,90 +281,99 @@
     100% { transform: translateX(0); }
 }
 
-/* Mobile Styles */
+/* Mobile Styles - NEW CARD APPROACH */
 @media screen and (max-width: 768px) {
-    /* Main wrapper */
-    .sxs-comparison-wrapper {
+    /* Hide the desktop comparison table */
+    .sxs-comparison-container {
+        display: none;
+    }
+
+    /* Create a card-based layout for mobile */
+    .sxs-mobile-cards {
+        display: block;
         margin: 0;
         padding: 0;
         width: 100%;
+    }
+
+    /* Individual candidate card */
+    .sxs-candidate-card {
+        margin: 0 0 20px 0;
+        padding: 0;
+        border-radius: 8px;
         overflow: hidden;
-        position: relative;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        background: #fff;
     }
 
-    /* Container with horizontal scroll */
-    .sxs-comparison-container {
-        margin: 0;
-        padding-left: 160px; /* Space for fixed column */
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* Row structure */
-    .sxs-comparison-container .sxs-row {
-        display: flex;
-        min-width: max-content;
-        width: auto;
-        position: relative;
-    }
-
-    /* Scrollable columns */
-    .sxs-comparison-container .sxs-col {
-        min-width: 280px;
-        width: 280px;
-        flex: 0 0 280px;
-        padding: 15px 20px;
-    }
-
-    /* FIXED LEFT COLUMN STYLING */
-    /* Remove any conflicting styles first */
-    .sxs-comparison-container .sxs-col-header {
-        position: static;
-        width: auto;
-        min-width: auto;
-        box-shadow: none;
-    }
-
-    /* Now apply fixed positioning to sticky column */
-    .sticky-left-col {
-        position: absolute !important;
-        left: 0;
-        top: auto; /* Let it position naturally in the row */
-        width: 160px;
-        min-width: 160px;
-        background-color: #F26724;
+    /* Candidate header */
+    .sxs-card-header {
+        background: #1C2856;
         color: #fff;
-        z-index: 10;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        padding: 15px 20px;
-        box-sizing: border-box;
-        align-items: center;
-        justify-content: flex-start;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    /* Row in card */
+    .sxs-card-row {
         display: flex;
-    }
-    
-    /* Style for navy header */
-    .sxs-comparison-header .sticky-left-col {
-        background-color: #1C2856;
-        z-index: 11;
+        border-bottom: 1px solid #E5E5E5;
+        flex-wrap: wrap;
     }
 
-    /* Clear any plugin-specific overrides */
-    .sxs-plugin .sxs-col-header,
-    .sxs-plugin .sticky-left-col {
-        min-width: 160px;
-        width: 160px;
+    .sxs-card-row:last-child {
+        border-bottom: none;
     }
 
-    /* Ensure rows don't collapse */
-    .sxs-comparison-container .sxs-row {
-        min-height: 60px;
+    /* Label column */
+    .sxs-card-label {
+        flex: 0 0 100%;
+        background: #F26724;
+        color: #fff;
+        padding: 10px 15px;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
     }
 
-    /* Hide any scroll indicators */
-    .scroll-indicator {
+    /* Content column */
+    .sxs-card-content {
+        flex: 0 0 100%;
+        padding: 15px;
+    }
+
+    /* Specific content styling */
+    .sxs-card-content .company {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .sxs-card-content .title {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .sxs-card-content ul {
+        margin: 0;
+        padding: 0 0 0 20px;
+        list-style-type: disc;
+    }
+
+    .sxs-card-content ul li {
+        margin-bottom: 8px;
+        line-height: 1.4;
+    }
+
+    .sxs-card-content ul li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Desktop-only styles */
+@media screen and (min-width: 769px) {
+    .sxs-mobile-cards {
         display: none;
     }
 }
@@ -441,43 +450,6 @@
 
 .sxs-comparison-container .sxs-col:last-child {
     border-right: none;
-}
-
-/* Content Styles */
-.sxs-comparison-container .sxs-col p {
-    margin: 0 0 10px 0;
-    line-height: 1.4;
-}
-
-.sxs-comparison-container .sxs-col p:last-child {
-    margin-bottom: 0;
-}
-
-/* List Styles */
-.sxs-comparison-container .sxs-col ul {
-    margin: 0;
-    padding: 0 0 0 20px;
-    list-style-type: disc;
-}
-
-.sxs-comparison-container .sxs-col ul li {
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-.sxs-comparison-container .sxs-col ul li:last-child {
-    margin-bottom: 0;
-}
-
-/* Current Company/Title */
-.sxs-comparison-container .sxs-col .company {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.sxs-comparison-container .sxs-col .title {
-    color: #666;
-    font-size: 14px;
 }
 
 /* Content Styles */
