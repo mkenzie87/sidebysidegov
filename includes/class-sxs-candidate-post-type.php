@@ -227,4 +227,90 @@ class SXS_Candidate_Post_Type {
             <?php
         }
     }
+
+    /**
+     * Define the columns for candidates list
+     */
+    public function set_columns($columns) {
+        $columns = array(
+            'cb'              => '<input type="checkbox" />',
+            'title'           => __('Name', 'sxs-candidate-comparison'),
+            'company'         => __('Current Company', 'sxs-candidate-comparison'),
+            'title_position'  => __('Title', 'sxs-candidate-comparison'),
+            'experience'      => __('Experience', 'sxs-candidate-comparison'),
+            'compensation'    => __('Compensation', 'sxs-candidate-comparison'),
+            'categories'      => __('Categories', 'sxs-candidate-comparison'),
+            'date'            => __('Date', 'sxs-candidate-comparison')
+        );
+        
+        return $columns;
+    }
+    
+    /**
+     * Display content for each column
+     */
+    public function column_content($column, $post_id) {
+        switch ($column) {
+            case 'company':
+                echo esc_html(get_post_meta($post_id, '_sxs_current_company', true));
+                break;
+                
+            case 'title_position':
+                echo esc_html(get_post_meta($post_id, '_sxs_current_title', true));
+                break;
+                
+            case 'experience':
+                $industry_exp = get_post_meta($post_id, '_sxs_industry_experience', true);
+                $role_exp = get_post_meta($post_id, '_sxs_role_experience', true);
+                
+                if ($industry_exp) {
+                    echo esc_html($industry_exp) . ' ' . __('years industry', 'sxs-candidate-comparison');
+                }
+                
+                if ($industry_exp && $role_exp) {
+                    echo ' / ';
+                }
+                
+                if ($role_exp) {
+                    echo esc_html($role_exp) . ' ' . __('years role', 'sxs-candidate-comparison');
+                }
+                break;
+                
+            case 'compensation':
+                $current_base = get_post_meta($post_id, '_sxs_current_base', true);
+                $current_bonus = get_post_meta($post_id, '_sxs_current_bonus', true);
+                
+                if ($current_base) {
+                    echo esc_html($current_base);
+                    
+                    if ($current_bonus) {
+                        echo ' + ' . esc_html($current_bonus);
+                    }
+                }
+                break;
+                
+            case 'categories':
+                $terms = get_the_terms($post_id, 'sxs_candidate_category');
+                if (!empty($terms) && !is_wp_error($terms)) {
+                    $term_names = array();
+                    foreach ($terms as $term) {
+                        $term_names[] = $term->name;
+                    }
+                    echo esc_html(implode(', ', $term_names));
+                }
+                break;
+        }
+    }
+    
+    /**
+     * Define sortable columns
+     */
+    public function sortable_columns($columns) {
+        $columns['company'] = 'company';
+        $columns['title_position'] = 'title_position';
+        $columns['experience'] = 'experience';
+        $columns['compensation'] = 'compensation';
+        
+        return $columns;
+    }
 } 
