@@ -123,7 +123,7 @@ wp_add_inline_script('slick', "
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
 }
 
