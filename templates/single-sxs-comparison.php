@@ -218,7 +218,7 @@ while (have_posts()) :
                                         <?php 
                                         $industry_exp = get_post_meta($candidate->ID, '_sxs_industry_experience', true);
                                         $role_exp = get_post_meta($candidate->ID, '_sxs_role_experience', true);
-                                        echo esc_html($industry_exp) . ' years\' industry experience; ' . esc_html($role_exp) . ' years\' specific role experience';
+                                        echo esc_html($industry_exp) . ' years\' industry experience<br>' . esc_html($role_exp) . ' years\' specific role experience';
                                         ?>
                                     </div>
                                 </div>
@@ -314,7 +314,7 @@ while (have_posts()) :
                                         <?php 
                                         $industry_exp = get_post_meta($candidate->ID, '_sxs_industry_experience', true);
                                         $role_exp = get_post_meta($candidate->ID, '_sxs_role_experience', true);
-                                        echo esc_html($industry_exp) . ' years\' industry experience; ' . esc_html($role_exp) . ' years\' specific role experience';
+                                        echo esc_html($industry_exp) . ' years\' industry experience<br>' . esc_html($role_exp) . ' years\' specific role experience';
                                         ?>
                                     </div>
                                 </div>
