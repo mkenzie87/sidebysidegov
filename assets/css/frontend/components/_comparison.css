@@ -41,6 +41,14 @@
     border-left: none;
 }
 
+/* Sticky Left Column */
+.sticky-left-col {
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 10 !important;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1) !important;
+}
+
 /* Header Column */
 .sxs-comparison-container .sxs-col-header,
 .sxs-comparison-table .sticky-left-col {
@@ -55,9 +63,6 @@
     text-align: left;
     display: flex;
     align-items: center;
-    position: sticky;
-    left: 0;
-    z-index: 10;
 }
 
 /* Sticky Header */
@@ -302,6 +307,12 @@
 /* Base styles for sticky column */
 .sticky-left-col {
     color: #fff;
+    background: #F26724 !important;
+}
+
+/* Header sticky column */
+.sxs-comparison-header .sticky-left-col {
+    background: #1C2856 !important;
 }
 
 /* Comparison Header Row */
