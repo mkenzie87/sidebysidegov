@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) {
 
             <!-- Current Company/Title Row -->
             <div class="sxs-row">
-                <div class="sxs-col sxs-col-header">CURRENT COMPANY/ TITLE</div>
+                <div class="sxs-col sxs-col-header">CURRENT COMPANY/<br>TITLE</div>
                 <?php foreach ($candidates as $candidate) : ?>
                     <div class="sxs-col">
                         <div class="sxs-company"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true)); ?></div>
@@ -37,12 +37,12 @@ if (!defined('ABSPATH')) {
 
             <!-- Degrees/Certifications Row -->
             <div class="sxs-row">
-                <div class="sxs-col sxs-col-header">DEGREES/ CERTIFICATIONS</div>
+                <div class="sxs-col sxs-col-header">DEGREES/<br>CERTIFICATIONS</div>
                 <?php foreach ($candidates as $candidate) : ?>
                     <div class="sxs-col">
                         <?php 
                         $education = get_post_meta($candidate->ID, '_sxs_education', true);
-                        if (is_array($education)) {
+                        if (is_array($education) && !empty($education)) {
                             echo '<ul class="sxs-list">';
                             foreach ($education as $degree) {
                                 echo '<li>' . esc_html($degree) . '</li>';
@@ -58,7 +58,7 @@ if (!defined('ABSPATH')) {
 
             <!-- Years Experience Row -->
             <div class="sxs-row">
-                <div class="sxs-col sxs-col-header">YEARS OF INDUSTRY EXPERIENCE/ROLE EXPERIENCE</div>
+                <div class="sxs-col sxs-col-header">YEARS OF INDUSTRY<br>EXPERIENCE/ROLE<br>EXPERIENCE</div>
                 <?php foreach ($candidates as $candidate) : ?>
                     <div class="sxs-col">
                         <?php 
@@ -78,12 +78,12 @@ if (!defined('ABSPATH')) {
 
             <!-- Relevant Experience Row -->
             <div class="sxs-row">
-                <div class="sxs-col sxs-col-header">RELEVANT EXPERIENCE SUMMARY</div>
+                <div class="sxs-col sxs-col-header">RELEVANT EXPERIENCE<br>SUMMARY</div>
                 <?php foreach ($candidates as $candidate) : ?>
                     <div class="sxs-col">
                         <?php 
                         $experience = get_post_meta($candidate->ID, '_sxs_relevant_experience', true);
-                        if (is_array($experience)) {
+                        if (is_array($experience) && !empty($experience)) {
                             echo '<ul class="sxs-list">';
                             foreach ($experience as $item) {
                                 echo '<li>' . esc_html($item) . '</li>';

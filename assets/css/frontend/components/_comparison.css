@@ -7,7 +7,7 @@
 .sxs-comparison-wrapper {
     max-width: 100%;
     margin: 30px auto;
-    padding: 0;
+    padding: 20px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
@@ -18,6 +18,8 @@
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     background: #fff;
+    padding: 0;
+    margin-bottom: 30px;
 }
 
 /* Scroll indicator */
@@ -48,6 +50,7 @@
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    position: relative;
 }
 
 /* Row styles */
@@ -56,6 +59,7 @@
     width: max-content;
     min-width: 100%;
     border-bottom: 1px solid #e5e5e5;
+    position: relative;
 }
 
 .sxs-row:last-child {
@@ -65,6 +69,7 @@
 /* Header row */
 .sxs-header-row {
     background: #1C2856;
+    position: relative;
 }
 
 .sxs-header-row .sxs-col {
@@ -92,25 +97,26 @@
 
 /* Header column */
 .sxs-col-header {
-    position: sticky;
-    left: 0;
+    position: sticky !important;
+    left: 0 !important;
     z-index: 10;
     width: 200px;
     min-width: 200px;
     max-width: 200px;
-    background: #F26724;
+    background: #F26724 !important;
     color: #fff;
     font-weight: 600;
     font-size: 14px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Header row's first column (corner) */
 .sxs-header-row .sxs-col-header {
-    background: #1C2856;
+    background: #1C2856 !important;
+    z-index: 11;
 }
 
 /* Company and title */
@@ -148,10 +154,21 @@
     background-color: #fff;
 }
 
+/* Fix for sticky column - ensure content stays within bounds */
+.sxs-col-header:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    background: inherit;
+}
+
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
     .sxs-comparison-wrapper {
-        padding: 0 15px;
+        padding: 15px;
     }
     
     .sxs-col-header {
