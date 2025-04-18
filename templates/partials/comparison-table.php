@@ -17,9 +17,9 @@ if (!defined('ABSPATH')) {
         
         <div class="sxs-comparison-scroll">
             <table class="sxs-comparison-table">
-                <thead class="sxs-comparison-header">
+                <thead class="sxs-comparison-header sticky-header">
                     <tr>
-                        <th class="sxs-col-header">SIDE BY SIDE</th>
+                        <th class="sxs-col-header sticky-left-col">SIDE BY SIDE</th>
                         <?php foreach ($candidates as $candidate) : ?>
                             <th class="sxs-col"><?php echo esc_html($candidate->post_title); ?></th>
                         <?php endforeach; ?>
@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {
                 <tbody>
                     <!-- Current Company Row -->
                     <tr class="sxs-comparison-row">
-                        <td class="sxs-col-header">CURRENT COMPANY</td>
+                        <td class="sxs-col-header sticky-left-col">CURRENT COMPANY</td>
                         <?php foreach ($candidates as $candidate) : ?>
                             <td class="sxs-col">
                                 <?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true)); ?>
@@ -38,7 +38,7 @@ if (!defined('ABSPATH')) {
 
                     <!-- Current Title Row -->
                     <tr class="sxs-comparison-row">
-                        <td class="sxs-col-header">CURRENT TITLE</td>
+                        <td class="sxs-col-header sticky-left-col">CURRENT TITLE</td>
                         <?php foreach ($candidates as $candidate) : ?>
                             <td class="sxs-col">
                                 <?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_title', true)); ?>
@@ -48,7 +48,7 @@ if (!defined('ABSPATH')) {
 
                     <!-- Years Experience Row -->
                     <tr class="sxs-comparison-row">
-                        <td class="sxs-col-header">YEARS EXPERIENCE</td>
+                        <td class="sxs-col-header sticky-left-col">YEARS EXPERIENCE</td>
                         <?php foreach ($candidates as $candidate) : ?>
                             <td class="sxs-col">
                                 <?php 
@@ -61,7 +61,7 @@ if (!defined('ABSPATH')) {
 
                     <!-- Education Row -->
                     <tr class="sxs-comparison-row">
-                        <td class="sxs-col-header">EDUCATION</td>
+                        <td class="sxs-col-header sticky-left-col">EDUCATION</td>
                         <?php foreach ($candidates as $candidate) : ?>
                             <td class="sxs-col">
                                 <?php 
@@ -82,7 +82,7 @@ if (!defined('ABSPATH')) {
 
                     <!-- Relevant Experience Row -->
                     <tr class="sxs-comparison-row">
-                        <td class="sxs-col-header">RELEVANT EXPERIENCE</td>
+                        <td class="sxs-col-header sticky-left-col">RELEVANT EXPERIENCE</td>
                         <?php foreach ($candidates as $candidate) : ?>
                             <td class="sxs-col">
                                 <?php 
@@ -103,7 +103,7 @@ if (!defined('ABSPATH')) {
 
                     <!-- Compensation Row -->
                     <tr class="sxs-comparison-row">
-                        <td class="sxs-col-header">COMPENSATION</td>
+                        <td class="sxs-col-header sticky-left-col">COMPENSATION</td>
                         <?php foreach ($candidates as $candidate) : ?>
                             <td class="sxs-col">
                                 <?php 

@@ -11,10 +11,13 @@
     min-width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Row settings for horizontal scroll */
-.sxs-plugin .sxs-row {
+.sxs-plugin .sxs-row,
+.sxs-comparison-table tr {
     display: flex;
     width: 100%;
     min-width: 100%;
@@ -22,7 +25,9 @@
 }
 
 /* Fixed column widths */
-.sxs-plugin .sxs-col {
+.sxs-plugin .sxs-col,
+.sxs-comparison-table td,
+.sxs-comparison-table th {
     flex: 1;
     min-width: 300px;
     max-width: 350px;
@@ -30,14 +35,30 @@
     overflow-wrap: break-word;
     word-break: normal;
     hyphens: auto;
+    box-sizing: border-box;
+}
+
+/* Table specific styles */
+.sxs-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 /* Make the left column sticky for horizontal scrolling */
-.sxs-plugin .sxs-col-header {
+.sxs-plugin .sxs-col-header,
+.sticky-left-col {
     position: sticky;
     left: 0;
     z-index: 2;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky header */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
 }
 
 /* Enhance scrollbar styling for better visibility */
@@ -60,13 +81,16 @@
 
 /* Mobile-specific adjustments */
 @media screen and (max-width: 768px) {
-    .sxs-plugin .sxs-col {
+    .sxs-plugin .sxs-col,
+    .sxs-comparison-table td,
+    .sxs-comparison-table th:not(.sticky-left-col) {
         flex: 0 0 280px;
         min-width: 280px;
         max-width: 280px;
     }
     
-    .sxs-plugin .sxs-col-header {
+    .sxs-plugin .sxs-col-header,
+    .sticky-left-col {
         flex: 0 0 150px;
         min-width: 150px;
         max-width: 150px;
@@ -75,7 +99,8 @@
 }
 
 /* Make sure comparison body extends properly for all candidates */
-.sxs-plugin .sxs-comparison-body {
+.sxs-plugin .sxs-comparison-body,
+.sxs-comparison-scroll {
     width: max-content;
     min-width: 100%;
 } 
