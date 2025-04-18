@@ -47,6 +47,20 @@
     left: 0 !important;
     z-index: 10 !important;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1) !important;
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+    background: #F26724 !important;
+    color: #fff !important;
+    padding: 15px 20px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    text-align: left !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: visible !important;
+    white-space: normal !important;
 }
 
 /* Header Column */
@@ -313,6 +327,7 @@
 /* Header sticky column */
 .sxs-comparison-header .sticky-left-col {
     background: #1C2856 !important;
+    z-index: 11 !important;
 }
 
 /* Comparison Header Row */
