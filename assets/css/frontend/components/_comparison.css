@@ -56,11 +56,25 @@
     border-collapse: separate;
     border-spacing: 0;
     table-layout: fixed;
+    display: table !important;
 }
 
-/* Cell styling */
+/* Force table behavior */
+.sxs-comparison-table thead {
+    display: table-header-group !important;
+}
+
+.sxs-comparison-table tbody {
+    display: table-row-group !important;
+}
+
+.sxs-comparison-table tr {
+    display: table-row !important;
+}
+
 .sxs-comparison-table th,
 .sxs-comparison-table td {
+    display: table-cell !important;
     padding: 15px 20px;
     text-align: left;
     vertical-align: top;
@@ -96,6 +110,7 @@
     font-size: 14px;
     text-transform: uppercase;
     width: 200px;
+    max-width: 200px;
 }
 
 /* Data cells (content) */
