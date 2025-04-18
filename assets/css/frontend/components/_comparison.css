@@ -1,11 +1,11 @@
 /* 
  * SXS Comparison Table - Main Styles
- * Complete overhaul with cleaner, more direct approach
+ * Complete overhaul with grid/flex approach
  */
 
-/* Basic reset and container styles */
+/* Wrapper and container */
 .sxs-comparison-wrapper {
-    max-width: 1400px;
+    max-width: 100%;
     margin: 30px auto;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -43,120 +43,109 @@
     100% { transform: translateX(0); }
 }
 
-/* Table wrapper with horizontal scroll */
-.sxs-table-wrapper {
+/* Scrollable area */
+.sxs-comparison-scroll {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
 
-/* Core table styles */
-.sxs-comparison-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    table-layout: fixed;
-    display: table !important;
-}
-
-/* Force table behavior */
-.sxs-comparison-table thead {
-    display: table-header-group !important;
-}
-
-.sxs-comparison-table tbody {
-    display: table-row-group !important;
-}
-
-.sxs-comparison-table tr {
-    display: table-row !important;
-}
-
-.sxs-comparison-table th,
-.sxs-comparison-table td {
-    display: table-cell !important;
-    padding: 15px 20px;
-    text-align: left;
-    vertical-align: top;
-    border-right: 1px solid #e5e5e5;
+/* Row styles */
+.sxs-row {
+    display: flex;
+    width: max-content;
+    min-width: 100%;
     border-bottom: 1px solid #e5e5e5;
-    min-width: 250px;
 }
 
-.sxs-comparison-table tr th:last-child,
-.sxs-comparison-table tr td:last-child {
-    border-right: none;
-}
-
-.sxs-comparison-table tr:last-child td {
+.sxs-row:last-child {
     border-bottom: none;
 }
 
-/* Header styling */
-.sxs-header-cell {
+/* Header row */
+.sxs-header-row {
     background: #1C2856;
+}
+
+.sxs-header-row .sxs-col {
     color: #fff;
     font-weight: 600;
     font-size: 15px;
     text-transform: uppercase;
-    white-space: nowrap;
+    background: #1C2856;
 }
 
-/* Label cells (first column) */
-.sxs-label-cell {
+/* Column styles */
+.sxs-col {
+    flex: 0 0 auto;
+    width: 300px;
+    min-width: 300px;
+    padding: 15px 20px;
+    border-right: 1px solid #e5e5e5;
+    text-align: left;
+    vertical-align: top;
+}
+
+.sxs-col:last-child {
+    border-right: none;
+}
+
+/* Header column */
+.sxs-col-header {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
     background: #F26724;
     color: #fff;
     font-weight: 600;
     font-size: 14px;
     text-transform: uppercase;
-    width: 200px;
-    max-width: 200px;
-}
-
-/* Data cells (content) */
-.sxs-data-cell {
-    background: #fff;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-/* Zebra striping for rows */
-.sxs-comparison-table tbody tr:nth-child(even) td.sxs-data-cell {
-    background-color: #f9f9f9;
-}
-
-/* The sticky column - THIS IS THE CRITICAL PART */
-.sxs-sticky-col {
-    position: sticky;
-    left: 0;
-    z-index: 10;
+    display: flex;
+    align-items: center;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
 }
 
-/* Company and title info */
-.company {
+/* Header row's first column (corner) */
+.sxs-header-row .sxs-col-header {
+    background: #1C2856;
+}
+
+/* Company and title */
+.sxs-company {
     font-weight: 600;
     margin-bottom: 5px;
 }
 
-.title {
+.sxs-title {
     color: #666;
 }
 
-/* Lists in cells */
-.sxs-data-cell ul {
+/* Lists */
+.sxs-list {
     margin: 0;
     padding: 0 0 0 20px;
     list-style-type: disc;
 }
 
-.sxs-data-cell ul li {
+.sxs-list li {
     margin-bottom: 8px;
     line-height: 1.4;
 }
 
-.sxs-data-cell ul li:last-child {
+.sxs-list li:last-child {
     margin-bottom: 0;
+}
+
+/* Zebra striping for better readability */
+.sxs-row:nth-child(even) .sxs-col:not(.sxs-col-header) {
+    background-color: #f9f9f9;
+}
+
+.sxs-row:nth-child(odd) .sxs-col:not(.sxs-col-header) {
+    background-color: #fff;
 }
 
 /* Responsive adjustments */
@@ -165,21 +154,18 @@
         padding: 0 15px;
     }
     
-    .sxs-label-cell {
+    .sxs-col-header {
         width: 150px;
         min-width: 150px;
+        max-width: 150px;
         font-size: 12px;
         padding: 12px 15px;
     }
     
-    .sxs-data-cell {
-        min-width: 200px;
+    .sxs-col {
+        width: 250px;
+        min-width: 250px;
         padding: 12px 15px;
-    }
-    
-    .sxs-header-cell {
-        min-width: 200px;
         font-size: 13px;
-        padding: 12px 15px;
     }
 }

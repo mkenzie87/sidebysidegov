@@ -15,115 +15,111 @@ if (!defined('ABSPATH')) {
             <i class="fas fa-arrow-right"></i>
         </div>
         
-        <div class="sxs-table-wrapper">
-            <table class="sxs-comparison-table">
-                <thead>
-                    <tr>
-                        <th class="sxs-header-cell sxs-sticky-col">SIDE BY SIDE</th>
-                        <?php foreach ($candidates as $candidate) : ?>
-                            <th class="sxs-header-cell"><?php echo esc_html($candidate->post_title); ?></th>
-                        <?php endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Current Company Row -->
-                    <tr>
-                        <td class="sxs-label-cell sxs-sticky-col">CURRENT COMPANY/ TITLE</td>
-                        <?php foreach ($candidates as $candidate) : ?>
-                            <td class="sxs-data-cell">
-                                <div class="company"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true)); ?></div>
-                                <div class="title"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_title', true)); ?></div>
-                            </td>
-                        <?php endforeach; ?>
-                    </tr>
+        <div class="sxs-comparison-scroll">
+            <!-- Header Row -->
+            <div class="sxs-row sxs-header-row">
+                <div class="sxs-col sxs-col-header">SIDE BY SIDE</div>
+                <?php foreach ($candidates as $candidate) : ?>
+                    <div class="sxs-col"><?php echo esc_html($candidate->post_title); ?></div>
+                <?php endforeach; ?>
+            </div>
 
-                    <!-- Degrees/Certifications Row -->
-                    <tr>
-                        <td class="sxs-label-cell sxs-sticky-col">DEGREES/ CERTIFICATIONS</td>
-                        <?php foreach ($candidates as $candidate) : ?>
-                            <td class="sxs-data-cell">
-                                <?php 
-                                $education = get_post_meta($candidate->ID, '_sxs_education', true);
-                                if (is_array($education)) {
-                                    echo '<ul class="education-list">';
-                                    foreach ($education as $degree) {
-                                        echo '<li>' . esc_html($degree) . '</li>';
-                                    }
-                                    echo '</ul>';
-                                } else {
-                                    echo 'N/A';
-                                }
-                                ?>
-                            </td>
-                        <?php endforeach; ?>
-                    </tr>
+            <!-- Current Company/Title Row -->
+            <div class="sxs-row">
+                <div class="sxs-col sxs-col-header">CURRENT COMPANY/ TITLE</div>
+                <?php foreach ($candidates as $candidate) : ?>
+                    <div class="sxs-col">
+                        <div class="sxs-company"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true)); ?></div>
+                        <div class="sxs-title"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_title', true)); ?></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
 
-                    <!-- Years Experience Row -->
-                    <tr>
-                        <td class="sxs-label-cell sxs-sticky-col">YEARS OF INDUSTRY EXPERIENCE/ROLE EXPERIENCE</td>
-                        <?php foreach ($candidates as $candidate) : ?>
-                            <td class="sxs-data-cell">
-                                <?php 
-                                $industry_exp = get_post_meta($candidate->ID, '_sxs_industry_experience', true);
-                                $role_exp = get_post_meta($candidate->ID, '_sxs_role_experience', true);
-                                
-                                if ($industry_exp || $role_exp) {
-                                    if ($industry_exp) echo '<div>' . esc_html($industry_exp) . ' years industry experience</div>';
-                                    if ($role_exp) echo '<div>' . esc_html($role_exp) . ' years role experience</div>';
-                                } else {
-                                    echo 'N/A';
-                                }
-                                ?>
-                            </td>
-                        <?php endforeach; ?>
-                    </tr>
+            <!-- Degrees/Certifications Row -->
+            <div class="sxs-row">
+                <div class="sxs-col sxs-col-header">DEGREES/ CERTIFICATIONS</div>
+                <?php foreach ($candidates as $candidate) : ?>
+                    <div class="sxs-col">
+                        <?php 
+                        $education = get_post_meta($candidate->ID, '_sxs_education', true);
+                        if (is_array($education)) {
+                            echo '<ul class="sxs-list">';
+                            foreach ($education as $degree) {
+                                echo '<li>' . esc_html($degree) . '</li>';
+                            }
+                            echo '</ul>';
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
 
-                    <!-- Relevant Experience Row -->
-                    <tr>
-                        <td class="sxs-label-cell sxs-sticky-col">RELEVANT EXPERIENCE SUMMARY</td>
-                        <?php foreach ($candidates as $candidate) : ?>
-                            <td class="sxs-data-cell">
-                                <?php 
-                                $experience = get_post_meta($candidate->ID, '_sxs_relevant_experience', true);
-                                if (is_array($experience)) {
-                                    echo '<ul class="experience-list">';
-                                    foreach ($experience as $item) {
-                                        echo '<li>' . esc_html($item) . '</li>';
-                                    }
-                                    echo '</ul>';
-                                } else {
-                                    echo 'N/A';
-                                }
-                                ?>
-                            </td>
-                        <?php endforeach; ?>
-                    </tr>
+            <!-- Years Experience Row -->
+            <div class="sxs-row">
+                <div class="sxs-col sxs-col-header">YEARS OF INDUSTRY EXPERIENCE/ROLE EXPERIENCE</div>
+                <?php foreach ($candidates as $candidate) : ?>
+                    <div class="sxs-col">
+                        <?php 
+                        $industry_exp = get_post_meta($candidate->ID, '_sxs_industry_experience', true);
+                        $role_exp = get_post_meta($candidate->ID, '_sxs_role_experience', true);
+                        
+                        if ($industry_exp || $role_exp) {
+                            if ($industry_exp) echo '<div>' . esc_html($industry_exp) . ' years industry experience</div>';
+                            if ($role_exp) echo '<div>' . esc_html($role_exp) . ' years role experience</div>';
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
 
-                    <!-- Compensation Row -->
-                    <tr>
-                        <td class="sxs-label-cell sxs-sticky-col">COMPENSATION</td>
-                        <?php foreach ($candidates as $candidate) : ?>
-                            <td class="sxs-data-cell">
-                                <?php 
-                                $base = get_post_meta($candidate->ID, '_sxs_current_base', true);
-                                $bonus = get_post_meta($candidate->ID, '_sxs_current_bonus', true);
-                                $total = get_post_meta($candidate->ID, '_sxs_application_compensation', true);
-                                
-                                if ($base || $bonus || $total) {
-                                    echo '<ul class="compensation-list">';
-                                    if ($base) echo '<li>Base: ' . esc_html($base) . '</li>';
-                                    if ($bonus) echo '<li>Bonus: ' . esc_html($bonus) . '</li>';
-                                    if ($total) echo '<li>Total: ' . esc_html($total) . '</li>';
-                                    echo '</ul>';
-                                } else {
-                                    echo 'N/A';
-                                }
-                                ?>
-                            </td>
-                        <?php endforeach; ?>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- Relevant Experience Row -->
+            <div class="sxs-row">
+                <div class="sxs-col sxs-col-header">RELEVANT EXPERIENCE SUMMARY</div>
+                <?php foreach ($candidates as $candidate) : ?>
+                    <div class="sxs-col">
+                        <?php 
+                        $experience = get_post_meta($candidate->ID, '_sxs_relevant_experience', true);
+                        if (is_array($experience)) {
+                            echo '<ul class="sxs-list">';
+                            foreach ($experience as $item) {
+                                echo '<li>' . esc_html($item) . '</li>';
+                            }
+                            echo '</ul>';
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Compensation Row -->
+            <div class="sxs-row">
+                <div class="sxs-col sxs-col-header">COMPENSATION</div>
+                <?php foreach ($candidates as $candidate) : ?>
+                    <div class="sxs-col">
+                        <?php 
+                        $base = get_post_meta($candidate->ID, '_sxs_current_base', true);
+                        $bonus = get_post_meta($candidate->ID, '_sxs_current_bonus', true);
+                        $total = get_post_meta($candidate->ID, '_sxs_application_compensation', true);
+                        
+                        if ($base || $bonus || $total) {
+                            echo '<ul class="sxs-list">';
+                            if ($base) echo '<li>Base: ' . esc_html($base) . '</li>';
+                            if ($bonus) echo '<li>Bonus: ' . esc_html($bonus) . '</li>';
+                            if ($total) echo '<li>Total: ' . esc_html($total) . '</li>';
+                            echo '</ul>';
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </div> 
