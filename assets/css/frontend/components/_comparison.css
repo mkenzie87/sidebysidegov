@@ -1,296 +1,23 @@
-/* Comparison Table Styles */
-.sxs-comparison-body {
-    overflow: hidden;
-    background: #fff;
-}
+/* 
+ * SXS Comparison Table - Main Styles
+ * Complete overhaul with cleaner, more direct approach
+ */
 
-/* Table Structure */
-.sxs-comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    display: table;
-}
-
-/* Row Styles */
-.sxs-row,
-.sxs-comparison-table tr {
-    display: flex;
-    border-bottom: 1px solid #E5E5E5;
-}
-
-.sxs-row:last-child,
-.sxs-comparison-table tr:last-child {
-    border-bottom: none;
-}
-
-/* Column Styles */
-.sxs-col,
-.sxs-comparison-table td,
-.sxs-comparison-table th {
-    flex: 1;
-    padding: 20px;
-    border-left: 1px solid #E5E5E5;
-    min-width: 280px;
-    box-sizing: border-box;
-}
-
-.sxs-col:first-child,
-.sxs-comparison-table td:first-child,
-.sxs-comparison-table th:first-child {
-    border-left: none;
-}
-
-/* Sticky Left Column */
-.sticky-left-col {
-    position: sticky !important;
-    left: 0 !important;
-    z-index: 10 !important;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1) !important;
-    width: 200px !important;
-    min-width: 200px !important;
-    max-width: 200px !important;
-    background: #F26724 !important;
-    color: #fff !important;
-    padding: 15px 20px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    text-align: left !important;
-    display: flex !important;
-    align-items: center !important;
-    overflow: visible !important;
-    white-space: normal !important;
-}
-
-/* Header Column */
-.sxs-comparison-container .sxs-col-header,
-.sxs-comparison-table .sticky-left-col {
-    width: 200px;
-    min-width: 200px;
-    background: #F26724;
-    color: #fff;
-    padding: 15px 20px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    text-align: left;
-    display: flex;
-    align-items: center;
-}
-
-/* Sticky Header */
-.sticky-header {
-    position: sticky;
-    top: 0;
-    z-index: 9;
-}
-
-/* Candidate Names Header */
-.sxs-candidate-names,
-.sxs-comparison-header {
-    display: flex;
-    background: #1C2856;
-    color: #fff;
-    border-bottom: 1px solid #E5E5E5;
-}
-
-.sxs-candidate-names .sxs-col-header,
-.sxs-comparison-header .sticky-left-col {
-    background: #1C2856;
-}
-
-.sxs-candidate-names .sxs-col,
-.sxs-comparison-header th:not(.sticky-left-col) {
-    padding: 15px 20px;
-    font-size: 18px;
-    font-weight: 600;
-    text-align: left;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    background: #1C2856;
-    color: #fff;
-}
-
-/* List Styles */
-.sxs-list,
-.education-list,
-.experience-list,
-.compensation-list {
-    margin: 0;
-    padding: 0 0 0 20px;
-    list-style-type: disc;
-}
-
-.sxs-list li,
-.education-list li,
-.experience-list li,
-.compensation-list li {
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-.sxs-list li:last-child,
-.education-list li:last-child,
-.experience-list li:last-child,
-.compensation-list li:last-child {
-    margin-bottom: 0;
-}
-
-/* Company Details */
-.sxs-company-details {
-    margin-bottom: 15px;
-}
-
-.sxs-company-logo-detail {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
-}
-
-.sxs-company-logo-detail img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.sxs-company-info .company {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.sxs-company-info .location,
-.sxs-company-info .website {
-    font-size: 14px;
-    margin: 0 0 5px;
-}
-
-/* Title */
-.sxs-col .title {
-    font-weight: 500;
-    margin: 0;
-}
-
-/* Zebra Striping */
-.sxs-row:nth-child(even),
-.sxs-comparison-table tr:nth-child(even) {
-    background-color: #F8F8F8;
-}
-
-.sxs-row:nth-child(odd),
-.sxs-comparison-table tr:nth-child(odd) {
-    background-color: #fff;
-}
-
-/* Compensation Section */
-.sxs-col p strong {
-    display: inline-block;
-    margin-right: 5px;
-}
-
-/* Comparison table styles */
-.sxs-plugin .sxs-comparison-body {
-    width: 100%;
-    border: 1px solid #E5E5E5;
-    border-radius: 4px;
-    overflow: hidden;
-    background: #fff;
-}
-
-.sxs-plugin .sxs-comparison-body .sxs-col,
-.sxs-plugin .sxs-comparison-table td {
-    text-align: left;
-    padding: 15px 20px;
-}
-
-.sxs-plugin .sxs-list,
-.sxs-plugin .education-list,
-.sxs-plugin .experience-list,
-.sxs-plugin .compensation-list {
-    padding-left: 0;
-    list-style-position: inside;
-}
-
-.sxs-plugin .sxs-comparison-wrapper {
+/* Basic reset and container styles */
+.sxs-comparison-wrapper {
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 30px auto;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-.sxs-plugin .sxs-comparison-container {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 0 auto;
+.sxs-comparison-container {
     position: relative;
-}
-
-.sxs-plugin .sxs-row,
-.sxs-plugin .sxs-comparison-table tr {
-    display: flex;
-    width: 100%;
-    border-bottom: 1px solid #E5E5E5;
-}
-
-.sxs-plugin .sxs-row:last-child,
-.sxs-plugin .sxs-comparison-table tr:last-child {
-    border-bottom: none;
-}
-
-/* Header styles */
-.sxs-plugin .sxs-comparison-header {
-    background: #1C2856;
-    width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 9;
-}
-
-.sxs-plugin .sxs-comparison-header .sxs-col,
-.sxs-plugin .sxs-comparison-header th:not(.sticky-left-col) {
-    padding: 15px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    text-align: left;
-    background: #1C2856;
-}
-
-.sxs-plugin .sxs-comparison-header .sxs-col:last-child,
-.sxs-plugin .sxs-comparison-header th:last-child {
-    border-right: none;
-}
-
-/* Column styles */
-.sxs-plugin .sxs-col,
-.sxs-plugin .sxs-comparison-table td {
-    flex: 1;
-    padding: 15px 20px;
-    border-right: 1px solid #E5E5E5;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
     background: #fff;
-}
-
-.sxs-plugin .sxs-col:last-child,
-.sxs-plugin .sxs-comparison-table td:last-child {
-    border-right: none;
-}
-
-/* Alternating column colors */
-.sxs-plugin .sxs-comparison-body .sxs-row .sxs-col:nth-child(even),
-.sxs-plugin .sxs-comparison-table tr td:nth-child(even) {
-    background-color: #F5F5F5;
-}
-
-.sxs-plugin .sxs-comparison-body .sxs-row .sxs-col:nth-child(odd),
-.sxs-plugin .sxs-comparison-table tr td:nth-child(odd) {
-    background-color: #FFFFFF;
-}
-
-/* Fixed widths to ensure vertical alignment */
-.sxs-comparison-scroll {
-    overflow-x: auto;
-    width: 100%;
 }
 
 /* Scroll indicator */
@@ -302,9 +29,7 @@
     font-size: 13px;
     color: #666;
     background: #f9f9f9;
-    border: 1px solid #e5e5e5;
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .scroll-indicator i {
@@ -318,570 +43,128 @@
     100% { transform: translateX(0); }
 }
 
-/* Base styles for sticky column */
-.sticky-left-col {
-    color: #fff;
-    background: #F26724 !important;
-}
-
-/* Header sticky column */
-.sxs-comparison-header .sticky-left-col {
-    background: #1C2856 !important;
-    z-index: 11 !important;
-}
-
-/* Comparison Header Row */
-.sxs-comparison-container .sxs-comparison-header {
-    background: #1C2856;
+/* Table wrapper with horizontal scroll */
+.sxs-table-wrapper {
     width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-.sxs-comparison-container .sxs-comparison-header .sxs-col-header,
-.sxs-comparison-container .sxs-comparison-header .sticky-left-col {
-    background: #1C2856;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 600;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+/* Core table styles */
+.sxs-comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
 }
 
-.sxs-comparison-container .sxs-comparison-header .sxs-col,
-.sxs-comparison-container .sxs-comparison-header th:not(.sticky-left-col) {
+/* Cell styling */
+.sxs-comparison-table th,
+.sxs-comparison-table td {
     padding: 15px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
-    border-right: 1px solid rgba(255,255,255,0.1);
     text-align: left;
+    vertical-align: top;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    min-width: 250px;
+}
+
+.sxs-comparison-table tr th:last-child,
+.sxs-comparison-table tr td:last-child {
+    border-right: none;
+}
+
+.sxs-comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Header styling */
+.sxs-header-cell {
     background: #1C2856;
-    min-width: 280px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
-.sxs-comparison-container .sxs-comparison-header .sxs-col:last-child,
-.sxs-comparison-container .sxs-comparison-header th:last-child {
-    border-right: none;
+/* Label cells (first column) */
+.sxs-label-cell {
+    background: #F26724;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 200px;
 }
 
-/* Column Styles */
-.sxs-comparison-container .sxs-col,
-.sxs-comparison-container td {
-    flex: 1;
-    padding: 15px 20px;
-    border-right: 1px solid #E5E5E5;
+/* Data cells (content) */
+.sxs-data-cell {
     background: #fff;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-.sxs-comparison-container .sxs-col:last-child,
-.sxs-comparison-container td:last-child {
-    border-right: none;
+/* Zebra striping for rows */
+.sxs-comparison-table tbody tr:nth-child(even) td.sxs-data-cell {
+    background-color: #f9f9f9;
 }
 
-/* Content Styles */
-.sxs-comparison-container .sxs-col p {
-    margin: 0 0 10px 0;
-    line-height: 1.4;
+/* The sticky column - THIS IS THE CRITICAL PART */
+.sxs-sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
 }
 
-.sxs-comparison-container .sxs-col p:last-child {
-    margin-bottom: 0;
+/* Company and title info */
+.company {
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
-/* List Styles */
-.sxs-comparison-container .sxs-col ul {
+.title {
+    color: #666;
+}
+
+/* Lists in cells */
+.sxs-data-cell ul {
     margin: 0;
     padding: 0 0 0 20px;
     list-style-type: disc;
 }
 
-.sxs-comparison-container .sxs-col ul li {
+.sxs-data-cell ul li {
     margin-bottom: 8px;
     line-height: 1.4;
 }
 
-.sxs-comparison-container .sxs-col ul li:last-child {
+.sxs-data-cell ul li:last-child {
     margin-bottom: 0;
 }
 
-/* Current Company/Title */
-.sxs-comparison-container .sxs-col .company {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.sxs-comparison-container .sxs-col .title {
-    color: #666;
-    font-size: 14px;
-}
-
-/* Scroll indicator for desktop */
-.sxs-scroll-indicator {
-    display: inline-block;
-    background: rgba(28, 40, 86, 0.05);
-    color: #1C2856;
-    padding: 8px 15px;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    font-weight: 500;
-    animation: fadeInOut 2s infinite;
-    cursor: default;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-}
-
-/* Fixed left column (orange headers) */
-.sxs-plugin .sxs-col-header {
-    width: 200px;
-    min-width: 200px;
-    max-width: 200px;
-    background: #F26724;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    border-right: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Mobile Scroll Indicators */
-.sxs-plugin .scroll-indicator {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    color: #666;
-    font-size: 14px;
-    gap: 5px;
-    margin-bottom: 20px;
-}
-
-.sxs-plugin .scroll-indicator i {
-    font-size: 16px;
-    animation: scrollPulse 2s infinite;
-}
-
-@keyframes scrollPulse {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
-    100% { transform: translateX(0); }
-}
-
-/* Mobile Styles - NEW CARD APPROACH */
+/* Responsive adjustments */
 @media screen and (max-width: 768px) {
-    /* Hide the desktop comparison table */
-    .sxs-comparison-container {
-        display: none;
-    }
-
-    /* Create a card-based layout for mobile */
-    .sxs-mobile-cards {
-        display: block;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
-
-    /* Container styling */
     .sxs-comparison-wrapper {
-        margin: 20px auto;
         padding: 0 15px;
-        max-width: 100%;
     }
     
-    /* Individual candidate card */
-    .sxs-candidate-card {
-        margin: 0 0 25px 0;
-        border-radius: 6px;
-        overflow: hidden;
-        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        background: #fff;
-    }
-
-    /* Candidate header */
-    .sxs-card-header {
-        background: #1C2856;
-        color: #fff;
-        padding: 18px 20px;
-        font-size: 18px;
-        font-weight: 600;
-        text-align: center;
-    }
-
-    /* Row in card */
-    .sxs-card-row {
-        display: flex;
-        border-bottom: 1px solid #E5E5E5;
-        flex-wrap: wrap;
-    }
-
-    .sxs-card-row:last-child {
-        border-bottom: none;
-    }
-
-    /* Label column */
-    .sxs-card-label {
-        flex: 0 0 100%;
-        background: #F26724;
-        color: #fff;
+    .sxs-label-cell {
+        width: 150px;
+        min-width: 150px;
+        font-size: 12px;
         padding: 12px 15px;
-        font-size: 13px;
-        font-weight: 600;
-        text-transform: uppercase;
-    }
-
-    /* Content column */
-    .sxs-card-content {
-        flex: 0 0 100%;
-        padding: 18px 20px;
-        background: #fff;
-    }
-
-    /* Add zebra striping to card rows */
-    .sxs-card-row:nth-child(even) .sxs-card-content {
-        background-color: #f9f9f9;
-    }
-
-    /* Company/Title styling */
-    .sxs-card-content .company {
-        font-weight: 600;
-        font-size: 15px;
-        margin-bottom: 5px;
-        color: #333;
-    }
-
-    .sxs-card-content .title {
-        color: #666;
-        font-size: 14px;
-        line-height: 1.4;
-    }
-
-    /* List styling */
-    .sxs-card-content ul {
-        margin: 0;
-        padding: 0 0 0 20px;
-        list-style-type: disc;
-    }
-
-    .sxs-card-content ul li {
-        margin-bottom: 10px;
-        line-height: 1.5;
-        color: #333;
-    }
-
-    /* Experience and compensation formatting */
-    .sxs-card-content .sxs-experience,
-    .sxs-card-content .sxs-compensation {
-        line-height: 1.5;
-        color: #333;
-    }
-
-    /* Ensure comparison header is properly aligned */
-    .sxs-plugin .sxs-comparison-header {
-        position: sticky;
-        top: 0;
-        z-index: 3;
-        background-color: #1C2856;
     }
     
-    /* Remove unnecessary padding */
-    .sxs-plugin .sxs-comparison-body {
-        padding: 0;
-    }
-    
-    /* Maintain consistent width for all cells */
-    .sxs-plugin .sxs-comparison-header .sxs-col,
-    .sxs-plugin .sxs-row .sxs-col {
-        min-width: 280px;
-        max-width: 280px;
-        box-sizing: border-box;
-    }
-    
-    /* Ensure the header column "SIDE BY SIDE" stays above other columns */
-    .sxs-plugin .sxs-comparison-header .sxs-col-header {
-        z-index: 4;
-        background-color: #1C2856;
-        min-width: 150px;
-        max-width: 150px;
-    }
-
-    /* Customize header for mobile */
-    .sxs-plugin .sxs-comparison-header .sxs-col-header {
-        min-width: 150px;
-        max-width: 150px;
-    }
-    
-    /* Maintain fixed widths on mobile */
-    .sxs-plugin .sxs-comparison-header .sxs-col,
-    .sxs-plugin .sxs-row .sxs-col {
-        min-width: 280px;
-        max-width: 280px;
-    }
-    
-    /* Hide the mobile card layout if we're using the horizontal scroll approach */
-    .sxs-plugin .sxs-mobile-cards {
-        display: none;
-    }
-    
-    /* Show the regular comparison table */
-    .sxs-plugin .sxs-comparison-container {
-        display: block;
-    }
-}
-
-/* Desktop-only styles */
-@media screen and (min-width: 769px) {
-    .sxs-mobile-cards {
-        display: none;
-    }
-
-    /* Layout improvements */
-    .sxs-comparison-wrapper {
-        max-width: 1400px;
-        margin: 30px auto;
-        padding: 0;
-        box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        border-radius: 0;
-        overflow: hidden;
-    }
-
-    .sxs-comparison-container {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        background: #fff;
-    }
-
-    /* Header row styling */
-    .sxs-comparison-header {
-        background: #1C2856 !important;
-    }
-
-    .sxs-comparison-header .sxs-col {
-        background: #1C2856;
-        color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        text-align: center;
-        padding: 20px 25px;
-        min-height: 60px;
-        border-right: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    .sxs-comparison-header .sxs-col-header {
-        background: #1C2856;
-        min-height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        border-right: 1px solid rgba(255,255,255,0.05);
-        padding: 20px 25px;
-    }
-
-    /* Equal width columns */
-    .sxs-row .sxs-col {
-        flex: 1;
-        min-width: 250px;
-        padding: 20px 25px;
-        text-align: left;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    /* Fixed left column */
-    .sxs-col-header {
-        width: 200px;
+    .sxs-data-cell {
         min-width: 200px;
-        max-width: 200px;
-        background: #F26724;
-        color: #fff;
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: uppercase;
-        padding: 20px 25px;
-        display: flex;
-        align-items: center;
-        border-right: 1px solid rgba(255,255,255,0.1);
+        padding: 12px 15px;
     }
-
-    /* Better content alignment */
-    .sxs-col .company {
-        font-weight: 600;
-        font-size: 15px;
-    }
-
-    .sxs-col .title {
-        color: #666;
-        font-size: 14px;
-        margin-top: 5px;
-    }
-
-    .sxs-experience, 
-    .sxs-compensation {
-        line-height: 1.5;
-    }
-
-    /* List improvements */
-    .sxs-col ul {
-        margin: 0;
-        padding: 0 0 0 20px;
-    }
-
-    .sxs-col ul li {
-        margin-bottom: 8px;
-        line-height: 1.5;
-    }
-
-    /* Zebra striping */
-    .sxs-comparison-body .sxs-row:nth-child(odd) {
-        background-color: #fff;
-    }
-
-    .sxs-comparison-body .sxs-row:nth-child(even) {
-        background-color: #f9f9f9;
+    
+    .sxs-header-cell {
+        min-width: 200px;
+        font-size: 13px;
+        padding: 12px 15px;
     }
 }
-
-/* Restore scrollbar appearance but make it subtle */
-.sxs-comparison-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.sxs-comparison-container::-webkit-scrollbar-track {
-    background: #f0f0f0;
-}
-
-.sxs-comparison-container::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.2);
-    border-radius: 4px;
-}
-
-/* Base styles for sticky column */
-.sticky-left-col {
-    color: #fff;
-}
-
-/* Comparison Header Row */
-.sxs-comparison-container .sxs-comparison-header {
-    background: #1C2856;
-    width: 100%;
-}
-
-.sxs-comparison-container .sxs-comparison-header .sxs-col-header {
-    background: #1C2856;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 600;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-
-.sxs-comparison-container .sxs-comparison-header .sxs-col {
-    padding: 15px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    text-align: left;
-    background: #1C2856;
-    min-width: 280px;
-}
-
-.sxs-comparison-container .sxs-comparison-header .sxs-col:last-child {
-    border-right: none;
-}
-
-/* Column Styles */
-.sxs-comparison-container .sxs-col {
-    flex: 1;
-    padding: 15px 20px;
-    border-right: 1px solid #E5E5E5;
-    background: #fff;
-}
-
-.sxs-comparison-container .sxs-col:last-child {
-    border-right: none;
-}
-
-/* Content Styles */
-.sxs-comparison-container .sxs-col p {
-    margin: 0 0 10px 0;
-    line-height: 1.4;
-}
-
-.sxs-comparison-container .sxs-col p:last-child {
-    margin-bottom: 0;
-}
-
-/* List Styles */
-.sxs-comparison-container .sxs-col ul {
-    margin: 0;
-    padding: 0 0 0 20px;
-    list-style-type: disc;
-}
-
-.sxs-comparison-container .sxs-col ul li {
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-.sxs-comparison-container .sxs-col ul li:last-child {
-    margin-bottom: 0;
-}
-
-/* Current Company/Title */
-.sxs-comparison-container .sxs-col .company {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.sxs-comparison-container .sxs-col .title {
-    color: #666;
-    font-size: 14px;
-}
-
-/* Scroll indicator for desktop */
-.sxs-scroll-indicator {
-    display: inline-block;
-    background: rgba(28, 40, 86, 0.05);
-    color: #1C2856;
-    padding: 8px 15px;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    font-weight: 500;
-    animation: fadeInOut 2s infinite;
-    cursor: default;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-}
-
-/* Fixed left column (orange headers) */
-.sxs-plugin .sxs-col-header {
-    width: 200px;
-    min-width: 200px;
-    max-width: 200px;
-    background: #F26724;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    border-right: 1px solid rgba(255,255,255,0.1);
-} 
