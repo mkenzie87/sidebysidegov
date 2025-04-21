@@ -42,15 +42,7 @@
     display: flex;
     gap: 30px;
 }
-/* Recruiter Name */
-.sxs-recruiter-name {
-    color: #fff;
-    font-size: 36px;
-    font-weight: 400;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
+
 
 /* Slide Controls */
 .sxs-slide-controls {
@@ -83,21 +75,26 @@
     background: rgba(255, 255, 255, 0.2);
 }
 
-.recruiter-info h5.team-name {
-    color: var(--white);
+/* Recruiter Name Container */
+.sxs-recruiter-name-container {
+    text-align: left;
+}
+
+.sxs-recruiter-name-container h5.team-name {
+    color: #fff;
     margin-top: 15px;
 }
 
-.recruiter-info p.team-title {
-    color: var(--white);
+.sxs-recruiter-name-container p.team-title {
+    color: #fff;
     text-transform: uppercase;
     font-size: 14px;
 }
 
-.recruiter-info .pres-team-social a {
-    background: var(--govigOrange);
-    color: var(--white);
-    border: 1px solid var(--govigOrange);
+.sxs-recruiter-name-container .pres-team-social a {
+    background:#F37021;
+    color: #fff;
+    border: 1px solid #F37021;
     height: 32px;
     width: 32px;
     display: inline-block;
@@ -106,15 +103,19 @@
     line-height: 32px;
 }
 
-.recruiter-info p.team-phone {
+.sxs-recruiter-name-container h5.team-name {
+    color: #fff;
+    margin-top: 15px;
+}
+.sxs-recruiter-name-container p.team-phone {
     margin-top: 7px;
     margin-bottom: 2px;
 }
 
-.recruiter-info .pres-team-social a:hover {
+.sxs-recruiter-name-container .pres-team-social a:hover {
     background: transparent;
-    color: var(--white);
-    border-color: var(--white);
+    color: #fff;
+    border-color: #fff;
 }
 
 /* Action Buttons */
