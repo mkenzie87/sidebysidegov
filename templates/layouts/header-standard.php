@@ -480,10 +480,10 @@ section.recruiter-info {
                     }
                     
                     // Fallback to meta fields if ACF data isn't available
-                    if (empty($title)) $title = get_post_meta($featured_post->ID, '_sxs_recruiter_title', true);
-                    if (empty($phone)) $phone = get_post_meta($featured_post->ID, '_sxs_recruiter_phone', true);
-                    if (empty($linkedin)) $linkedin = get_post_meta($featured_post->ID, '_sxs_recruiter_linkedin', true);
-                    if (empty($email)) $email = get_post_meta($featured_post->ID, '_sxs_recruiter_email', true);
+                    // if (empty($title)) $title = get_post_meta($featured_post->ID, '_sxs_recruiter_title', true);
+                    // if (empty($phone)) $phone = get_post_meta($featured_post->ID, '_sxs_recruiter_phone', true);
+                    // if (empty($linkedin)) $linkedin = get_post_meta($featured_post->ID, '_sxs_recruiter_linkedin', true);
+                    // if (empty($email)) $email = get_post_meta($featured_post->ID, '_sxs_recruiter_email', true);
                     
                     $thumbnail = get_the_post_thumbnail_url($featured_post->ID);
                     if (empty($thumbnail)) $thumbnail = get_post_meta($featured_post->ID, '_sxs_recruiter_image', true);
@@ -504,7 +504,28 @@ section.recruiter-info {
                             ?>
                         </div>
                             <div class="sxs-recruiter-name-container">
-                            <h2 class="sxs-recruiter-name"><?php echo esc_html($recruiter_name); ?></h2>
+                            <h class="sxs-recruiter-name"><?php echo esc_html($recruiter_name); ?></h2>
+
+                            <?php if($title): ?>
+                                <p class="team-title uppercase"><?php echo $title; ?></p>
+                            <?php endif; ?>
+
+                            <div class="team-divider"></div>
+
+                            <?php if($phone): ?>
+                                <p class="team-phone"><?php echo $phone; ?></p>
+                            <?php endif; ?>
+
+                            <div class="pres-team-social">
+
+                                <?php if($linkedin): ?>
+                                    <a href="<?php echo $linkedin; ?>" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                <?php endif; ?>
+
+                                <?php if($email): ?>
+                                    <a id="pres-recruiter-email" data-email="<?php echo $email; ?>" href="mailto:<?php echo $email; ?>" target="_blank"><i class="fas fa-envelope"></i></a>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
 
