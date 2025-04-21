@@ -83,6 +83,40 @@
     background: rgba(255, 255, 255, 0.2);
 }
 
+.recruiter-info h5.team-name {
+    color: var(--white);
+    margin-top: 15px;
+}
+
+.recruiter-info p.team-title {
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.recruiter-info .pres-team-social a {
+    background: var(--govigOrange);
+    color: var(--white);
+    border: 1px solid var(--govigOrange);
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 32px;
+}
+
+.recruiter-info p.team-phone {
+    margin-top: 7px;
+    margin-bottom: 2px;
+}
+
+.recruiter-info .pres-team-social a:hover {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
 /* Action Buttons */
 .sxs-action-buttons-container {
     display: flex;
