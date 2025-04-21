@@ -10,10 +10,25 @@ jQuery(document).ready(function($) {
             this.setupResponsiveColumns();
             this.setupSmoothScrolling();
             this.initializeRecruiterSlider();
+            
+            // Initialize scroll position tracker
+            this.lastScrollTop = 0;
+            this.scrollTimeout = null;
         },
 
         bindEvents: function() {
             $(window).on('resize', this.setupResponsiveColumns);
+            
+            // Add throttled scroll event to check indicator visibility
+            var self = this;
+            $(window).on('scroll', function() {
+                if (!self.scrollTimeout) {
+                    self.scrollTimeout = setTimeout(function() {
+                        self.checkScrollIndicator();
+                        self.scrollTimeout = null;
+                    }, 100); // throttle to once every 100ms
+                }
+            });
         },
 
         initializeTooltips: function() {
@@ -91,22 +106,54 @@ jQuery(document).ready(function($) {
             // Remove existing handler to prevent multiple bindings
             $container.off('scroll.indicator');
             
-            // Check if horizontal scrolling is needed (on any device)
-            if ($firstRow.length && $firstRow.width() > $container.width()) {
-                // Add scroll indicator if needed
-                if ($('.sxs-scroll-indicator').length === 0) {
-                    $('<div class="sxs-scroll-indicator">Scroll to see more candidates →</div>')
-                        .insertBefore($container)
-                        .fadeIn();
-                } else {
-                    $('.sxs-scroll-indicator').fadeIn();
-                }
+            // Function to check if element is in viewport
+            function isElementInViewport($el) {
+                if (!$el.length) return false;
                 
-                // Keep indicator visible at all times when horizontal scrolling is needed
+                var rect = $el[0].getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Check if comparison container is in viewport and if horizontal scrolling is needed
+            if ($container.length && $firstRow.length && $firstRow.width() > $container.width()) {
+                var isContainerVisible = isElementInViewport($container) || 
+                                       // Also check if we're scrolled within the container
+                                       $container.offset().top < window.pageYOffset + window.innerHeight &&
+                                       $container.offset().top + $container.height() > window.pageYOffset;
+                
+                if (isContainerVisible) {
+                    // Add scroll indicator if needed
+                    if ($('.sxs-scroll-indicator').length === 0) {
+                        $('<div class="sxs-scroll-indicator">Scroll to see more candidates →</div>')
+                            .insertBefore($container)
+                            .fadeIn();
+                    } else {
+                        $('.sxs-scroll-indicator').fadeIn();
+                    }
+                } else {
+                    // Hide indicator when container not in viewport
+                    $('.sxs-scroll-indicator').fadeOut();
+                }
             } else {
                 // Hide indicator if not needed
                 $('.sxs-scroll-indicator').fadeOut();
             }
+            
+            // Set up horizontal scroll detection
+            $container.on('scroll.indicator', function() {
+                // Hide indicator as they start scrolling horizontally
+                if ($(this).scrollLeft() > 0) {
+                    $('.sxs-scroll-indicator').fadeOut();
+                } else {
+                    // Show it again when scrolled back to start
+                    $('.sxs-scroll-indicator').fadeIn();
+                }
+            });
         },
 
         // Initialize recruiter slider
