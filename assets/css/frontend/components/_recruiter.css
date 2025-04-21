@@ -121,9 +121,11 @@ h5.sxs-recruiter-name {
     color: #fff;
     margin-top: 15px;
 }
+
 .sxs-recruiter-name-container p.team-phone {
     margin-top: 7px;
     margin-bottom: 2px;
+    color: white;
 }
 
 .sxs-recruiter-name-container .pres-team-social a:hover {
