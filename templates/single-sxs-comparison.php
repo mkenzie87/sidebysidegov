@@ -278,6 +278,7 @@ while (have_posts()) :
             </div>
             <?php
             // Display the selected layout footer
+            /*
             sxs_get_template_part('templates/layouts/footer', $footer_layout, array(
                 'company' => $company,
                 'company_logo_url' => $company_logo_url,
@@ -294,6 +295,7 @@ while (have_posts()) :
                 'job_education' => $job_education,
                 'job' => $job
             ));
+            */
         endif;
     }
 endwhile;
