@@ -91,26 +91,20 @@ jQuery(document).ready(function($) {
             // Remove existing handler to prevent multiple bindings
             $container.off('scroll.indicator');
             
-            // Only apply on desktop
-            if ($(window).width() > 768 && $firstRow.length) {
-                if ($firstRow.width() > $container.width()) {
-                    // Add scroll indicator if needed
-                    if ($('.sxs-scroll-indicator').length === 0) {
-                        $('<div class="sxs-scroll-indicator">Scroll to see more candidates →</div>')
-                            .insertBefore($container)
-                            .fadeIn();
-                    } else {
-                        $('.sxs-scroll-indicator').fadeIn();
-                    }
-                    
-                    // Keep indicator visible at all times when horizontal scrolling is needed
-                    // No longer hiding it on scroll
+            // Check if horizontal scrolling is needed (on any device)
+            if ($firstRow.length && $firstRow.width() > $container.width()) {
+                // Add scroll indicator if needed
+                if ($('.sxs-scroll-indicator').length === 0) {
+                    $('<div class="sxs-scroll-indicator">Scroll to see more candidates →</div>')
+                        .insertBefore($container)
+                        .fadeIn();
                 } else {
-                    // Hide indicator if not needed
-                    $('.sxs-scroll-indicator').fadeOut();
+                    $('.sxs-scroll-indicator').fadeIn();
                 }
+                
+                // Keep indicator visible at all times when horizontal scrolling is needed
             } else {
-                // Hide indicator on mobile
+                // Hide indicator if not needed
                 $('.sxs-scroll-indicator').fadeOut();
             }
         },
