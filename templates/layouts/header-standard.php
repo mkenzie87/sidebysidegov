@@ -60,7 +60,7 @@ wp_add_inline_script('slick', "
     overflow: hidden;
     background-color: #1C2856;
     flex-direction: column;
-    padding: 60px 20px;
+    padding: 150px 20px 60px;
 }
 
 .sxs-hero-bg {
@@ -347,7 +347,7 @@ section.recruiter-info {
 
 @media screen and (max-width: 768px) {
     .sxs-hero-header {
-        padding: 40px 20px;
+        padding: 100px 20px 60px;
     }
     
     .sxs-hero-logo {
