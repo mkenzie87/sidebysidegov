@@ -14,6 +14,23 @@ jQuery(document).ready(function($) {
             // Initialize scroll position tracker
             this.lastScrollTop = 0;
             this.scrollTimeout = null;
+            
+            // Create both indicator elements on page load to prevent layout jumps
+            this.createScrollIndicators();
+        },
+        
+        // Create both indicator elements to prevent layout jumps when showing/hiding
+        createScrollIndicators: function() {
+            var $container = $('.sxs-comparison-container');
+            if ($container.length && $('.sxs-scroll-indicator').length === 0) {
+                // Add desktop indicator (initially hidden)
+                $('<div class="sxs-scroll-indicator desktop-indicator" style="visibility:hidden;">Scroll to see more candidates →</div>')
+                    .insertBefore($container);
+                
+                // Add mobile indicator (initially hidden)
+                $('<div class="sxs-scroll-indicator mobile-indicator" style="visibility:hidden;">Scroll to see more candidates →</div>')
+                    .appendTo('body'); // Append to body for fixed positioning
+            }
         },
 
         bindEvents: function() {
@@ -103,6 +120,8 @@ jQuery(document).ready(function($) {
             var $container = $('.sxs-comparison-container');
             var $firstRow = $container.find('.sxs-row:first');
             var isMobile = window.innerWidth <= 768;
+            var $desktopIndicator = $('.desktop-indicator');
+            var $mobileIndicator = $('.mobile-indicator');
             
             // Remove existing handler to prevent multiple bindings
             $container.off('scroll.indicator');
@@ -120,6 +139,13 @@ jQuery(document).ready(function($) {
                 );
             }
             
+            // Create indicators if they don't exist yet
+            if ($desktopIndicator.length === 0 || $mobileIndicator.length === 0) {
+                this.createScrollIndicators();
+                $desktopIndicator = $('.desktop-indicator');
+                $mobileIndicator = $('.mobile-indicator');
+            }
+            
             // Check if comparison container is in viewport and if horizontal scrolling is needed
             if ($container.length && $firstRow.length && $firstRow.width() > $container.width()) {
                 var isContainerVisible = isElementInViewport($container) || 
@@ -128,34 +154,42 @@ jQuery(document).ready(function($) {
                                        $container.offset().top + $container.height() > window.pageYOffset;
                 
                 if (isContainerVisible) {
-                    // Remove existing indicator
-                    $('.sxs-scroll-indicator').remove();
-                    
-                    // Add scroll indicator with appropriate class for device type
-                    var indicatorClass = isMobile ? 'sxs-scroll-indicator mobile-indicator' : 'sxs-scroll-indicator desktop-indicator';
-                    $('<div class="' + indicatorClass + '">Scroll to see more candidates →</div>')
-                        .insertBefore($container)
-                        .fadeIn();
+                    // Show the appropriate indicator based on device type
+                    if (isMobile) {
+                        $mobileIndicator.css('visibility', 'visible');
+                        $desktopIndicator.css('visibility', 'hidden');
+                    } else {
+                        $desktopIndicator.css('visibility', 'visible');
+                        $mobileIndicator.css('visibility', 'hidden');
+                    }
                 } else {
-                    // Hide indicator when container not in viewport
-                    $('.sxs-scroll-indicator').fadeOut();
+                    // Hide both indicators when container not in viewport
+                    $desktopIndicator.css('visibility', 'hidden');
+                    $mobileIndicator.css('visibility', 'hidden');
                 }
             } else {
-                // Hide indicator if not needed
-                $('.sxs-scroll-indicator').fadeOut();
+                // Hide both indicators if horizontal scrolling is not needed
+                $desktopIndicator.css('visibility', 'hidden');
+                $mobileIndicator.css('visibility', 'hidden');
             }
             
             // Set up horizontal scroll detection
             $container.on('scroll.indicator', function() {
-                // Hide indicator as they start scrolling horizontally
+                // Hide indicators as they start scrolling horizontally
                 if ($(this).scrollLeft() > 0) {
-                    $('.sxs-scroll-indicator').fadeOut();
+                    $desktopIndicator.css('visibility', 'hidden');
+                    $mobileIndicator.css('visibility', 'hidden');
                 } else {
                     // Show it again when scrolled back to start
                     if (isElementInViewport($container) || 
                         $container.offset().top < window.pageYOffset + window.innerHeight &&
                         $container.offset().top + $container.height() > window.pageYOffset) {
-                        $('.sxs-scroll-indicator').fadeIn();
+                        
+                        if (isMobile) {
+                            $mobileIndicator.css('visibility', 'visible');
+                        } else {
+                            $desktopIndicator.css('visibility', 'visible');
+                        }
                     }
                 }
             });
