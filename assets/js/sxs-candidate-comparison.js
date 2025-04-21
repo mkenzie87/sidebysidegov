@@ -102,6 +102,7 @@ jQuery(document).ready(function($) {
         checkScrollIndicator: function() {
             var $container = $('.sxs-comparison-container');
             var $firstRow = $container.find('.sxs-row:first');
+            var isMobile = window.innerWidth <= 768;
             
             // Remove existing handler to prevent multiple bindings
             $container.off('scroll.indicator');
@@ -127,14 +128,14 @@ jQuery(document).ready(function($) {
                                        $container.offset().top + $container.height() > window.pageYOffset;
                 
                 if (isContainerVisible) {
-                    // Add scroll indicator if needed
-                    if ($('.sxs-scroll-indicator').length === 0) {
-                        $('<div class="sxs-scroll-indicator">Scroll to see more candidates →</div>')
-                            .insertBefore($container)
-                            .fadeIn();
-                    } else {
-                        $('.sxs-scroll-indicator').fadeIn();
-                    }
+                    // Remove existing indicator
+                    $('.sxs-scroll-indicator').remove();
+                    
+                    // Add scroll indicator with appropriate class for device type
+                    var indicatorClass = isMobile ? 'sxs-scroll-indicator mobile-indicator' : 'sxs-scroll-indicator desktop-indicator';
+                    $('<div class="' + indicatorClass + '">Scroll to see more candidates →</div>')
+                        .insertBefore($container)
+                        .fadeIn();
                 } else {
                     // Hide indicator when container not in viewport
                     $('.sxs-scroll-indicator').fadeOut();
@@ -151,7 +152,11 @@ jQuery(document).ready(function($) {
                     $('.sxs-scroll-indicator').fadeOut();
                 } else {
                     // Show it again when scrolled back to start
-                    $('.sxs-scroll-indicator').fadeIn();
+                    if (isElementInViewport($container) || 
+                        $container.offset().top < window.pageYOffset + window.innerHeight &&
+                        $container.offset().top + $container.height() > window.pageYOffset) {
+                        $('.sxs-scroll-indicator').fadeIn();
+                    }
                 }
             });
         },

@@ -39,11 +39,8 @@
     animation: scroll-right 1.5s infinite;
 }
 
-/* Custom scroll indicator for horizontal scrolling */
+/* Custom scroll indicator for horizontal scrolling - base styles */
 .sxs-scroll-indicator {
-    position: sticky;
-    top: 10px;
-    right: 10px;
     z-index: 100;
     background-color: rgb(217 217 217);
     color: black;
@@ -55,6 +52,28 @@
     text-align: center;
     margin: 10px auto;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Desktop indicator - positioned normally (not sticky) */
+.desktop-indicator {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 10px auto;
+    display: block;
+}
+
+/* Mobile indicator - fixed at bottom of screen */
+.mobile-indicator {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
 }
 
 @keyframes scroll-right {
@@ -216,13 +235,6 @@
     .sxs-scroll-indicator {
         font-size: 12px;
         padding: 6px 12px;
-        max-width: 100%;
-        bottom: 0;
-        top: auto;
-        left: 10px;
-        width: calc(100% - 20px);
-        right: 10px;
-        position: fixed;
     }
     
 }
