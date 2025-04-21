@@ -80,6 +80,11 @@
     text-align: left;
 }
 
+h5.sxs-recruiter-name {
+    color: white;
+    margin-bottom: 0;
+}
+
 .sxs-recruiter-name-container h5.team-name {
     color: #fff;
     margin-top: 15px;
@@ -91,16 +96,25 @@
     font-size: 14px;
 }
 
+.sxs-recruiter-name-container .team-divider {
+    background: #fff;
+    height: 1px;
+    width: 22px;
+    margin: 0;
+}
+
 .sxs-recruiter-name-container .pres-team-social a {
-    background:#F37021;
+    background: #F37021;
     color: #fff;
     border: 1px solid #F37021;
     height: 32px;
     width: 32px;
-    display: inline-block;
     border-radius: 50%;
     font-size: 16px;
     line-height: 32px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sxs-recruiter-name-container h5.team-name {
