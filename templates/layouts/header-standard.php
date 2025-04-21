@@ -504,7 +504,7 @@ section.recruiter-info {
                             ?>
                         </div>
                             <div class="sxs-recruiter-name-container">
-                            <h class="sxs-recruiter-name"><?php echo esc_html($recruiter_name); ?></h2>
+                            <h5 class="sxs-recruiter-name"><?php echo esc_html($recruiter_name); ?></h5>
 
                             <?php if($title): ?>
                                 <p class="team-title uppercase"><?php echo $title; ?></p>
