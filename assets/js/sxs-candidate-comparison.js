@@ -69,33 +69,51 @@ jQuery(document).ready(function($) {
 
         // Add smooth scrolling for horizontal scroll
         setupSmoothScrolling: function() {
-            // Only apply this on desktop
-            if ($(window).width() > 768) {
-                // Check if we have more candidates than can fit in viewport
-                var $container = $('.sxs-comparison-container');
-                var $firstRow = $container.find('.sxs-row:first');
-                
+            this.checkScrollIndicator();
+            
+            // Add resize listener to update scroll indicator dynamically
+            $(window).on('resize', $.proxy(this.checkScrollIndicator, this));
+            
+            // Enable smoother scrolling with mouse wheel
+            $('.sxs-comparison-container').on('wheel', function(e) {
+                if (e.originalEvent.deltaY === 0) {
+                    e.preventDefault();
+                    $(this).scrollLeft($(this).scrollLeft() + e.originalEvent.deltaX);
+                }
+            });
+        },
+        
+        // Check if scroll indicator should be shown or hidden
+        checkScrollIndicator: function() {
+            var $container = $('.sxs-comparison-container');
+            var $firstRow = $container.find('.sxs-row:first');
+            
+            // Remove existing handler to prevent multiple bindings
+            $container.off('scroll.indicator');
+            
+            // Only apply on desktop
+            if ($(window).width() > 768 && $firstRow.length) {
                 if ($firstRow.width() > $container.width()) {
                     // Add scroll indicator if needed
                     if ($('.sxs-scroll-indicator').length === 0) {
                         $('<div class="sxs-scroll-indicator">Scroll to see more candidates →</div>')
                             .insertBefore($container)
                             .fadeIn();
-                        
-                        // Hide indicator after scrolling
-                        $container.on('scroll', function() {
-                            $('.sxs-scroll-indicator').fadeOut();
-                        });
+                    } else {
+                        $('.sxs-scroll-indicator').fadeIn();
                     }
                     
-                    // Enable smoother scrolling with mouse wheel
-                    $container.on('wheel', function(e) {
-                        if (e.originalEvent.deltaY === 0) {
-                            e.preventDefault();
-                            $(this).scrollLeft($(this).scrollLeft() + e.originalEvent.deltaX);
-                        }
+                    // Hide indicator after scrolling
+                    $container.on('scroll.indicator', function() {
+                        $('.sxs-scroll-indicator').fadeOut();
                     });
+                } else {
+                    // Hide indicator if not needed
+                    $('.sxs-scroll-indicator').fadeOut();
                 }
+            } else {
+                // Hide indicator on mobile
+                $('.sxs-scroll-indicator').fadeOut();
             }
         },
 
