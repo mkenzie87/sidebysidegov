@@ -103,10 +103,8 @@ jQuery(document).ready(function($) {
                         $('.sxs-scroll-indicator').fadeIn();
                     }
                     
-                    // Hide indicator after scrolling
-                    $container.on('scroll.indicator', function() {
-                        $('.sxs-scroll-indicator').fadeOut();
-                    });
+                    // Keep indicator visible at all times when horizontal scrolling is needed
+                    // No longer hiding it on scroll
                 } else {
                     // Hide indicator if not needed
                     $('.sxs-scroll-indicator').fadeOut();
