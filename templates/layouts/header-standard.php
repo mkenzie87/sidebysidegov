@@ -360,7 +360,7 @@ section.recruiter-info {
     }
 
     .sxs-split-content {
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 30px;
     }
 
