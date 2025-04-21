@@ -125,6 +125,7 @@ wp_add_inline_script('slick', "
     gap: 40px;
     align-items: center;
     justify-content: space-between;
+    padding: 50px 20px 0 20px;
 }
 
 .sxs-split-recruiters {
@@ -163,10 +164,6 @@ wp_add_inline_script('slick', "
     transition: color 0.3s ease;
 }
 
-.sxs-split-text a:hover {
-    color: white;
-    text-decoration: underline;
-}
 
 .sxs-split-text ul,
 .sxs-split-text ol {
@@ -339,9 +336,13 @@ section.recruiter-info {
     margin-left: 5px;
 }
 
+
+
 .position-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: #1c2856;
+    color: white;
+    border: 1px solid #1c2856;
+    text-decoration: none !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -490,18 +491,23 @@ section.recruiter-info {
                     $recruiter_name = get_the_title($featured_post->ID);
                 ?>
                 <div class="sxs-recruiter-slide">
-                    <div class="sxs-recruiter-photo">
-                        <?php
-                        if (!empty($thumbnail)) {
-                            echo '<img src="' . esc_url($thumbnail) . '" alt="' . esc_attr($recruiter_name) . '">';
-                        } elseif (!empty($placeholder)) {
-                            echo '<img src="' . esc_url($placeholder) . '" alt="' . esc_attr($recruiter_name) . '">';
-                        } else {
-                            echo '<img src="' . esc_url(plugins_url('assets/images/placeholder-user.jpg', dirname(dirname(__FILE__)))) . '" alt="' . esc_attr($recruiter_name) . '">';
-                        }
-                        ?>
+                    <div class="sxs-recruiter-slide-inner">
+                        <div class="sxs-recruiter-photo">
+                            <?php
+                            if (!empty($thumbnail)) {
+                                echo '<img src="' . esc_url($thumbnail) . '" alt="' . esc_attr($recruiter_name) . '">';
+                            } elseif (!empty($placeholder)) {
+                                echo '<img src="' . esc_url($placeholder) . '" alt="' . esc_attr($recruiter_name) . '">';
+                            } else {
+                                echo '<img src="' . esc_url(plugins_url('assets/images/placeholder-user.jpg', dirname(dirname(__FILE__)))) . '" alt="' . esc_attr($recruiter_name) . '">';
+                            }
+                            ?>
+                        </div>
+                            <div class="sxs-recruiter-name-container">
+                            <h2 class="sxs-recruiter-name"><?php echo esc_html($recruiter_name); ?></h2>
+                        </div>
                     </div>
-                    <h2 class="sxs-recruiter-name"><?php echo esc_html($recruiter_name); ?></h2>
+
                     
                     <?php if (count($featured_posts) > 1) : ?>
                     <div class="sxs-slide-controls">

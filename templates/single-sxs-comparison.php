@@ -172,7 +172,7 @@ while (have_posts()) :
                     <div class="sxs-row sxs-comparison-header">
                         <div class="sxs-col-header sticky-left-col">SIDE BY SIDE</div>
                         <?php foreach ($candidates as $candidate) : ?>
-                            <div class="sxs-col">
+                            <div class="sxs-col sxs-candidate-name">
                                 <?php echo esc_html($candidate->post_title); ?>
                             </div>
                         <?php endforeach; ?>
@@ -274,96 +274,7 @@ while (have_posts()) :
                 </div>
                 
                 <!-- Mobile Layout - Vertical Cards -->
-                <div class="sxs-mobile-cards">
-                    <?php foreach ($candidates as $candidate) : ?>
-                        <div class="sxs-candidate-card">
-                            <div class="sxs-card-header">
-                                <?php echo esc_html($candidate->post_title); ?>
-                            </div>
-                            
-                            <!-- Company/Title -->
-                            <div class="sxs-card-row">
-                                <div class="sxs-card-label">CURRENT COMPANY/TITLE</div>
-                                <div class="sxs-card-content">
-                                    <div class="company"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_company', true)); ?></div>
-                                    <div class="title"><?php echo esc_html(get_post_meta($candidate->ID, '_sxs_current_title', true)); ?></div>
-                                </div>
-                            </div>
-                            
-                            <!-- Degrees -->
-                            <div class="sxs-card-row">
-                                <div class="sxs-card-label">DEGREES/CERTIFICATIONS</div>
-                                <div class="sxs-card-content">
-                                    <ul class="sxs-degrees">
-                                        <?php 
-                                        $education = get_post_meta($candidate->ID, '_sxs_education', true);
-                                        if (is_array($education) && !empty($education)) :
-                                            foreach ($education as $edu) : ?>
-                                                <li><?php echo esc_html($edu); ?></li>
-                                            <?php endforeach;
-                                        endif; ?>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- Experience -->
-                            <div class="sxs-card-row">
-                                <div class="sxs-card-label">YEARS OF INDUSTRY EXPERIENCE/ROLE EXPERIENCE</div>
-                                <div class="sxs-card-content">
-                                    <div class="sxs-experience">
-                                        <?php 
-                                        $industry_exp = get_post_meta($candidate->ID, '_sxs_industry_experience', true);
-                                        $role_exp = get_post_meta($candidate->ID, '_sxs_role_experience', true);
-                                        echo esc_html($industry_exp) . ' years\' industry experience<br>' . esc_html($role_exp) . ' years\' specific role experience';
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Relevant Experience -->
-                            <div class="sxs-card-row">
-                                <div class="sxs-card-label">RELEVANT EXPERIENCE SUMMARY</div>
-                                <div class="sxs-card-content">
-                                    <ul class="sxs-list">
-                                        <?php 
-                                        $experience = get_post_meta($candidate->ID, '_sxs_relevant_experience', true);
-                                        if (is_array($experience) && !empty($experience)) :
-                                            foreach ($experience as $item) : ?>
-                                                <li><?php echo esc_html($item); ?></li>
-                                            <?php endforeach;
-                                        endif; ?>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- Compensation -->
-                            <div class="sxs-card-row">
-                                <div class="sxs-card-label">COMPENSATION</div>
-                                <div class="sxs-card-content">
-                                    <div class="sxs-compensation">
-                                        <?php 
-                                        $current_base = get_post_meta($candidate->ID, '_sxs_current_base', true);
-                                        $current_bonus = get_post_meta($candidate->ID, '_sxs_current_bonus', true);
-                                        $application = get_post_meta($candidate->ID, '_sxs_application_compensation', true);
-                                        
-                                        if (!empty($current_base)) {
-                                            echo 'Current: ' . esc_html($current_base);
-                                            if (!empty($current_bonus)) {
-                                                echo ' + ' . esc_html($current_bonus);
-                                            }
-                                            echo '<br>';
-                                        }
-                                        
-                                        if (!empty($application)) {
-                                            echo 'Application: ' . esc_html($application);
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                
             </div>
             <?php
             // Display the selected layout footer

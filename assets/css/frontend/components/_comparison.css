@@ -111,6 +111,15 @@
     display: flex;
     align-items: center;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    padding: 10px 15px;
+}
+
+/* Header Candidate Name column */
+.sxs-col.sxs-candidate-name {
+    background-color: #1C2856 !important;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 /* Header row's first column (corner) */
