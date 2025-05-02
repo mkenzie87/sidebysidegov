@@ -262,7 +262,7 @@ wp_add_inline_script('slick', "
 
 @media screen and (max-width: 768px) {
     .sxs-hero-header {
-        padding: 100px 20px 60px;
+        padding: 150px 20px 20px;
     }
     
     .sxs-hero-logo {
