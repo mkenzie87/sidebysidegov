@@ -4,14 +4,15 @@ A WordPress plugin for creating beautiful side-by-side candidate comparisons for
 
 ## Features
 
-- Custom post types for managing candidate profiles, companies, and jobs
+- Custom post types for managing candidate profiles
 - Side-by-side comparison of multiple candidates
 - Responsive design for all devices
-- Print-friendly layouts
-- Shortcode support for easy embedding
-- Customizable styling options
+- Print-friendly layout
 - Modern, clean interface
-- Multiple layout options (Standard, Premium, Minimal, Branded)
+- Sticky left column for better usability with many candidates
+- Resume upload and download functionality
+- Global default background image setting for comparison headers
+- Position Brief and Crelate Portal button integration
 
 ## Installation
 
@@ -21,72 +22,32 @@ A WordPress plugin for creating beautiful side-by-side candidate comparisons for
 
 ## Usage
 
-### Managing Internal Data
+### Managing Candidates
 
-The plugin uses several custom post types to organize your data internally. These don't create public-facing pages:
-
-#### Candidate Profiles
 1. Navigate to 'Side by Side > All Candidates' in the WordPress admin menu
-2. Click 'Add New' to create a new candidate profile in your internal database
-3. Fill in the candidate details for use in comparisons
+2. Click 'Add New' to create a new candidate profile
+3. Fill in the candidate details:
+   - Current Position (company and title)
+   - Experience & Education (years of experience, education, relevant experience)
+   - Compensation Details
+   - Upload a resume for the candidate (PDF format recommended)
+4. Publish the candidate
 
-#### Company Profiles
-1. Navigate to 'Side by Side > Companies' in the WordPress admin menu
-2. Click 'Add New' to create a new company profile in your internal database
-3. Fill in the company details for branding your comparisons
-
-#### Job Listings
-1. Navigate to 'Side by Side > Jobs' in the WordPress admin menu
-2. Click 'Add New' to create a new job in your internal database
-3. Fill in the job details to provide context for your comparisons
-
-### Creating Public Comparisons
+### Creating Comparisons
 
 1. Navigate to 'Side by Side > Comparisons' in the WordPress admin menu
 2. Click 'Add New' to create a comparison set
-3. Select a job, candidates, and layout 
-4. Publish the comparison
-5. Use the generated shortcode to display the comparison on any page
+3. Enter a title for your comparison
+4. Select candidates to include in the comparison
+5. (Optional) Add Position Brief and Crelate Portal links
+6. Publish the comparison
+7. View the comparison by clicking the "View" link
 
-### Displaying Comparisons
+### Configuring Settings
 
-Use the shortcode `[sxs_candidate_comparison]` to display candidate comparisons. The shortcode accepts the following parameters:
-
-- `ids`: Comma-separated list of candidate IDs to compare
-- `category`: Category slug to filter candidates
-- `job`: ID of a job to use for comparison context
-- `layout`: Style to use (standard, premium, minimal, branded)
-- `limit`: Maximum number of candidates to display (default: 3)
-
-Examples:
-
-```
-[sxs_candidate_comparison ids="1,2,3"]
-[sxs_candidate_comparison category="executive" limit="4"]
-[sxs_candidate_comparison job="45" layout="premium"]
-```
-
-### Layout Options
-
-The plugin provides four distinct layout options for candidate comparisons:
-
-1. **Standard**: The default layout with clean, professional design. Includes job details in the header and all candidate information.
-   
-2. **Premium**: Enhanced layout with additional visual elements and more detailed profiles. Ideal for executive searches and client presentations.
-   
-3. **Minimal**: Simplified layout with only essential information. Perfect for internal reviews or preliminary candidate screenings.
-   
-4. **Branded**: Company-focused layout that uses brand colors and emphasizes company identity. Best for client-facing reports.
-
-You can select a layout when creating a comparison set or specify it in the shortcode with the `layout` parameter.
-
-### Styling
-
-The plugin includes default styles that match modern recruitment presentations. You can customize the appearance by:
-
-1. Adding custom CSS to your theme
-2. Modifying the color scheme through WordPress customizer
-3. Overriding the default styles in your theme's stylesheet
+1. Navigate to 'Side by Side > Settings' in the WordPress admin menu
+2. Upload a default background image for all comparison headers (optional)
+3. Click 'Save Changes'
 
 ## Requirements
 
@@ -108,10 +69,18 @@ This plugin is licensed under the GPL v2 or later.
 
 ## Changelog
 
+### 2.0.0
+- Added resume upload/download functionality
+- Added global default header background image setting
+- Renamed Scorecard to Crelate Portal
+- Simplified plugin by removing unused features
+- Removed job post type
+- Removed shortcode functionality
+- Streamlined UI for better usability
+
 ### 1.0.0
 - Initial release
 - Custom post type for candidates
 - Side-by-side comparison functionality
 - Responsive design
-- Print-friendly layouts
-- Shortcode support 
+- Print-friendly layouts 

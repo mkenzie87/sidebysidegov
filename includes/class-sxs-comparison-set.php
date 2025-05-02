@@ -60,23 +60,21 @@ class SXS_Comparison_Set {
     }
 
     public function add_meta_boxes() {
-        // Only add job selection if jobs are enabled
-        if (class_exists('SXS_Settings') && SXS_Settings::is_jobs_enabled()) {
-            add_meta_box(
-                'sxs_job_selection',
-                __('Job Selection', 'sxs-candidate-comparison'),
-                array($this, 'render_job_selection_meta_box'),
-                'sxs_comparison',
-                'normal',
-                'high'
-            );
-        }
-        
-        // Position Brief and Scorecard metabox
+        // Candidates metabox
         add_meta_box(
-            'sxs_position_brief_scorecard',
-            __('Position Brief & Scorecard', 'sxs-candidate-comparison'),
-            array($this, 'render_position_brief_scorecard_meta_box'),
+            'sxs_comparison_candidates',
+            __('Candidates', 'sxs-candidate-comparison'),
+            array($this, 'render_candidates_meta_box'),
+            'sxs_comparison',
+            'normal',
+            'high'
+        );
+        
+        // Company selection metabox
+        add_meta_box(
+            'sxs_comparison_company',
+            __('Company', 'sxs-candidate-comparison'),
+            array($this, 'render_companies_meta_box'),
             'sxs_comparison',
             'normal',
             'high'
@@ -92,262 +90,15 @@ class SXS_Comparison_Set {
             'high'
         );
         
-        // Candidates metabox
+        // Position Brief and Scorecard metabox
         add_meta_box(
-            'sxs_comparison_candidates',
-            __('Select Candidates', 'sxs-candidate-comparison'),
-            array($this, 'render_candidates_meta_box'),
+            'sxs_position_brief_scorecard',
+            __('Position Brief & Crelate Portal', 'sxs-candidate-comparison'),
+            array($this, 'render_position_brief_scorecard_meta_box'),
             'sxs_comparison',
             'normal',
             'high'
         );
-
-        // Companies metabox
-        add_meta_box(
-            'sxs_comparison_companies',
-            __('Select Companies', 'sxs-candidate-comparison'),
-            array($this, 'render_companies_meta_box'),
-            'sxs_comparison',
-            'normal',
-            'high'
-        );
-
-        // Shortcode metabox
-        add_meta_box(
-            'sxs_comparison_shortcode',
-            __('Shortcode', 'sxs-candidate-comparison'),
-            array($this, 'render_shortcode_meta_box'),
-            'sxs_comparison',
-            'side',
-            'default'
-        );
-    }
-
-    public function render_job_selection_meta_box($post) {
-        wp_nonce_field('sxs_job_selection_nonce', 'sxs_job_selection_nonce');
-        
-        $selected_job = get_post_meta($post->ID, '_sxs_selected_job', true);
-        
-        // Get all jobs
-        $jobs = get_posts(array(
-            'post_type' => 'sxs_job',
-            'posts_per_page' => -1,
-            'orderby' => 'title',
-            'order' => 'ASC'
-        ));
-
-        ?>
-        <div class="sxs-meta-row">
-            <h3 class="sxs-section-title"><?php _e('Job Selection', 'sxs-candidate-comparison'); ?></h3>
-            
-            <p class="description">
-                <?php _e('Choose a job to include in this comparison. The job information will be displayed along with the candidates.', 'sxs-candidate-comparison'); ?>
-                <span class="sxs-tooltip">
-                    <span class="sxs-tooltip-icon">?</span>
-                    <span class="sxs-tooltip-text"><?php _e('Job information such as title, location, description and application link will be shown in the comparison.', 'sxs-candidate-comparison'); ?></span>
-                </span>
-            </p>
-            
-            <div class="sxs-job-selector">
-                <label for="sxs_selected_job">
-                    <?php _e('Select Job', 'sxs-candidate-comparison'); ?>
-                </label>
-                
-                <select id="sxs_selected_job" name="sxs_selected_job" class="widefat">
-                    <option value=""><?php _e('-- None --', 'sxs-candidate-comparison'); ?></option>
-                    <?php foreach ($jobs as $job) : ?>
-                        <?php 
-                        $company_id = get_post_meta($job->ID, '_sxs_job_company_id', true);
-                        $company_name = '';
-                        if (!empty($company_id)) {
-                            $company = get_post($company_id);
-                            if ($company) {
-                                $company_name = ' (' . $company->post_title . ')';
-                            }
-                        }
-                        $job_location = get_post_meta($job->ID, '_sxs_job_location', true);
-                        $location_text = !empty($job_location) ? ' - ' . $job_location : '';
-                        ?>
-                        <option value="<?php echo esc_attr($job->ID); ?>" <?php selected($selected_job, $job->ID); ?>>
-                            <?php echo esc_html($job->post_title) . esc_html($location_text) . esc_html($company_name); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                
-                <?php if (empty($jobs)) : ?>
-                    <div class="sxs-error-message">
-                        <?php 
-                        printf(
-                            __('No jobs available. <a href="%s">Add a job</a> first.', 'sxs-candidate-comparison'),
-                            admin_url('post-new.php?post_type=sxs_job')
-                        ); 
-                        ?>
-                    </div>
-                <?php endif; ?>
-                
-                <?php if (!empty($selected_job)) : 
-                    $job = get_post($selected_job);
-                    if ($job) : 
-                        // Get job details
-                        $job_location = get_post_meta($job->ID, '_sxs_job_location', true);
-                        $job_type = get_post_meta($job->ID, '_sxs_job_type', true);
-                        $company_id = get_post_meta($job->ID, '_sxs_job_company_id', true);
-                        $company_name = '';
-                        $company_logo_url = '';
-                        
-                        if (!empty($company_id)) {
-                            $company = get_post($company_id);
-                            if ($company) {
-                                $company_name = $company->post_title;
-                                $logo_id = get_post_meta($company_id, '_sxs_company_logo_id', true);
-                                if (!empty($logo_id)) {
-                                    $logo_img = wp_get_attachment_image_src($logo_id, array(40, 40));
-                                    if ($logo_img) {
-                                        $company_logo_url = $logo_img[0];
-                                    }
-                                }
-                            }
-                        }
-                        ?>
-                        <div class="sxs-job-preview">
-                            <div class="sxs-job-preview-header">
-                                <?php if (!empty($company_logo_url)) : ?>
-                                <div class="sxs-job-company-logo">
-                                    <img src="<?php echo esc_url($company_logo_url); ?>" alt="<?php echo esc_attr($company_name); ?> Logo">
-                                </div>
-                                <?php endif; ?>
-                                <div class="sxs-job-preview-title">
-                                    <h3><?php echo esc_html($job->post_title); ?></h3>
-                                    <?php if (!empty($company_name)) : ?>
-                                    <div class="sxs-job-company"><?php echo esc_html($company_name); ?></div>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                            <div class="sxs-job-preview-details">
-                                <?php if (!empty($job_location)) : ?>
-                                <div class="sxs-job-location">
-                                    <strong><?php _e('Location:', 'sxs-candidate-comparison'); ?></strong> <?php echo esc_html($job_location); ?>
-                                </div>
-                                <?php endif; ?>
-                                <?php if (!empty($job_type)) : ?>
-                                <div class="sxs-job-type">
-                                    <strong><?php _e('Type:', 'sxs-candidate-comparison'); ?></strong> <?php echo esc_html(ucfirst($job_type)); ?>
-                                </div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="sxs-job-actions">
-                            <a href="<?php echo get_edit_post_link($job->ID); ?>" class="button" target="_blank">
-                                <?php _e('Edit Job', 'sxs-candidate-comparison'); ?>
-                            </a>
-                            <a href="<?php echo get_permalink($job->ID); ?>" class="button" target="_blank">
-                                <?php _e('View Job', 'sxs-candidate-comparison'); ?>
-                            </a>
-                        </div>
-                    <?php endif; ?>
-                <?php endif; ?>
-            </div>
-        </div>
-
-        <style>
-            .sxs-job-selector {
-                margin-top: 20px;
-            }
-            
-            #sxs_selected_job {
-                margin-top: 10px;
-                margin-bottom: 15px;
-            }
-            
-            .sxs-job-preview {
-                margin-top: 15px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                overflow: hidden;
-                background: #f9f9f9;
-            }
-            
-            .sxs-job-preview-header {
-                padding: 15px;
-                display: flex;
-                align-items: center;
-                border-bottom: 1px solid #eee;
-                background: #fff;
-            }
-            
-            .sxs-job-company-logo {
-                margin-right: 15px;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .sxs-job-company-logo img {
-                max-width: 100%;
-                max-height: 100%;
-                border-radius: 4px;
-            }
-            
-            .sxs-job-preview-title h3 {
-                margin: 0 0 5px;
-                font-size: 16px;
-            }
-            
-            .sxs-job-company {
-                font-size: 13px;
-                color: #666;
-            }
-            
-            .sxs-job-preview-details {
-                padding: 15px;
-                display: flex;
-                gap: 20px;
-                font-size: 13px;
-            }
-            
-            .sxs-job-actions {
-                margin-top: 10px;
-                display: flex;
-                gap: 10px;
-            }
-        </style>
-        
-        <script>
-        jQuery(document).ready(function($) {
-            // Update preview when job selection changes
-            $('#sxs_selected_job').on('change', function() {
-                // Submit the form when job changes to update the preview
-                var $form = $(this).closest('form');
-                var action = $form.attr('action');
-                
-                // Store the current scroll position
-                var scrollPosition = $(window).scrollTop();
-                
-                // Add a hidden input to indicate this is just a preview update
-                if (!$('#sxs_preview_update').length) {
-                    $form.append('<input type="hidden" id="sxs_preview_update" name="sxs_preview_update" value="1">');
-                }
-                
-                // Save form data to localStorage
-                var formData = $form.serialize();
-                localStorage.setItem('sxs_form_data', formData);
-                localStorage.setItem('sxs_scroll_position', scrollPosition);
-                
-                // Submit the form
-                $form.submit();
-            });
-            
-            // Restore scroll position after page reload
-            var savedScrollPosition = localStorage.getItem('sxs_scroll_position');
-            if (savedScrollPosition) {
-                $(window).scrollTop(savedScrollPosition);
-                localStorage.removeItem('sxs_scroll_position');
-            }
-        });
-        </script>
-        <?php
     }
 
     public function render_position_brief_scorecard_meta_box($post) {
@@ -360,12 +111,17 @@ class SXS_Comparison_Set {
         $scorecard_url = get_post_meta($post->ID, '_sxs_scorecard_url', true);
         $buttons_message = get_post_meta($post->ID, '_sxs_buttons_message', true);
         
+        // Set default message if empty
+        if (empty($buttons_message)) {
+            $buttons_message = 'Side by Side <br> Candidate Comparison';
+        }
+        
         ?>
         <div class="sxs-meta-row">
-            <h3 class="sxs-section-title"><?php _e('Position Brief & Scorecard Buttons', 'sxs-candidate-comparison'); ?></h3>
+            <h3 class="sxs-section-title"><?php _e('Position Brief & Crelate Portal Buttons', 'sxs-candidate-comparison'); ?></h3>
             
             <p class="description">
-                <?php _e('Enable buttons to link to Position Brief and Scorecard documents.', 'sxs-candidate-comparison'); ?>
+                <?php _e('Enable buttons to link to Position Brief and Crelate Portal.', 'sxs-candidate-comparison'); ?>
             </p>
             
             <div class="sxs-field-row">
@@ -391,18 +147,18 @@ class SXS_Comparison_Set {
                 <div>
                     <label for="sxs_scorecard_enabled">
                         <input type="checkbox" name="sxs_scorecard_enabled" id="sxs_scorecard_enabled" value="1" <?php checked($scorecard_enabled, true); ?>>
-                        <?php _e('Enable Scorecard Button', 'sxs-candidate-comparison'); ?>
+                        <?php _e('Enable Crelate Portal URL', 'sxs-candidate-comparison'); ?>
                     </label>
                 </div>
                 
                 <div class="sxs-scorecard-url" style="margin: 10px 0 20px 24px; <?php echo $scorecard_enabled ? '' : 'display: none;'; ?>">
                     <label for="sxs_scorecard_url">
-                        <?php _e('Scorecard URL', 'sxs-candidate-comparison'); ?>
+                        <?php _e('Crelate Portal URL', 'sxs-candidate-comparison'); ?>
                     </label>
                     <input type="url" name="sxs_scorecard_url" id="sxs_scorecard_url" 
                            value="<?php echo esc_attr($scorecard_url); ?>" class="widefat"
-                           placeholder="https://example.com/scorecard.pdf">
-                    <p class="description"><?php _e('URL to the Scorecard document (PDF or webpage).', 'sxs-candidate-comparison'); ?></p>
+                           placeholder="https://example.com/crelate-portal">
+                    <p class="description"><?php _e('URL to the Crelate Portal (PDF or webpage).', 'sxs-candidate-comparison'); ?></p>
                 </div>
             </div>
         </div>
@@ -416,7 +172,7 @@ class SXS_Comparison_Set {
                 <input type="text" id="sxs_buttons_message" name="sxs_buttons_message" 
                        value="<?php echo esc_attr($buttons_message); ?>" class="widefat"
                        placeholder="<?php _e('e.g., Learn more about this position:', 'sxs-candidate-comparison'); ?>">
-                <p class="description"><?php _e('This message will appear as a heading above the Position Brief and Scorecard buttons.', 'sxs-candidate-comparison'); ?></p>
+                <p class="description"><?php _e('This message will appear as a heading above the Position Brief and Crelate Portal buttons.', 'sxs-candidate-comparison'); ?></p>
             </p>
         </div>
         <?php
@@ -652,9 +408,9 @@ class SXS_Comparison_Set {
         
         $selected_company = get_post_meta($post->ID, '_sxs_selected_company', true);
         
-        // Get all companies
+        // Get all companies from the client's existing post type
         $companies = get_posts(array(
-            'post_type' => 'sxs_company',
+            'post_type' => 'companies',
             'posts_per_page' => -1,
             'orderby' => 'title',
             'order' => 'ASC'
@@ -668,7 +424,7 @@ class SXS_Comparison_Set {
                 <?php _e('Choose a company to include in this comparison. The company information will be displayed along with the candidates selected below.', 'sxs-candidate-comparison'); ?>
                 <span class="sxs-tooltip">
                     <span class="sxs-tooltip-icon">?</span>
-                    <span class="sxs-tooltip-text"><?php _e('Company information such as logo, header colors, and contact details will be shown in the comparison.', 'sxs-candidate-comparison'); ?></span>
+                    <span class="sxs-tooltip-text"><?php _e('Company information such as logo and name will be shown in the comparison.', 'sxs-candidate-comparison'); ?></span>
                 </span>
             </p>
             
@@ -691,112 +447,12 @@ class SXS_Comparison_Set {
                         <?php 
                         printf(
                             __('No companies available. <a href="%s">Add a company</a> first.', 'sxs-candidate-comparison'),
-                            admin_url('post-new.php?post_type=sxs_company')
+                            admin_url('post-new.php?post_type=companies')
                         ); 
                         ?>
                     </div>
                 <?php endif; ?>
-                
-                <?php if (!empty($selected_company)) : 
-                    $company = get_post($selected_company);
-                    if ($company) : 
-                        // Get company details for preview
-                        $header_color = get_post_meta($selected_company, '_sxs_company_header_color', true) ?: '#1C2856';
-                        $text_color = get_post_meta($selected_company, '_sxs_company_text_color', true) ?: '#FFFFFF';
-                        $logo_id = get_post_meta($selected_company, '_sxs_company_logo_id', true);
-                        $logo_url = '';
-                        if (!empty($logo_id)) {
-                            $logo_img = wp_get_attachment_image_src($logo_id, array(40, 40));
-                            if ($logo_img) {
-                                $logo_url = $logo_img[0];
-                            }
-                        }
-                        ?>
-                        <div class="sxs-company-preview">
-                            <div class="sxs-company-header" style="background-color:<?php echo esc_attr($header_color); ?>;color:<?php echo esc_attr($text_color); ?>;">
-                                <?php if (!empty($logo_url)) : ?>
-                                    <div class="sxs-company-logo">
-                                        <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($company->post_title); ?> Logo">
-                                    </div>
-                                <?php endif; ?>
-                                <div class="sxs-company-title">
-                                    <?php echo esc_html($company->post_title); ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                <?php endif; ?>
             </div>
-        </div>
-        <?php
-    }
-
-    public function render_shortcode_meta_box($post) {
-        // Get selected company and candidates
-        $selected_company = get_post_meta($post->ID, '_sxs_selected_company', true);
-        $selected_candidates = get_post_meta($post->ID, '_sxs_selected_candidates', true);
-        
-        $has_company = !empty($selected_company);
-        $has_candidates = is_array($selected_candidates) && !empty($selected_candidates);
-        
-        ?>
-        <div class="sxs-meta-row">
-            <h3 class="sxs-section-title"><?php _e('Shortcode', 'sxs-candidate-comparison'); ?></h3>
-            <p><?php _e('Use this shortcode to display the comparison:', 'sxs-candidate-comparison'); ?></p>
-            <div class="sxs-shortcode-container">
-                <code class="sxs-shortcode">[sxs_candidate_comparison set="<?php echo $post->ID; ?>"]</code>
-                <button type="button" class="button sxs-copy-shortcode" data-clipboard-text="[sxs_candidate_comparison set=&quot;<?php echo $post->ID; ?>&quot;]">
-                    <?php _e('Copy', 'sxs-candidate-comparison'); ?>
-                </button>
-            </div>
-            <p class="description">
-                <?php _e('Copy and paste this shortcode into any post or page where you want to display this comparison.', 'sxs-candidate-comparison'); ?>
-            </p>
-            
-            <?php if ($has_company && $has_candidates): 
-                $company = get_post($selected_company);
-                $company_name = $company ? $company->post_title : __('Selected company', 'sxs-candidate-comparison');
-                ?>
-                <div class="sxs-notice sxs-notice-info">
-                    <p>
-                        <strong><?php _e('Summary:', 'sxs-candidate-comparison'); ?></strong> 
-                        <?php 
-                        printf(
-                            __('This comparison includes %s and %d selected candidates.', 'sxs-candidate-comparison'),
-                            '<strong>' . esc_html($company_name) . '</strong>',
-                            count($selected_candidates)
-                        ); 
-                        ?>
-                    </p>
-                </div>
-            <?php elseif ($has_company): ?>
-                <div class="sxs-notice sxs-notice-warning">
-                    <p>
-                        <strong><?php _e('Warning:', 'sxs-candidate-comparison'); ?></strong> 
-                        <?php _e('You have selected a company but no candidates. Please select candidates to compare.', 'sxs-candidate-comparison'); ?>
-                    </p>
-                </div>
-            <?php elseif ($has_candidates): ?>
-                <div class="sxs-notice sxs-notice-info">
-                    <p>
-                        <strong><?php _e('Candidate Only Mode:', 'sxs-candidate-comparison'); ?></strong> 
-                        <?php printf(
-                            _n('This comparison includes %d candidate without company branding.', 
-                               'This comparison includes %d candidates without company branding.', 
-                               count($selected_candidates), 
-                               'sxs-candidate-comparison'),
-                            count($selected_candidates)
-                        ); ?>
-                    </p>
-                </div>
-            <?php else: ?>
-                <div class="sxs-notice sxs-notice-warning">
-                    <p>
-                        <strong><?php _e('Warning:', 'sxs-candidate-comparison'); ?></strong> 
-                        <?php _e('No candidates selected. Please select candidates to compare.', 'sxs-candidate-comparison'); ?>
-                    </p>
-                </div>
-            <?php endif; ?>
         </div>
         <?php
     }
@@ -838,61 +494,6 @@ class SXS_Comparison_Set {
                 update_post_meta($post_id, '_sxs_selected_company', $selected_company);
             } else {
                 delete_post_meta($post_id, '_sxs_selected_company');
-            }
-        }
-        
-        // Only save job-related data if jobs are enabled
-        if (class_exists('SXS_Settings') && SXS_Settings::is_jobs_enabled()) {
-            // Verify job selection nonce
-            if (isset($_POST['sxs_job_selection_nonce']) &&
-                wp_verify_nonce($_POST['sxs_job_selection_nonce'], 'sxs_job_selection_nonce')) {
-                
-                // Save selected job
-                if (isset($_POST['sxs_selected_job'])) {
-                    $selected_job = intval($_POST['sxs_selected_job']);
-                    update_post_meta($post_id, '_sxs_selected_job', $selected_job);
-                    
-                    // If this is just a preview update, redirect back to the edit page
-                    if (isset($_POST['sxs_preview_update'])) {
-                        wp_redirect(admin_url('post.php?post=' . $post_id . '&action=edit'));
-                        exit;
-                    }
-                } else {
-                    delete_post_meta($post_id, '_sxs_selected_job');
-                }
-            }
-        }
-        
-        // Verify layout settings nonce
-        if (isset($_POST['sxs_layout_settings_nonce']) &&
-            wp_verify_nonce($_POST['sxs_layout_settings_nonce'], 'sxs_layout_settings_nonce')) {
-            
-            // Save layout option - will only be used for footer
-            if (isset($_POST['sxs_layout_option'])) {
-                $layout_option = sanitize_text_field($_POST['sxs_layout_option']);
-                update_post_meta($post_id, '_sxs_layout_option', $layout_option);
-            }
-        }
-        
-        // Verify job details nonce
-        if (isset($_POST['sxs_comparison_job_nonce']) &&
-            wp_verify_nonce($_POST['sxs_comparison_job_nonce'], 'sxs_comparison_job_nonce')) {
-            
-            // Save job details
-            if (isset($_POST['sxs_job_title'])) {
-                update_post_meta($post_id, '_sxs_job_title', sanitize_text_field($_POST['sxs_job_title']));
-            }
-            
-            if (isset($_POST['sxs_job_location'])) {
-                update_post_meta($post_id, '_sxs_job_location', sanitize_text_field($_POST['sxs_job_location']));
-            }
-            
-            if (isset($_POST['sxs_job_description'])) {
-                update_post_meta($post_id, '_sxs_job_description', wp_kses_post($_POST['sxs_job_description']));
-            }
-            
-            if (isset($_POST['sxs_job_link'])) {
-                update_post_meta($post_id, '_sxs_job_link', esc_url_raw($_POST['sxs_job_link']));
             }
         }
 
@@ -1014,13 +615,13 @@ class SXS_Comparison_Set {
                 if (!empty($selected_company)) {
                     $company = get_post($selected_company);
                     if ($company) {
-                        $logo_id = get_post_meta($selected_company, '_sxs_company_logo_id', true);
+                        // Get company logo using ACF
                         $logo_html = '';
-                        
-                        if (!empty($logo_id)) {
-                            $image = wp_get_attachment_image_src($logo_id, array(30, 30));
-                            if ($image) {
-                                $logo_html = '<img src="' . esc_url($image[0]) . '" alt="' . esc_attr__('Company Logo', 'sxs-candidate-comparison') . '" style="max-width: 30px; max-height: 30px; vertical-align: middle; margin-right: 5px; border-radius: 3px;">';
+                        if (function_exists('get_field')) {
+                            $logo = get_field('company_logo', $company->ID);
+                            if (!empty($logo)) {
+                                $logo_url = is_array($logo) ? $logo['url'] : $logo;
+                                $logo_html = '<img src="' . esc_url($logo_url) . '" alt="' . esc_attr__('Company Logo', 'sxs-candidate-comparison') . '" style="max-width: 30px; max-height: 30px; vertical-align: middle; margin-right: 5px; border-radius: 3px;">';
                             }
                         }
                         

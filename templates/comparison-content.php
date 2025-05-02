@@ -104,6 +104,25 @@ if (!defined('ABSPATH')) {
                     </div>
                 <?php endforeach; ?>
             </div>
+
+            <!-- Resume -->
+            <div class="sxs-row">
+                <div class="sxs-col-header">RESUME</div>
+                <?php foreach ($candidates as $candidate) : ?>
+                    <div class="sxs-col">
+                        <?php 
+                        $resume_url = get_post_meta($candidate->ID, '_sxs_resume_url', true);
+                        if (!empty($resume_url)) {
+                            echo '<a href="' . esc_url($resume_url) . '" class="sxs-button sxs-download-button" target="_blank" download>';
+                            echo '<i class="fas fa-download"></i> Download Resume';
+                            echo '</a>';
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </div> 

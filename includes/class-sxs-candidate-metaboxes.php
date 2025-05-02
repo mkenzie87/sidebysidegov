@@ -38,6 +38,15 @@ class SXS_Candidate_Metaboxes {
             'normal',
             'high'
         );
+        
+        add_meta_box(
+            'sxs_candidate_resume',
+            __('Candidate Resume', 'sxs-candidate-comparison'),
+            array($this, 'render_resume_meta_box'),
+            'sxs_candidate',
+            'normal',
+            'high'
+        );
     }
 
     public function render_details_meta_box($post) {
@@ -232,17 +241,85 @@ class SXS_Candidate_Metaboxes {
         <?php
     }
 
+    public function render_resume_meta_box($post) {
+        wp_nonce_field('sxs_candidate_resume_nonce', 'sxs_candidate_resume_nonce');
+        
+        $resume_url = get_post_meta($post->ID, '_sxs_resume_url', true);
+        
+        ?>
+        <div class="sxs-meta-row">
+            <h3 class="sxs-section-title"><?php _e('Resume Document', 'sxs-candidate-comparison'); ?></h3>
+            <p>
+                <label for="sxs_resume">
+                    <?php _e('Upload Resume', 'sxs-candidate-comparison'); ?>
+                    <span class="sxs-tooltip">
+                        <span class="sxs-tooltip-icon">?</span>
+                        <span class="sxs-tooltip-text"><?php _e('Upload a PDF resume for this candidate. This will be available for download in the comparison.', 'sxs-candidate-comparison'); ?></span>
+                    </span>
+                </label>
+                <div class="sxs-resume-upload-field">
+                    <input type="text" id="sxs_resume_url" name="sxs_resume_url" 
+                        value="<?php echo esc_attr($resume_url); ?>" class="widefat">
+                    <button type="button" class="button sxs-upload-resume" id="sxs_upload_resume_button">
+                        <?php _e('Upload Resume', 'sxs-candidate-comparison'); ?>
+                    </button>
+                    <?php if (!empty($resume_url)) : ?>
+                        <div class="sxs-resume-preview" style="margin-top: 10px;">
+                            <a href="<?php echo esc_url($resume_url); ?>" target="_blank">
+                                <?php _e('View uploaded resume', 'sxs-candidate-comparison'); ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </p>
+        </div>
+
+        <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('#sxs_upload_resume_button').on('click', function(e) {
+                e.preventDefault();
+                
+                var file_frame = wp.media({
+                    title: '<?php _e('Upload or Select Resume', 'sxs-candidate-comparison'); ?>',
+                    button: {
+                        text: '<?php _e('Use this file', 'sxs-candidate-comparison'); ?>'
+                    },
+                    multiple: false,
+                    library: {
+                        type: ['application/pdf']
+                    }
+                }).open().on('select', function() {
+                    var attachment = file_frame.state().get('selection').first().toJSON();
+                    $('#sxs_resume_url').val(attachment.url);
+                    
+                    // Update or add preview
+                    if ($('.sxs-resume-preview').length) {
+                        $('.sxs-resume-preview a').attr('href', attachment.url);
+                    } else {
+                        $('.sxs-resume-upload-field').append('<div class="sxs-resume-preview" style="margin-top: 10px;"><a href="' + attachment.url + '" target="_blank"><?php _e('View uploaded resume', 'sxs-candidate-comparison'); ?></a></div>');
+                    }
+                });
+                
+                return false;
+            });
+        });
+        </script>
+        <?php
+    }
+
     public function save_meta_boxes($post_id, $post) {
         // Verify nonces
         if (!isset($_POST['sxs_candidate_details_nonce']) ||
             !isset($_POST['sxs_candidate_experience_nonce']) ||
-            !isset($_POST['sxs_candidate_compensation_nonce'])) {
+            !isset($_POST['sxs_candidate_compensation_nonce']) ||
+            !isset($_POST['sxs_candidate_resume_nonce'])) {
             return;
         }
 
         if (!wp_verify_nonce($_POST['sxs_candidate_details_nonce'], 'sxs_candidate_details_nonce') ||
             !wp_verify_nonce($_POST['sxs_candidate_experience_nonce'], 'sxs_candidate_experience_nonce') ||
-            !wp_verify_nonce($_POST['sxs_candidate_compensation_nonce'], 'sxs_candidate_compensation_nonce')) {
+            !wp_verify_nonce($_POST['sxs_candidate_compensation_nonce'], 'sxs_candidate_compensation_nonce') ||
+            !wp_verify_nonce($_POST['sxs_candidate_resume_nonce'], 'sxs_candidate_resume_nonce')) {
             return;
         }
 
@@ -295,6 +372,11 @@ class SXS_Candidate_Metaboxes {
         }
         if (isset($_POST['sxs_application_compensation'])) {
             update_post_meta($post_id, '_sxs_application_compensation', sanitize_text_field($_POST['sxs_application_compensation']));
+        }
+
+        // Save resume URL
+        if (isset($_POST['sxs_resume_url'])) {
+            update_post_meta($post_id, '_sxs_resume_url', esc_url_raw($_POST['sxs_resume_url']));
         }
     }
 } 

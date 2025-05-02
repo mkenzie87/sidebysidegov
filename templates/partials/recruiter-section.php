@@ -77,7 +77,7 @@ $scorecard_url = get_post_meta($set_id, '_sxs_scorecard_url', true);
         <?php endif; ?>
         
         <?php if ($enable_scorecard && !empty($scorecard_url)) : ?>
-            <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button scorecard" target="_blank">Scorecard</a>
+            <a href="<?php echo esc_url($scorecard_url); ?>" class="sxs-button scorecard" target="_blank">Crelate Portal</a>
         <?php endif; ?>
     </div>
     <?php endif; ?>

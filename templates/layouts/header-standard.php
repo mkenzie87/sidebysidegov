@@ -12,15 +12,23 @@ $company = $args['company'] ?? null;
 $company_logo_url = $args['company_logo_url'] ?? '';
 $company_header_color = $args['company_header_color'] ?? '#1C2856';
 $company_text_color = $args['company_text_color'] ?? '#FFFFFF';
-$company_cover_url = $args['company_cover_url'] ?? '';
-$job_title = $args['job_title'] ?? '';
-$job_location = $args['job_location'] ?? '';
-$job_description = $args['job_description'] ?? '';
-$job_type = $args['job_type'] ?? '';
-$job_experience = $args['job_experience'] ?? '';
-$job_education = $args['job_education'] ?? '';
 
-// If no company cover URL, use a default
+// If no company cover URL, use the default from settings or fallback to the default image
+$company_cover_url = '';
+
+// First try to get company-specific cover if available
+if (!empty($args['company_cover_url'])) {
+    $company_cover_url = $args['company_cover_url'];
+} 
+// Then try to get the global default from settings
+else if (class_exists('SXS_Settings')) {
+    $default_bg = SXS_Settings::get_default_header_background();
+    if (!empty($default_bg)) {
+        $company_cover_url = $default_bg;
+    }
+}
+
+// If still empty, use plugin default
 if (empty($company_cover_url)) {
     $company_cover_url = plugins_url('assets/images/default-cover.jpg', dirname(dirname(__FILE__)));
 }
@@ -207,99 +215,6 @@ wp_add_inline_script('slick', "
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Recruiter Card Styles - DEPRECATED - KEPT FOR REFERENCE
-.recruiter-slides {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    position: relative;
-    z-index: 3;
-}
-
-section.recruiter-info {
-    background: #14213D;
-    padding: 30px;
-    border-radius: 8px;
-    color: white;
-    text-align: left;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-}
-
-.recruiter-info .team-picture {
-    flex: 0 0 auto;
-}
-
-.recruiter-info .team-picture img {
-    border-radius: 50%;
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
-    border: 3px solid white;
-    margin: 0;
-}
-
-.recruiter-info .team-info {
-    flex: 1;
-}
-
-.recruiter-info h5.contact-title {
-    display: none;
-}
-
-.recruiter-info h5.team-name {
-    color: white;
-    margin: 0;
-    font-size: 24px;
-    font-weight: 500;
-    text-transform: none;
-    letter-spacing: 0;
-}
-
-.recruiter-info p.team-title {
-    color: white;
-    text-transform: none;
-    font-size: 16px;
-    margin: 5px 0 10px;
-    opacity: 0.9;
-}
-
-.recruiter-info p.team-phone {
-    margin: 0 0 10px;
-    font-size: 16px;
-    opacity: 0.9;
-}
-
-.team-divider {
-    display: none;
-}
-
-.pres-team-social {
-    display: flex;
-    gap: 10px;
-}
-
-.recruiter-info .pres-team-social a {
-    background: #F26724;
-    color: white;
-    border: none;
-    height: 36px;
-    width: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-.recruiter-info .pres-team-social a:hover {
-    background: #d55314;
-    transform: translateY(-2px);
-}
-*/
-
 /* Position Buttons */
 .position-buttons {
     margin-top: 30px;
@@ -407,7 +322,7 @@ section.recruiter-info {
                 </div>
             <?php endif; ?>
         </div>
-        <h1 class="sxs-hero-title"><?php echo esc_html($company ? $company->post_title : $job_title); ?></h1>
+        <h1 class="sxs-hero-title"><?php echo esc_html($company ? $company->post_title : ''); ?></h1>
     </div>
 </div>
 
@@ -548,22 +463,25 @@ section.recruiter-info {
         // Get and display the header content
         if (isset($args['post_id'])) {
             $header_content = get_post_meta($args['post_id'], '_sxs_header_content', true);
+            $buttons_message = get_post_meta($args['post_id'], '_sxs_buttons_message', true);
+            
+            // Display the header content or buttons message if available, otherwise show default
+            if (!empty($header_content)) {
+                echo wp_kses_post($header_content);
+            } elseif (!empty($buttons_message)) {
+                echo '<h2 class="buttons-heading">' . wp_kses_post($buttons_message) . '</h2>';
+            } else {
+                echo '<h2>Side by Side <br> Candidate Comparison</h2>';
+            }
             
             // Get button settings and URLs
             $enable_position_brief = get_post_meta($args['post_id'], '_sxs_position_brief_enabled', true);
             $enable_scorecard = get_post_meta($args['post_id'], '_sxs_scorecard_enabled', true);
             $position_brief_url = get_post_meta($args['post_id'], '_sxs_position_brief_url', true);
             $scorecard_url = get_post_meta($args['post_id'], '_sxs_scorecard_url', true);
-            $buttons_message = get_post_meta($args['post_id'], '_sxs_buttons_message', true);
-            
-            // Display the header content (job description, etc.)
-            echo wp_kses_post($header_content);
             
             // Only show buttons section if at least one button is enabled and has a URL
             if (($enable_position_brief && !empty($position_brief_url)) || ($enable_scorecard && !empty($scorecard_url))) : ?>
-                <?php if (!empty($buttons_message)) : ?>
-                    <h2 class="buttons-heading"><?php echo esc_html($buttons_message); ?></h2>
-                <?php endif; ?>
                 <div class="position-buttons">
                     <?php if ($enable_position_brief && !empty($position_brief_url)) : ?>
                         <a href="<?php echo esc_url($position_brief_url); ?>" class="position-button primary" target="_blank">
@@ -573,7 +491,7 @@ section.recruiter-info {
                     
                     <?php if ($enable_scorecard && !empty($scorecard_url)) : ?>
                         <a href="<?php echo esc_url($scorecard_url); ?>" class="position-button secondary" target="_blank">
-                            Scorecard <i class="fas fa-arrow-right"></i>
+                            Crelate Portal <i class="fas fa-arrow-right"></i>
                         </a>
                     <?php endif; ?>
                 </div>

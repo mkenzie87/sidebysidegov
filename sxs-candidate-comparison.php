@@ -23,10 +23,6 @@ define('SXS_CC_PLUGIN_URL', plugin_dir_url(__FILE__));
 require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-settings.php';
 require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-candidate-post-type.php';
 require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-candidate-metaboxes.php';
-require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-company-post-type.php';
-require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-company-metaboxes.php';
-require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-job-post-type.php';
-require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-job-metaboxes.php';
 require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-candidate-comparison.php';
 require_once SXS_CC_PLUGIN_DIR . 'includes/class-sxs-comparison-set.php';
 require_once SXS_CC_PLUGIN_DIR . 'admin/class-sxs-help-docs.php';
@@ -41,12 +37,6 @@ function sxs_cc_init() {
     // Initialize post types
     $candidate_post_type = new SXS_Candidate_Post_Type();
     $candidate_post_type->init();
-    
-    $company_post_type = new SXS_Company_Post_Type();
-    $company_post_type->init();
-    
-    $job_post_type = new SXS_Job_Post_Type();
-    $job_post_type->init();
 
     $comparison_set = new SXS_Comparison_Set();
     $comparison_set->init();
@@ -54,12 +44,6 @@ function sxs_cc_init() {
     // Initialize metaboxes
     $metaboxes = new SXS_Candidate_Metaboxes();
     $metaboxes->init();
-    
-    $company_metaboxes = new SXS_Company_Metaboxes();
-    $company_metaboxes->init();
-    
-    $job_metaboxes = new SXS_Job_Metaboxes();
-    $job_metaboxes->init();
 
     // Initialize comparison functionality
     $comparison = new SXS_Candidate_Comparison();
@@ -84,7 +68,7 @@ register_activation_hook(__FILE__, 'sxs_cc_activate');
 function sxs_cc_activate() {
     // Set up initial options
     $default_settings = array(
-        'jobs_enabled' => false
+        // 'jobs_enabled' => false
     );
     
     // Only add the option if it doesn't exist
@@ -125,27 +109,14 @@ function sxs_cc_admin_scripts($hook) {
             wp_enqueue_script('jquery-ui-sortable');
         }
         
-        // Enqueue media uploader for company post type
-        if ('sxs_company' === $screen->post_type) {
-            wp_enqueue_media();
-        }
-        
         // Enqueue admin scripts and styles for candidate and comparison post types
-        if ('sxs_candidate' === $screen->post_type || 'sxs_comparison' === $screen->post_type || 'sxs_company' === $screen->post_type) {
+        if ('sxs_candidate' === $screen->post_type || 'sxs_comparison' === $screen->post_type) {
             // Admin CSS with filemtime for cache busting
             wp_enqueue_style(
                 'sxs-candidate-admin',
                 SXS_CC_PLUGIN_URL . 'assets/css/admin/admin.css',
                 array('jquery-ui-styles'),
                 filemtime(SXS_CC_PLUGIN_DIR . 'assets/css/admin/admin.css')
-            );
-            
-            // Add company-specific styles
-            wp_enqueue_style(
-                'sxs-company-admin',
-                SXS_CC_PLUGIN_URL . 'assets/css/admin/company.css',
-                array('sxs-candidate-admin'),
-                filemtime(SXS_CC_PLUGIN_DIR . 'assets/css/admin/company.css')
             );
             
             // Main admin JS
@@ -157,8 +128,8 @@ function sxs_cc_admin_scripts($hook) {
                 true
             );
             
-            // Company specific JS for preview and shortcode
-            if ('sxs_comparison' === $screen->post_type || 'sxs_company' === $screen->post_type) {
+            // Company specific JS for preview - for comparison post type only
+            if ('sxs_comparison' === $screen->post_type) {
                 wp_enqueue_script(
                     'sxs-company-admin',
                     SXS_CC_PLUGIN_URL . 'assets/js/admin/company.js',
@@ -215,22 +186,22 @@ function sxs_get_company_preview() {
     $company_id = intval($_POST['company_id']);
     $company = get_post($company_id);
     
-    if (!$company || $company->post_type !== 'sxs_company') {
+    if (!$company || $company->post_type !== 'companies') {
         wp_send_json_error(array('message' => __('Invalid company', 'sxs-candidate-comparison')));
     }
     
-    // Get company details
-    $header_color = get_post_meta($company_id, '_sxs_company_header_color', true) ?: '#1C2856';
-    $text_color = get_post_meta($company_id, '_sxs_company_text_color', true) ?: '#FFFFFF';
-    $logo_id = get_post_meta($company_id, '_sxs_company_logo_id', true);
+    // Get company logo using ACF
     $logo_url = '';
-    
-    if (!empty($logo_id)) {
-        $logo_img = wp_get_attachment_image_src($logo_id, array(40, 40));
-        if ($logo_img) {
-            $logo_url = $logo_img[0];
+    if (function_exists('get_field')) {
+        $logo = get_field('company_logo', $company_id);
+        if (!empty($logo)) {
+            $logo_url = is_array($logo) ? $logo['url'] : $logo;
         }
     }
+    
+    // Default colors
+    $header_color = '#1C2856';
+    $text_color = '#FFFFFF';
     
     // Build preview HTML
     ob_start();

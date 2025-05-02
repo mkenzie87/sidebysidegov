@@ -64,6 +64,19 @@
     margin-top: 20px;
 }
 
+a.sxs-button.sxs-download-button {
+    gap: 7px;
+    background: #F26724;
+    color: white;
+    border: none;
+    border-radius: 60px;
+}
+
+a.sxs-button.sxs-download-button:hover {
+    background: #1b2856;
+    text-decoration: none;
+}
+
 /* Mobile styles */
 @media screen and (max-width: 768px) {
     .sxs-plugin .sxs-button {
