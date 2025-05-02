@@ -43,8 +43,9 @@ wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-aw
 // Initialize slick carousel
 wp_add_inline_script('slick', "
     jQuery(document).ready(function(){
-        jQuery('.recruiter-slides').slick({
+        jQuery('.sxs-recruiter-slider').slick({
             dots: true,
+            arrows: false,
             infinite: true,
             speed: 300,
             slidesToShow: 1,
@@ -251,7 +252,21 @@ wp_add_inline_script('slick', "
     margin-left: 5px;
 }
 
+/* Slick Dots Customization */
+.sxs-recruiter-slider .slick-dots {
+    bottom: -25px;
+}
 
+.sxs-recruiter-slider .slick-dots li button:before {
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 1;
+    font-size: 10px;
+}
+
+.sxs-recruiter-slider .slick-dots li.slick-active button:before {
+    color: rgba(255, 255, 255, 1);
+    opacity: 1;
+}
 
 .position-button:hover {
     background: #1c2856;

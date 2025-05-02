@@ -197,4 +197,17 @@ h5.sxs-recruiter-name {
     .sxs-button {
         width: 100%;
     }
+
+    .sxs-recruiter-slide-inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sxs-recruiter-name-container {
+        text-align: center;
+    }
+
+    .sxs-recruiter-name-container .team-divider {
+        margin: 0 auto;
+    }
 } 
