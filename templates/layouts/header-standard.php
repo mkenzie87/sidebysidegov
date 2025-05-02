@@ -42,18 +42,29 @@ wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-aw
 
 // Initialize slick carousel
 wp_add_inline_script('slick', "
-    jQuery(document).ready(function(){
-        jQuery('.sxs-recruiter-slider').slick({
-            dots: true,
-            arrows: false,
-            infinite: true,
-            speed: 300,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            draggable: true,
-            autoplay: true,
-            adaptiveHeight: true,
-        });
+    jQuery(document).ready(function($){
+        var \$slider = jQuery('.sxs-recruiter-slider');
+        if (\$slider.length && \$slider.children().length > 1) {
+            \$slider.slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                draggable: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                adaptiveHeight: true,
+                pauseOnHover: true,
+                pauseOnFocus: false,
+                arrows: false
+            });
+            
+            // Force autoplay to start (sometimes needed)
+            setTimeout(function() {
+                \$slider.slick('slickPlay');
+            }, 100);
+        }
     });
 ");
 ?>
