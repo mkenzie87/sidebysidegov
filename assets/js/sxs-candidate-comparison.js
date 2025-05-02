@@ -21,9 +21,6 @@ jQuery(document).ready(function($) {
             // Setup top scrollbar only
             this.setupTopScrollbar();
             
-            // Add explicit scroll buttons
-            this.setupScrollButtons();
-            
             // Detect Windows to adjust scrollbar visibility
             this.detectWindows();
         },
@@ -40,65 +37,6 @@ jQuery(document).ready(function($) {
                 $('<div class="sxs-scroll-indicator mobile-indicator" style="visibility:hidden;">Scroll to see more candidates →</div>')
                     .appendTo('body'); // Append to body for fixed positioning
             }
-        },
-
-        // Setup explicit scroll buttons for better accessibility
-        setupScrollButtons: function() {
-            var $container = $('.sxs-comparison-container');
-            
-            if (!$container.length) {
-                return;
-            }
-            
-            // Create buttons container
-            var $scrollButtons = $('<div class="sxs-fixed-scroll-buttons">');
-            var $leftButton = $('<button class="sxs-left-scroll-btn"><span>◀</span> Scroll Left</button>');
-            var $rightButton = $('<button class="sxs-right-scroll-btn">Scroll Right <span>▶</span></button>');
-            var $scrollHint = $('<div class="sxs-scroll-hint">Use these buttons to scroll horizontally</div>');
-            
-            $scrollButtons.append($leftButton);
-            $scrollButtons.append($scrollHint);
-            $scrollButtons.append($rightButton);
-            
-            // Add buttons before the comparison container
-            $scrollButtons.insertBefore($container);
-            
-            // Add click handlers - scroll amount based on container width
-            $leftButton.on('click', function() {
-                var scrollAmount = $container.width() * 0.75;
-                $container.animate({
-                    scrollLeft: $container.scrollLeft() - scrollAmount
-                }, 300);
-            });
-            
-            $rightButton.on('click', function() {
-                var scrollAmount = $container.width() * 0.75;
-                $container.animate({
-                    scrollLeft: $container.scrollLeft() + scrollAmount
-                }, 300);
-            });
-            
-            // Update button states on scroll
-            $container.on('scroll', function() {
-                var maxScrollLeft = $container[0].scrollWidth - $container.width();
-                
-                // Disable left button if at beginning
-                if ($container.scrollLeft() <= 0) {
-                    $leftButton.prop('disabled', true).css('opacity', 0.5);
-                } else {
-                    $leftButton.prop('disabled', false).css('opacity', 1);
-                }
-                
-                // Disable right button if at end
-                if ($container.scrollLeft() >= maxScrollLeft - 10) {
-                    $rightButton.prop('disabled', true).css('opacity', 0.5);
-                } else {
-                    $rightButton.prop('disabled', false).css('opacity', 1);
-                }
-            });
-            
-            // Initial button state
-            $container.trigger('scroll');
         },
 
         bindEvents: function() {
@@ -283,31 +221,13 @@ jQuery(document).ready(function($) {
             // Add top scrollbar before the comparison container
             $topScrollContainer.insertBefore($container);
             
-            // Add text indicator after the container
-            var $textIndicator = $('<div class="sxs-scroll-indicator-text">↔️ Scroll horizontally to see more candidates ↔️</div>');
-            $textIndicator.insertAfter($container);
-            
             // Sync horizontal scrolling between scrollable elements
             $container.on('scroll', function() {
                 $topScrollContainer.scrollLeft($(this).scrollLeft());
-                
-                // Hide the indicator if scrolled
-                if ($(this).scrollLeft() > 0) {
-                    $textIndicator.fadeOut(200);
-                } else {
-                    $textIndicator.fadeIn(200);
-                }
             });
             
             $topScrollContainer.on('scroll', function() {
                 $container.scrollLeft($(this).scrollLeft());
-                
-                // Hide the indicator if scrolled
-                if ($(this).scrollLeft() > 0) {
-                    $textIndicator.fadeOut(200);
-                } else {
-                    $textIndicator.fadeIn(200);
-                }
             });
             
             // Update the spacer width on window resize
