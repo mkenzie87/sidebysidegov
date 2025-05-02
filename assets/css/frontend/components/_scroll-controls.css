@@ -1,0 +1,127 @@
+/* Scroll Controls for Comparison Table */
+
+/* Container for the scroll buttons */
+.sxs-scroll-controls {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+/* Styling for the scroll buttons */
+.sxs-scroll-left,
+.sxs-scroll-right {
+    width: 40px;
+    height: 40px;
+    background: rgba(28, 40, 86, 0.8);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sxs-scroll-left:hover,
+.sxs-scroll-right:hover {
+    background: rgba(242, 103, 36, 0.9);
+    transform: scale(1.1);
+}
+
+.sxs-scroll-left {
+    margin-left: 5px;
+}
+
+.sxs-scroll-right {
+    margin-right: 5px;
+}
+
+/* Enhanced Scrollbar Styling for Comparison Table */
+
+/* Make sure the comparison container has proper scroll settings */
+.sxs-comparison-container {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: auto; /* For Firefox */
+    scrollbar-color: #555 #f1f1f1; /* For Firefox */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin-bottom: 16px; /* Space for the scrollbar */
+}
+
+/* Make scrollbars always visible (not just on hover) */
+.sxs-comparison-container::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height: 16px; /* Thicker scrollbar */
+    width: 16px;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 8px;
+    border: 3px solid #f1f1f1;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-thumb:hover {
+    background-color: #333;
+}
+
+/* For Edge/IE compatibility */
+.sxs-comparison-container {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+/* Add a visible indicator to show there's horizontal scrolling */
+.sxs-comparison-container:after {
+    content: "→ Scroll horizontally to see more →";
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px;
+    color: #555;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    right: 0;
+    opacity: 0.8;
+}
+
+/* Hide the text indicator on mobile */
+@media screen and (max-width: 768px) {
+    .sxs-comparison-container:after {
+        content: none;
+    }
+}
+
+/* Show scroll controls only on desktop without hover capability (non-touch devices) */
+@media (hover: none) {
+    .sxs-scroll-controls {
+        display: none;
+    }
+}
+
+/* Hide on mobile as they'll use touch scrolling */
+@media screen and (max-width: 768px) {
+    .sxs-scroll-controls {
+        display: none;
+    }
+} 

@@ -20,6 +20,9 @@
     background: #fff;
     padding: 0;
     margin-bottom: 30px;
+    overflow-x: auto;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: rgba(28, 40, 86, 0.5) transparent; /* For Firefox */
 }
 
 /* Scroll indicator */
@@ -237,4 +240,80 @@
         padding: 6px 12px;
     }
     
+}
+
+/* Comparison Table Styles */
+
+/* Scroll Controls */
+.sxs-scroll-controls {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.sxs-scroll-left,
+.sxs-scroll-right {
+    width: 40px;
+    height: 40px;
+    background: rgba(28, 40, 86, 0.8);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sxs-scroll-left:hover,
+.sxs-scroll-right:hover {
+    background: rgba(242, 103, 36, 0.9);
+    transform: scale(1.1);
+}
+
+.sxs-scroll-left {
+    margin-left: 5px;
+}
+
+.sxs-scroll-right {
+    margin-right: 5px;
+}
+
+/* Customize scrollbar for webkit browsers */
+.sxs-comparison-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sxs-comparison-container::-webkit-scrollbar-thumb {
+    background-color: rgba(28, 40, 86, 0.5);
+    border-radius: 4px;
+}
+
+/* Show scroll controls only on desktop without hover capability (non-touch devices) */
+@media (hover: none) {
+    .sxs-scroll-controls {
+        display: none;
+    }
+}
+
+/* Hide on mobile as they'll use touch scrolling */
+@media screen and (max-width: 768px) {
+    .sxs-scroll-controls {
+        display: none;
+    }
 }

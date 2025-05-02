@@ -78,7 +78,7 @@ wp_add_inline_script('slick', "
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center;
+    background-position: top right;
     filter: brightness(0.7);
     z-index: 1;
 }

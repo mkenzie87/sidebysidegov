@@ -13,7 +13,7 @@ class SXS_Candidate_Comparison {
 
     public function enqueue_scripts() {
         // Define components in order of loading
-        $components = array('layout', 'header', 'comparison', 'cells', 'recruiter', 'buttons');
+        $components = array('layout', 'header', 'comparison', 'cells', 'recruiter', 'buttons', 'scroll-controls');
         
         // Enqueue each component's CSS
         foreach ($components as $component) {
