@@ -47,7 +47,66 @@
     margin-right: 5px;
 }
 
-/* Enhanced Scrollbar Styling for Comparison Table */
+/* Fixed scroll buttons */
+.sxs-fixed-scroll-buttons {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 50;
+    padding: 0;
+    margin: 5px 0;
+}
+
+.sxs-left-scroll-btn,
+.sxs-right-scroll-btn {
+    background-color: #1C2856;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sxs-left-scroll-btn:hover,
+.sxs-right-scroll-btn:hover {
+    background-color: #F26724;
+}
+
+.sxs-left-scroll-btn i,
+.sxs-right-scroll-btn i {
+    margin: 0 5px;
+}
+
+.sxs-scroll-hint {
+    text-align: center;
+    color: #666;
+    flex: 1;
+    font-size: 14px;
+    align-self: center;
+    white-space: nowrap;
+    padding: 0 15px;
+}
+
+/* Enhanced Scrollbar Styling */
+
+/* Top scrollbar container */
+.sxs-top-scroll-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 0;
+    background-color: transparent;
+    scrollbar-width: auto; /* For Firefox */
+    scrollbar-color: #1C2856 #e0e0e0; /* For Firefox */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    height: 16px; /* Height for scrollbar */
+    position: relative;
+    z-index: 5;
+}
 
 /* Make sure the comparison container has proper scroll settings */
 .sxs-comparison-container {
@@ -55,43 +114,91 @@
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: auto; /* For Firefox */
-    scrollbar-color: #555 #f1f1f1; /* For Firefox */
+    scrollbar-color: #1C2856 #e0e0e0; /* For Firefox */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     margin-bottom: 16px; /* Space for the scrollbar */
+    
+    /* Force scrollbar to always be visible - Firefox */
+    scrollbar-width: auto !important;
+    
+    /* Force scrollbar to always be visible - Edge/IE */
+    -ms-overflow-style: scrollbar !important;
 }
 
-/* Make scrollbars always visible (not just on hover) */
-.sxs-comparison-container::-webkit-scrollbar {
+/* Visual indicators for horizontal scrolling */
+.sxs-comparison-container::before,
+.sxs-comparison-container::after {
+    content: "⟷";
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: rgba(242, 103, 36, 0.8);
+    z-index: 10;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.sxs-comparison-container::before {
+    left: 5px;
+}
+
+.sxs-comparison-container::after {
+    right: 5px;
+    content: "⟷"; /* Unicode for left-right arrows */
+}
+
+/* Aggressively force scrollbars to be visible on all browsers */
+.sxs-comparison-container::-webkit-scrollbar,
+.sxs-top-scroll-container::-webkit-scrollbar {
     -webkit-appearance: none;
     height: 16px; /* Thicker scrollbar */
     width: 16px;
+    display: block !important; /* Always visible */
+    background-color: #e0e0e0 !important;
 }
 
-.sxs-comparison-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
+.sxs-comparison-container::-webkit-scrollbar-track,
+.sxs-top-scroll-container::-webkit-scrollbar-track {
+    background: #e0e0e0 !important;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
 }
 
-.sxs-comparison-container::-webkit-scrollbar-thumb {
-    background-color: #555;
+.sxs-comparison-container::-webkit-scrollbar-thumb,
+.sxs-top-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #1C2856 !important;
     border-radius: 8px;
-    border: 3px solid #f1f1f1;
+    border: 3px solid #e0e0e0;
+    min-height: 16px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
 }
 
-.sxs-comparison-container::-webkit-scrollbar-thumb:hover {
-    background-color: #333;
+.sxs-comparison-container::-webkit-scrollbar-thumb:hover,
+.sxs-top-scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #F26724 !important;
 }
 
-/* For Edge/IE compatibility */
-.sxs-comparison-container {
-    -ms-overflow-style: -ms-autohiding-scrollbar;
+/* For all browsers - force overflow-x to be scroll instead of auto */
+.sxs-comparison-container,
+.sxs-top-scroll-container {
+    overflow-x: scroll !important;
+    -ms-overflow-style: scrollbar !important;
 }
 
-/* Add a visible indicator to show there's horizontal scrolling */
-.sxs-comparison-container:after {
-    content: "→ Scroll horizontally to see more →";
-    display: block;
+/* All other browsers - Firefox */
+.sxs-comparison-container,
+.sxs-top-scroll-container {
+    scrollbar-width: auto !important; 
+    scrollbar-color: #1C2856 #e0e0e0 !important;
+    padding-bottom: 5px; /* Add padding to ensure scrollbar is visible */
+}
+
+/* Text indicator to show there's horizontal scrolling */
+.sxs-scroll-indicator-text {
     text-align: center;
     font-size: 14px;
     padding: 5px;
@@ -105,10 +212,56 @@
     opacity: 0.8;
 }
 
-/* Hide the text indicator on mobile */
+/* Add a horizontal gradient shadow to indicate more content */
+.sxs-comparison-wrapper::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, 
+        rgba(242, 103, 36, 0.3) 0%, 
+        rgba(242, 103, 36, 0.1) 5%, 
+        transparent 20%, 
+        transparent 80%, 
+        rgba(242, 103, 36, 0.1) 95%, 
+        rgba(242, 103, 36, 0.3) 100%
+    );
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Windows-specific scrollbar styling */
+.sxs-windows-os .sxs-comparison-container {
+    /* Force scrollbar to be visible on Windows by adding padding */
+    padding-bottom: 20px;
+}
+
+/* Add visible scrollbar track to make it more obvious */
+.sxs-windows-os .sxs-comparison-container::-webkit-scrollbar-track {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+}
+
+/* Make the scrollbar thumb more visible on Windows */
+.sxs-windows-os .sxs-comparison-container::-webkit-scrollbar-thumb {
+    background-color: #1C2856;
+    border-width: 2px;
+}
+
+/* Windows-specific hover effect */
+.sxs-windows-os .sxs-comparison-container::-webkit-scrollbar-thumb:hover {
+    background-color: #F26724;
+}
+
+/* Responsive adjustments */
 @media screen and (max-width: 768px) {
-    .sxs-comparison-container:after {
-        content: none;
+    .sxs-comparison-container::before,
+    .sxs-comparison-container::after,
+    .sxs-scroll-indicator-text,
+    .sxs-comparison-wrapper::after {
+        display: none;
     }
 }
 
