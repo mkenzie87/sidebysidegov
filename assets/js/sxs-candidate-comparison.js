@@ -29,12 +29,12 @@ jQuery(document).ready(function($) {
         createScrollIndicators: function() {
             var $container = $('.sxs-comparison-container');
             if ($container.length && $('.sxs-scroll-indicator').length === 0) {
-                // Add desktop indicator (initially hidden)
-                $('<div class="sxs-scroll-indicator desktop-indicator" style="visibility:hidden;">Scroll to see more candidates →</div>')
+                // Add desktop indicator (now always visible)
+                $('<div class="sxs-scroll-indicator desktop-indicator">Scroll to see more candidates →</div>')
                     .insertBefore($container);
                 
-                // Add mobile indicator (initially hidden)
-                $('<div class="sxs-scroll-indicator mobile-indicator" style="visibility:hidden;">Scroll to see more candidates →</div>')
+                // Add mobile indicator (still conditionally visible)
+                $('<div class="sxs-scroll-indicator mobile-indicator">Scroll to see more candidates →</div>')
                     .appendTo('body'); // Append to body for fixed positioning
             }
         },
@@ -152,6 +152,9 @@ jQuery(document).ready(function($) {
                 $mobileIndicator = $('.mobile-indicator');
             }
             
+            // Desktop indicator is always visible 
+            $desktopIndicator.show();
+            
             // Check if comparison container is in viewport and if horizontal scrolling is needed
             if ($container.length && $firstRow.length && $firstRow.width() > $container.width()) {
                 var isContainerVisible = isElementInViewport($container) || 
@@ -160,30 +163,23 @@ jQuery(document).ready(function($) {
                                        $container.offset().top + $container.height() > window.pageYOffset;
                 
                 if (isContainerVisible) {
-                    // Show the appropriate indicator based on device type
+                    // Show mobile indicator when container is visible
                     if (isMobile) {
                         $mobileIndicator.css('visibility', 'visible');
-                        $desktopIndicator.css('visibility', 'hidden');
-                    } else {
-                        $desktopIndicator.css('visibility', 'visible');
-                        $mobileIndicator.css('visibility', 'hidden');
                     }
                 } else {
-                    // Hide both indicators when container not in viewport
-                    $desktopIndicator.css('visibility', 'hidden');
+                    // Hide mobile indicator when container not in viewport
                     $mobileIndicator.css('visibility', 'hidden');
                 }
             } else {
-                // Hide both indicators if horizontal scrolling is not needed
-                $desktopIndicator.css('visibility', 'hidden');
+                // Hide mobile indicator if horizontal scrolling is not needed
                 $mobileIndicator.css('visibility', 'hidden');
             }
             
-            // Set up horizontal scroll detection
+            // Set up horizontal scroll detection for mobile indicator only
             $container.on('scroll.indicator', function() {
-                // Hide indicators as they start scrolling horizontally
+                // For mobile indicator only - hide when scrolling, show when at start
                 if ($(this).scrollLeft() > 0) {
-                    $desktopIndicator.css('visibility', 'hidden');
                     $mobileIndicator.css('visibility', 'hidden');
                 } else {
                     // Show it again when scrolled back to start
@@ -193,8 +189,6 @@ jQuery(document).ready(function($) {
                         
                         if (isMobile) {
                             $mobileIndicator.css('visibility', 'visible');
-                        } else {
-                            $desktopIndicator.css('visibility', 'visible');
                         }
                     }
                 }
