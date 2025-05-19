@@ -111,7 +111,7 @@ while (have_posts()) :
                 <div class="sxs-comparison-container">
                     <!-- Header Row -->
                     <div class="sxs-row sxs-comparison-header">
-                        <div class="sxs-col-header sticky-left-col">SIDE BY SIDE</div>
+                        <div class="sxs-col-header sticky-left-col">CANDIDATE NAME</div>
                         <?php foreach ($candidates as $candidate) : ?>
                             <div class="sxs-col sxs-candidate-name">
                                 <?php echo esc_html($candidate->post_title); ?>
@@ -230,6 +230,16 @@ while (have_posts()) :
                                 </div>
                             <?php endforeach; ?>
                         </div>
+                    </div>
+
+                     <!-- Header Row -->
+                     <div class="sxs-row sxs-comparison-header">
+                        <div class="sxs-col-header sticky-left-col">CANDIDATE NAME</div>
+                        <?php foreach ($candidates as $candidate) : ?>
+                            <div class="sxs-col sxs-candidate-name">
+                                <?php echo esc_html($candidate->post_title); ?>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 
