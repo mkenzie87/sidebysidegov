@@ -215,12 +215,17 @@ jQuery(document).ready(function($) {
             // Add top scrollbar before the comparison container
             $topScrollContainer.insertBefore($container);
             
+            // Get header row for sticky header synchronization
+            var $headerRow = $('.sxs-row.sxs-comparison-header');
+            
             // Sync horizontal scrolling between scrollable elements
             $container.on('scroll', function() {
+                // Sync top scrollbar with main container
                 $topScrollContainer.scrollLeft($(this).scrollLeft());
             });
             
             $topScrollContainer.on('scroll', function() {
+                // Sync main container with top scrollbar
                 $container.scrollLeft($(this).scrollLeft());
             });
             

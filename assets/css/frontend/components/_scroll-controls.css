@@ -42,7 +42,7 @@
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     height: 16px; /* Height for scrollbar */
     position: relative;
-    z-index: 5;
+    z-index: 30; /* Higher than sticky header */
 }
 
 /* Make sure the comparison container has proper scroll settings */
